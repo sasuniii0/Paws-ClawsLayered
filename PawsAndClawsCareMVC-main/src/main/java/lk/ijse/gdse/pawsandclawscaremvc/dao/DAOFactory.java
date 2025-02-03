@@ -7,7 +7,7 @@ public class DAOFactory {
     private DAOFactory(){
 
     }
-    private static DAOFactory getDaoFactory(){
+     public static DAOFactory getDaoFactory(){
         return (daoFactory==null)?daoFactory= new DAOFactory():daoFactory;
     }
     public enum DAOTypes{

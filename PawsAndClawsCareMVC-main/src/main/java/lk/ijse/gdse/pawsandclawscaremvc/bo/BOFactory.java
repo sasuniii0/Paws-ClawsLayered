@@ -1,6 +1,5 @@
 package lk.ijse.gdse.pawsandclawscaremvc.bo;
 
-import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.SupplierBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.*;
 
 public class BOFactory {

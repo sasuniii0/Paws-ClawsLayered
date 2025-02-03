@@ -3,22 +3,23 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.CustomerDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.CustomerDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Customer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CustomerDAOImpl implements CustomerDAO {
-    public boolean saveCustomer(CustomerDto customerDto) throws SQLException {
+    public boolean save(Customer entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO Customer (custId, name, address, email, contactNumber)\n" +
                         "VALUES (?, ?, ?, ?, ?)",
-                customerDto.getCustomerId(),
-                customerDto.getCustomerName(),
-                customerDto.getAddress(),
-                customerDto.getEmail(),
-                customerDto.getContactNumber());
+                entity.getCustomerId(),
+                entity.getCustomerName(),
+                entity.getAddress(),
+                entity.getEmail(),
+                entity.getContactNumber());
     }
-    public String getNextCustomerId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select custId from Customer order by custId desc limit 1");
 
         if (rst.next()) {
@@ -31,34 +32,34 @@ public class CustomerDAOImpl implements CustomerDAO {
         return "C001";
     }
 
-    public ArrayList<CustomerDto> getAllCustomers() throws SQLException {
+    public ArrayList<Customer> getAll() throws SQLException {
         ResultSet rst = SQLUtil.execute("select * from Customer");
-        ArrayList<CustomerDto> customerDtos = new ArrayList<>();
+        ArrayList<Customer> allCustomer = new ArrayList<>();
 
         while (rst.next()) {
-            CustomerDto customerDto = new CustomerDto(
+            Customer entity = new Customer(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getString(4),
                     rst.getString(5)
             );
-            customerDtos.add(customerDto);
+            allCustomer.add(entity);
         }
-        return customerDtos;
+        return allCustomer;
     }
 
-    public boolean deleteCustomer(String customerId) throws SQLException {
+    public boolean delete(String customerId) throws SQLException {
         return SQLUtil.execute("delete from Customer where custId = ?",customerId);
     }
 
-    public boolean updateCustomer(CustomerDto customerDto) throws SQLException {
+    public boolean update(Customer entity) throws SQLException {
         return  SQLUtil.execute("update Customer set name=?, address =?, email=?, contactNumber=? where custId =?",
-                customerDto.getCustomerName(),
-                customerDto.getAddress(),
-                customerDto.getEmail(),
-                customerDto.getContactNumber(),
-                customerDto.getCustomerId()
+                entity.getCustomerName(),
+                entity.getAddress(),
+                entity.getEmail(),
+                entity.getContactNumber(),
+                entity.getCustomerId()
         );
     }
 

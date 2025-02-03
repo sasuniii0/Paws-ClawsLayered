@@ -15,6 +15,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Callback;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.CustomerManageBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.CustomerManageBOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.CustomerDAO;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
@@ -100,6 +103,8 @@ public class CustomerManageController implements Initializable {
     @FXML
     private TextField TxtEmail;
 
+    CustomerManageBO customerBO = new CustomerManageBOImpl();
+
     @FXML
     void DeleteOnClickAction(ActionEvent event) throws SQLException {
         String customerId = LblCustId.getText();
@@ -108,7 +113,7 @@ public class CustomerManageController implements Initializable {
         Optional<ButtonType> optionalButtonType = alert.showAndWait();
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
-            boolean isDeleted = customerDAOImpl.deleteCustomer(customerId);
+            boolean isDeleted = customerBO.deleteCustomer(customerId);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION,"Customer Deleted").show();
@@ -192,7 +197,7 @@ public class CustomerManageController implements Initializable {
         if (isValidEmail && isValidContact && isValidName && isValidAddress){
             CustomerDto customerDto = new CustomerDto(custId, custName, address, email, contactNumber);
 
-            boolean isSaved = customerDAOImpl.saveCustomer(customerDto);
+            boolean isSaved = customerBO.saveCustomer(customerDto);
             if (isSaved){
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION,"Customer Saved....").show();
@@ -218,7 +223,7 @@ public class CustomerManageController implements Initializable {
     }
 
     private void loadTableData() throws SQLException {
-        ArrayList<CustomerDto> customerDtos = customerDAOImpl.getAllCustomers();
+        ArrayList<CustomerDto> customerDtos = customerBO.getAllCustomer();
 
         ObservableList<CustomerTm> customerTms = FXCollections.observableArrayList();
 
@@ -236,7 +241,7 @@ public class CustomerManageController implements Initializable {
     }
 
     private void loadNextCustomerId() throws SQLException {
-        String nextCustomerId = customerDAOImpl.getNextCustomerId();
+        String nextCustomerId = customerBO.getNextCustomerId();
         LblCustId.setText(nextCustomerId);
     }
 
@@ -320,7 +325,7 @@ public class CustomerManageController implements Initializable {
         if (isValidEmail && isValidContact && isValidName && isValidAddress){
             CustomerDto customerDto = new CustomerDto(custId, custName, address, email, contactNumber);
 
-            boolean isSaved = customerDAOImpl.updateCustomer(customerDto);
+            boolean isSaved = customerBO.updateCustomer(customerDto);
             if (isSaved){
                 refreshPage();
 
