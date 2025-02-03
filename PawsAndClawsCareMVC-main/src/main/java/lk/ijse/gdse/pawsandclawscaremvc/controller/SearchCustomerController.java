@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.CustomerDto;
-import lk.ijse.gdse.pawsandclawscaremvc.model.CustomerModel;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.CustomerDAOImpl;
 public class SearchCustomerController {
 
     @FXML
@@ -35,13 +35,13 @@ public class SearchCustomerController {
     @FXML
     private TextField TxtSearchCustContactNumber;
 
-    CustomerModel customerModel = new CustomerModel();
+    CustomerDAOImpl customerDAOImpl = new CustomerDAOImpl();
     @FXML
     void BtnSearchOnClickAction(ActionEvent event) {
         String contactNumber = TxtSearchCustContactNumber.getText();
 
         if (!contactNumber.isEmpty()) {
-            CustomerDto customer = customerModel.SearchCustomerByContact(contactNumber);
+            CustomerDto customer = customerDAOImpl.SearchCustomerByContact(contactNumber);
             LblSearchCustId.setText(contactNumber);
             if (customer != null) {
                 LblSearchCustId.setText(customer.getCustomerId());

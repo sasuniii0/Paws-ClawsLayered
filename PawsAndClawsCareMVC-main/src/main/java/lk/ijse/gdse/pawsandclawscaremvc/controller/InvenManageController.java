@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.InventoryDto;
 import lk.ijse.gdse.pawsandclawscaremvc.view.dtm.InventoryTm;
-import lk.ijse.gdse.pawsandclawscaremvc.model.InvenManageModel;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.InvenManageDAOImpl;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -75,7 +75,7 @@ public class InvenManageController implements Initializable {
 
         try {
             // Call the method to search for products by catalog
-            ArrayList<InventoryDto> filteredProducts = invenManageModel.searchProductsByCatalog(searchText);
+            ArrayList<InventoryDto> filteredProducts = invenManageDAOImpl.searchProductsByCatalog(searchText);
 
             // Convert the filtered products to ProductTm objects
             ObservableList<InventoryTm> filteredList = FXCollections.observableArrayList();
@@ -107,7 +107,7 @@ public class InvenManageController implements Initializable {
         Optional<ButtonType> optionalButtonType = alert.showAndWait();
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
-            boolean isDeleted = invenManageModel.deleteItem(invenId);
+            boolean isDeleted = invenManageDAOImpl.deleteItem(invenId);
             if (isDeleted){
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION,"Inventory Deleted").show();
@@ -134,7 +134,7 @@ public class InvenManageController implements Initializable {
         TxtStock.setStyle(TxtCategory.getStyle() + " -fx-border-color: blue;");
 
         InventoryDto inventoryDto = new InventoryDto(inventoryId,stockUpdate,category,status);
-        boolean isSaved = invenManageModel.saveInventory(inventoryDto);
+        boolean isSaved = invenManageDAOImpl.saveInventory(inventoryDto);
         if (isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Saved", ButtonType.OK).show();
@@ -170,7 +170,7 @@ public class InvenManageController implements Initializable {
         TxtStock.setStyle(TxtCategory.getStyle() + " -fx-border-color: blue;");
 
         InventoryDto inventoryDto = new InventoryDto(inventoryId,stockUpdate,category,status);
-        boolean isSaved = invenManageModel.updateInventory(inventoryDto);
+        boolean isSaved = invenManageDAOImpl.updateInventory(inventoryDto);
         if (isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Updated", ButtonType.OK).show();
@@ -227,7 +227,7 @@ public class InvenManageController implements Initializable {
     }
 
     private void loadTableData() throws SQLException {
-        ArrayList<InventoryDto> inventoryDtos = invenManageModel.getAllInventory();
+        ArrayList<InventoryDto> inventoryDtos = invenManageDAOImpl.getAllInventory();
 
         ObservableList<InventoryTm> inventoryTms = FXCollections.observableArrayList();
 
@@ -243,10 +243,10 @@ public class InvenManageController implements Initializable {
         TblInventory.setItems(inventoryTms);
     }
 
-    InvenManageModel invenManageModel = new InvenManageModel();
+    InvenManageDAOImpl invenManageDAOImpl = new InvenManageDAOImpl();
 
     private void loadNextInventoryId() throws SQLException {
-        String nextInventoryId = invenManageModel.getNextInventoryId();
+        String nextInventoryId = invenManageDAOImpl.getNextInventoryId();
         LblInvenId.setText(nextInventoryId);
     }
 }

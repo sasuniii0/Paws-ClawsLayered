@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.gdse.pawsandclawscaremvc.db.Database;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.UserDto;
-import lk.ijse.gdse.pawsandclawscaremvc.model.UserModel;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.UserDAOImpl;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -63,7 +63,7 @@ public class LoginPageController {
             new Alert(Alert.AlertType.WARNING, "Invalid email format!").show();
             return;
         }
-        boolean isAvailable = UserModel.searchUser(email, password);
+        boolean isAvailable = UserDAOImpl.searchUser(email, password);
         if (isAvailable) {
             signInAncPane.getChildren().clear();
             Parent load = FXMLLoader.load(getClass().getResource("/view/DashBoardPage.fxml"));

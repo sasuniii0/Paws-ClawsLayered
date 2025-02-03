@@ -11,8 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.SupplierDto;
 import lk.ijse.gdse.pawsandclawscaremvc.view.dtm.SupplierTm;
-import lk.ijse.gdse.pawsandclawscaremvc.model.InvenManageModel;
-import lk.ijse.gdse.pawsandclawscaremvc.model.SupManageModel;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.InvenManageDAOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.SupManageDAOImpl;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class SupManageController implements Initializable {
         String contactNumber = TxtContactNumber.getText();
 
         SupplierDto supplierDto = new SupplierDto(supId, supName, contactNumber);
-        boolean isUpdated = supManageModel.updateSupplier(supplierDto);
+        boolean isUpdated = supManageDAOImpl.updateSupplier(supplierDto);
 
         if (isUpdated) {
             refreshPage();
@@ -89,7 +89,7 @@ public class SupManageController implements Initializable {
         String contactNumber = TxtContactNumber.getText();
 
         SupplierDto supplierDto = new SupplierDto(supId, supName, contactNumber);
-        boolean isSaved = supManageModel.saveSupplier(supplierDto);
+        boolean isSaved = supManageDAOImpl.saveSupplier(supplierDto);
 
         if (isSaved) {
             refreshPage();
@@ -104,7 +104,7 @@ public class SupManageController implements Initializable {
     void BtnDeleteOnClickAction(ActionEvent event) throws SQLException {
         String supId = LblSupId.getText();
 
-        boolean isDeleted = supManageModel.deleteSupplier(supId);
+        boolean isDeleted = supManageDAOImpl.deleteSupplier(supId);
 
         if (isDeleted) {
             refreshPage();
@@ -173,10 +173,10 @@ public class SupManageController implements Initializable {
         });
     }
 
-    SupManageModel supManageModel= new SupManageModel();
+    SupManageDAOImpl supManageDAOImpl = new SupManageDAOImpl();
     SupplierTm supplierTm= new SupplierTm();
     private void refreshPage() throws SQLException {
-        LblSupId.setText(supManageModel.getNextSupId());
+        LblSupId.setText(supManageDAOImpl.getNextSupId());
 
         loadTableData();
 
@@ -194,7 +194,7 @@ public class SupManageController implements Initializable {
     private void loadTableData() throws SQLException {
         ArrayList<SupplierDto> supplierDtos;
 
-        supplierDtos = supManageModel.getAllSuppliers(); // Load all suppliers if no filter is applied
+        supplierDtos = supManageDAOImpl.getAllSuppliers(); // Load all suppliers if no filter is applied
 
         ObservableList<SupplierTm> supplierTms1 = FXCollections.observableArrayList();
 
@@ -210,13 +210,13 @@ public class SupManageController implements Initializable {
         TblSupplier.setItems(supplierTms1);
     }
 
-    InvenManageModel invenManageModel = new InvenManageModel();
+    InvenManageDAOImpl invenManageDAOImpl = new InvenManageDAOImpl();
 
     @FXML
     void BtnSearchOnClickAction(ActionEvent event) throws SQLException {
         String searchText = TxtSearchSupplier.getText().trim();
 
-        ArrayList<SupplierDto> searchResults = supManageModel.searchSuppliersByNameOrId(searchText);
+        ArrayList<SupplierDto> searchResults = supManageDAOImpl.searchSuppliersByNameOrId(searchText);
         ObservableList<SupplierTm> supplierTms1 = FXCollections.observableArrayList();
 
         for (SupplierDto supplierDto : searchResults) {

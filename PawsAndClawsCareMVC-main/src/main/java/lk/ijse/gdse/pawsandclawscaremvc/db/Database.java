@@ -1,7 +1,7 @@
 package lk.ijse.gdse.pawsandclawscaremvc.db;
 
 import lk.ijse.gdse.pawsandclawscaremvc.dto.UserDto;
-import lk.ijse.gdse.pawsandclawscaremvc.util.security.PwdManager;
+import lk.ijse.gdse.pawsandclawscaremvc.security.PwdManager;
 
 import java.util.ArrayList;
 

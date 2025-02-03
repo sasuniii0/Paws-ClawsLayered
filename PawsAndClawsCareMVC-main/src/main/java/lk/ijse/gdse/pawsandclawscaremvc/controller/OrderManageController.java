@@ -16,9 +16,9 @@ import lk.ijse.gdse.pawsandclawscaremvc.dto.OrderDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.OrdersDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ProductDto;
 import lk.ijse.gdse.pawsandclawscaremvc.view.dtm.CartTm;
-import lk.ijse.gdse.pawsandclawscaremvc.model.CustomerModel;
-import lk.ijse.gdse.pawsandclawscaremvc.model.OrderManageModel;
-import lk.ijse.gdse.pawsandclawscaremvc.model.ProductManageModel;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.CustomerDAOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.OrderManageDAOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.ProductManageDAOImpl;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -92,9 +92,9 @@ public class OrderManageController implements Initializable {
     @FXML
     private TextField TxtQty;
 
-    private final OrderManageModel orderManageModel = new OrderManageModel();
-    private final CustomerModel customerModel = new CustomerModel();
-    private final ProductManageModel productManageModel = new ProductManageModel();
+    private final OrderManageDAOImpl orderManageDAOImpl = new OrderManageDAOImpl();
+    private final CustomerDAOImpl customerDAOImpl = new CustomerDAOImpl();
+    private final ProductManageDAOImpl productManageDAOImpl = new ProductManageDAOImpl();
 
     private final ObservableList<CartTm> cartTms = FXCollections.observableArrayList();
 
@@ -163,7 +163,7 @@ public class OrderManageController implements Initializable {
     @FXML
     void CmbCustomerOnClickAction(ActionEvent event) throws SQLException {
         String selectedCustId = CmbCustomer.getSelectionModel().getSelectedItem();
-        CustomerDto customerDto = customerModel.findById(selectedCustId);
+        CustomerDto customerDto = customerDAOImpl.findById(selectedCustId);
 
         if (customerDto != null) {
             LblCustomerName.setText(customerDto.getCustomerName());
@@ -173,7 +173,7 @@ public class OrderManageController implements Initializable {
     @FXML
     void CmbProductOnClickAction(ActionEvent event) throws SQLException {
         String selectedProId = CmbProduct.getSelectionModel().getSelectedItem();
-        ProductDto productDto = productManageModel.findById(selectedProId);
+        ProductDto productDto = productManageDAOImpl.findById(selectedProId);
 
         if (productDto != null) {
             LblProductName.setText(productDto.getProductName());
@@ -245,7 +245,7 @@ public class OrderManageController implements Initializable {
                 orderDetailsDtos
         );
 
-        boolean isSaved = orderManageModel.saveOrder(ordersDto);
+        boolean isSaved = orderManageDAOImpl.saveOrder(ordersDto);
 
         if (isSaved) {
             new Alert(Alert.AlertType.INFORMATION, "Order saved..!").show();
@@ -279,7 +279,7 @@ public class OrderManageController implements Initializable {
     }
 
     private void refreshPage() throws SQLException {
-        LblOrderId.setText(orderManageModel.getNextOrderId());
+        LblOrderId.setText(orderManageDAOImpl.getNextOrderId());
         LblOrderDate.setText(LocalDate.now().toString());
         loadCustomerIds();
         loadProductIds();
@@ -298,14 +298,14 @@ public class OrderManageController implements Initializable {
     }
 
     private void loadProductIds() throws SQLException {
-        ArrayList<String> itemIds = productManageModel.getAllProductId();
+        ArrayList<String> itemIds = productManageDAOImpl.getAllProductId();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(itemIds);
         CmbProduct.setItems(observableList);
     }
 
     private void loadCustomerIds() throws SQLException {
-        ArrayList<String> customerIds = customerModel.getAllCustomerIds();
+        ArrayList<String> customerIds = customerDAOImpl.getAllCustomerIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(customerIds);
         CmbCustomer.setItems(observableList);

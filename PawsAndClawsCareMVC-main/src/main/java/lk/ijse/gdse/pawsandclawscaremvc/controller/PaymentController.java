@@ -20,7 +20,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.PaymentDto;
 import lk.ijse.gdse.pawsandclawscaremvc.view.dtm.PaymentTm;
-import lk.ijse.gdse.pawsandclawscaremvc.model.PaymentModel;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.PaymentDAOImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -139,7 +139,7 @@ public class PaymentController implements Initializable {
         String email= LblEmail.getText();
 
         PaymentDto paymentDto = new PaymentDto(paymentId,date,amount,method,resId,orderId,custId,email);
-        boolean isSaved = paymentModel.savePayment(paymentDto);
+        boolean isSaved = paymentDAOImpl.savePayment(paymentDto);
         if(isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Payment added successfully").show();
@@ -156,7 +156,7 @@ public class PaymentController implements Initializable {
         Optional<ButtonType> optionalButtonType = alert.showAndWait();
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
-            boolean isDeleted = paymentModel.deletePayment(paymentIdTxt);
+            boolean isDeleted = paymentDAOImpl.deletePayment(paymentIdTxt);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION,"Payment Deleted").show();
@@ -212,7 +212,7 @@ public class PaymentController implements Initializable {
 
         try {
             // Call the method to search for products by catalog
-            ArrayList<PaymentDto> filteredPayments = paymentModel.searchPaymentsByEmail(searchText);
+            ArrayList<PaymentDto> filteredPayments = paymentDAOImpl.searchPaymentsByEmail(searchText);
 
             // Convert the filtered products to ProductTm objects
             ObservableList<PaymentTm> filteredList = FXCollections.observableArrayList();
@@ -292,7 +292,7 @@ public class PaymentController implements Initializable {
         String email= LblEmail.getText();
 
         PaymentDto paymentDto = new PaymentDto(paymentId,date,amount,method,resId,orderId,custId,email);
-        boolean isSaved = paymentModel.UpdatePayment(paymentDto);
+        boolean isSaved = paymentDAOImpl.UpdatePayment(paymentDto);
         if(isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Payment Updated successfully").show();
@@ -306,7 +306,7 @@ public class PaymentController implements Initializable {
         CmbOrderId.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 try {
-                    paymentModel.displayCustomerDetailsByOrderId(newValue);// Fetch and display details based on orderId
+                    paymentDAOImpl.displayCustomerDetailsByOrderId(newValue);// Fetch and display details based on orderId
                     LblCustId.setText(newValue);
                     LblEmail.setText(newValue);
                 } catch (SQLException e) {
@@ -321,7 +321,7 @@ public class PaymentController implements Initializable {
         CmbReservationId.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 try {
-                    paymentModel.displayCustomerDetailsByResId(newValue); // Fetch and display details based on resId
+                    paymentDAOImpl.displayCustomerDetailsByResId(newValue); // Fetch and display details based on resId
                     LblCustId.setText(newValue);
                     LblEmail.setText(newValue);
                 } catch (SQLException e) {
@@ -421,7 +421,7 @@ public class PaymentController implements Initializable {
 
     private void loadReservationData() {
         try {
-            ObservableList<String> serviceIds = paymentModel.getAllReservationIds();
+            ObservableList<String> serviceIds = paymentDAOImpl.getAllReservationIds();
             CmbReservationId.setItems(serviceIds);
             CmbReservationId.valueProperty().addListener((obs, oldValue, newValue) -> {
             });
@@ -429,10 +429,10 @@ public class PaymentController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Failed to load reservation data: " + e.getMessage()).show();
         }
     }
-PaymentModel paymentModel = new PaymentModel();
+PaymentDAOImpl paymentDAOImpl = new PaymentDAOImpl();
     private void loadOrderData() {
         try {
-            ObservableList<String> orderIds = paymentModel.getAllOrderIds();
+            ObservableList<String> orderIds = paymentDAOImpl.getAllOrderIds();
             CmbOrderId.setItems(orderIds);
             CmbOrderId.valueProperty().addListener((obs, oldValue, newValue) -> {
             });
@@ -477,7 +477,7 @@ PaymentModel paymentModel = new PaymentModel();
     }
 
     private void loadTableData() throws SQLException {
-        ArrayList<PaymentDto> paymentDto = paymentModel.getAllPayments();
+        ArrayList<PaymentDto> paymentDto = paymentDAOImpl.getAllPayments();
 
         ObservableList<PaymentTm> paymentTms = FXCollections.observableArrayList();
 
@@ -499,7 +499,7 @@ PaymentModel paymentModel = new PaymentModel();
     }
 
     private void loadNextPaymentId() throws SQLException {
-        String nextEmpId = paymentModel.getNextPaymentId();
+        String nextEmpId = paymentDAOImpl.getNextPaymentId();
         LblPaymentId.setText(nextEmpId);
     }
 

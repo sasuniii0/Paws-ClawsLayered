@@ -13,9 +13,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.EmployeeDto;
 import lk.ijse.gdse.pawsandclawscaremvc.view.dtm.EmployeeTm;
-import lk.ijse.gdse.pawsandclawscaremvc.model.EmpManageModel;
-import lk.ijse.gdse.pawsandclawscaremvc.model.OrderManageModel;
-import lk.ijse.gdse.pawsandclawscaremvc.model.ServiceModel;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.EmpManageDAOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.OrderManageDAOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.ServiceDAOImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -121,7 +121,7 @@ public class EmpManageController implements Initializable {
     @FXML
     private AnchorPane display;
 
-    EmpManageModel empManageModel = new EmpManageModel();
+    EmpManageDAOImpl empManageDAOImpl = new EmpManageDAOImpl();
 
     @FXML
     void BtnAddNewOrderOnClickAction(ActionEvent event) {
@@ -151,7 +151,7 @@ public class EmpManageController implements Initializable {
         Optional<ButtonType> optionalButtonType = alert.showAndWait();
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
-            boolean isDeleted = empManageModel.deleteService(serviceIdText);
+            boolean isDeleted = empManageDAOImpl.deleteService(serviceIdText);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION,"Service Deleted").show();
@@ -185,7 +185,7 @@ public class EmpManageController implements Initializable {
 
         EmployeeDto employeeDto = new EmployeeDto(empId,startTime,endTime,role,contactNumber,serviceId,orderId,employeeType);
 
-        boolean isSaved = empManageModel.saveEmployee(employeeDto);
+        boolean isSaved = empManageDAOImpl.saveEmployee(employeeDto);
         if (isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Employee saved successfully").show();
@@ -200,7 +200,7 @@ public class EmpManageController implements Initializable {
 
         try {
             // Call the method to search for products by catalog
-            ArrayList<EmployeeDto> filteredEmployee = empManageModel.searchEmployeeByRole(searchText);
+            ArrayList<EmployeeDto> filteredEmployee = empManageDAOImpl.searchEmployeeByRole(searchText);
 
             // Convert the filtered products to ProductTm objects
             ObservableList<EmployeeTm> filteredList = FXCollections.observableArrayList();
@@ -247,7 +247,7 @@ public class EmpManageController implements Initializable {
 
         EmployeeDto employeeDto = new EmployeeDto(empId,startTime,endTime,role,contactNumber,serviceId,orderId,employeeType);
 
-        boolean isSaved = empManageModel.updateEmployee(employeeDto);
+        boolean isSaved = empManageDAOImpl.updateEmployee(employeeDto);
         if (isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Employee updated successfully").show();
@@ -255,7 +255,7 @@ public class EmpManageController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Failed to update employee").show();
         }
     }
-OrderManageModel orderManageModel = new OrderManageModel();
+OrderManageDAOImpl orderManageDAOImpl = new OrderManageDAOImpl();
     @FXML
     void CmbOrderId(ActionEvent event) {
         String selectedOrderId = CmbOrdersId.getValue();
@@ -263,7 +263,7 @@ OrderManageModel orderManageModel = new OrderManageModel();
         if (selectedOrderId != null) {
             try {
                 // Fetch order date from the database
-                String orderDate = orderManageModel.getOrderDateById(selectedOrderId);
+                String orderDate = orderManageDAOImpl.getOrderDateById(selectedOrderId);
 
                 // Update the label
                 LblDate.setText(orderDate != null ? orderDate : "Order date not available");
@@ -273,7 +273,7 @@ OrderManageModel orderManageModel = new OrderManageModel();
             }
         }
     }
-ServiceModel serviceModel = new ServiceModel();
+ServiceDAOImpl serviceDAOImpl = new ServiceDAOImpl();
     @FXML
     void CmbServiceId(ActionEvent event) {
         String selectedServiceId = CmbServiceId.getValue();
@@ -281,7 +281,7 @@ ServiceModel serviceModel = new ServiceModel();
         if (selectedServiceId != null) {
             try {
                 // Fetch service description from the database
-                String serviceDescription = serviceModel.getServiceDescriptionById(selectedServiceId);
+                String serviceDescription = serviceDAOImpl.getServiceDescriptionById(selectedServiceId);
                 // Update the label
                 LblDesc.setText(serviceDescription != null ? serviceDescription : "Description not available");
             } catch (SQLException e) {
@@ -369,7 +369,7 @@ ServiceModel serviceModel = new ServiceModel();
         TblEmployee.getItems().clear();
 
         // Fetch all employees from the model
-        ArrayList<EmployeeDto> employees = empManageModel.getAllEmployees();
+        ArrayList<EmployeeDto> employees = empManageDAOImpl.getAllEmployees();
 
         // Convert EmployeeDto objects to EmployeeTm objects
         ObservableList<EmployeeTm> employeeList = FXCollections.observableArrayList();
@@ -413,11 +413,11 @@ ServiceModel serviceModel = new ServiceModel();
 
     private void loadOrderData() {
         try {
-            ObservableList<String> orderIds = empManageModel.getAllOrderIds();
+            ObservableList<String> orderIds = empManageDAOImpl.getAllOrderIds();
             CmbOrdersId.setItems(orderIds);
             CmbOrdersId.valueProperty().addListener((obs, oldValue, newValue) -> {
                 try {
-                    LblDate.setText(empManageModel.getOrderDate(newValue).toString());
+                    LblDate.setText(empManageDAOImpl.getOrderDate(newValue).toString());
                 } catch (SQLException e) {
                    // LblDate.setText("");
                 }
@@ -429,11 +429,11 @@ ServiceModel serviceModel = new ServiceModel();
 
     private void loadServiceData() {
         try {
-            ObservableList<String> serviceIds = empManageModel.getAllServiceIds();
+            ObservableList<String> serviceIds = empManageDAOImpl.getAllServiceIds();
             CmbServiceId.setItems(serviceIds);
             CmbServiceId.valueProperty().addListener((obs, oldValue, newValue) -> {
                 try {
-                    LblDesc.setText(empManageModel.getServiceDescription(newValue));
+                    LblDesc.setText(empManageDAOImpl.getServiceDescription(newValue));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -466,7 +466,7 @@ ServiceModel serviceModel = new ServiceModel();
     }
 
     private void loadTblData() throws SQLException {
-        ArrayList<EmployeeDto> employeeDto = empManageModel.getAllEmployees();
+        ArrayList<EmployeeDto> employeeDto = empManageDAOImpl.getAllEmployees();
 
         ObservableList<EmployeeTm> employeeTms = FXCollections.observableArrayList();
 
@@ -488,7 +488,7 @@ ServiceModel serviceModel = new ServiceModel();
     }
 
     private void loadNextEmplId() throws SQLException {
-        String nextEmpId = empManageModel.getNextEmpId();
+        String nextEmpId = empManageDAOImpl.getNextEmpId();
         LblEmpId.setText(nextEmpId);
     }
 }

@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDto;
 import lk.ijse.gdse.pawsandclawscaremvc.view.dtm.ServiceTm;
-import lk.ijse.gdse.pawsandclawscaremvc.model.ServiceModel;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.ServiceDAOImpl;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -80,7 +80,7 @@ public class ServicesController implements Initializable {
         Optional<ButtonType> optionalButtonType = alert.showAndWait();
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
-            boolean isDeleted = serviceModel.deleteService(serviceIdText);
+            boolean isDeleted = serviceDAOImpl.deleteService(serviceIdText);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION,"Service Deleted").show();
@@ -111,7 +111,7 @@ public class ServicesController implements Initializable {
 
 
             ServiceDto serviceDto = new ServiceDto(serviceId,availability,duration,price,desc);
-            boolean isSaved = serviceModel.saveService(serviceDto);
+            boolean isSaved = serviceDAOImpl.saveService(serviceDto);
             if (isSaved) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
@@ -152,7 +152,7 @@ public class ServicesController implements Initializable {
 
 
         ServiceDto serviceDto = new ServiceDto(serviceId,desc,duration,price,availability);
-        boolean isUpdated = serviceModel.updateService(serviceDto);
+        boolean isUpdated = serviceDAOImpl.updateService(serviceDto);
         //System.out.println("hjbsqwhjs");
         if (isUpdated) {
             refreshPage();
@@ -210,10 +210,10 @@ public class ServicesController implements Initializable {
         TxtDuration.setText("");
         TxtPrice.setText("");
     }
-    ServiceModel serviceModel = new ServiceModel();
+    ServiceDAOImpl serviceDAOImpl = new ServiceDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<ServiceDto> serviceDtos = serviceModel.getAllServices();
+        ArrayList<ServiceDto> serviceDtos = serviceDAOImpl.getAllServices();
         ObservableList<ServiceTm> serviceTms = FXCollections.observableArrayList();
 
         for (ServiceDto serviceDto : serviceDtos) {
@@ -230,7 +230,7 @@ public class ServicesController implements Initializable {
     }
 
     private void loadNextServiceId() throws SQLException {
-        String nextServiceId = serviceModel.getNextCustomerId();
+        String nextServiceId = serviceDAOImpl.getNextCustomerId();
         LblServiceId.setText(nextServiceId);
     }
 }

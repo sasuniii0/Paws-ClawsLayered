@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.gdse.pawsandclawscaremvc.model.UserModel;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.UserDAOImpl;
 import java.io.IOException;
 
 public class ResetPwdController {
@@ -39,7 +39,7 @@ public class ResetPwdController {
     @FXML
     void BtnChangePnAction(ActionEvent event) throws IOException {
         String password = TxtNewPwd.getText();
-        boolean isUpdate = UserModel.updateUser(selectedEmail, password);
+        boolean isUpdate = UserDAOImpl.updateUser(selectedEmail, password);
         if (isUpdate) {
             new Alert(Alert.AlertType.INFORMATION, "Password updated successfully").show();
             Parent load = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
