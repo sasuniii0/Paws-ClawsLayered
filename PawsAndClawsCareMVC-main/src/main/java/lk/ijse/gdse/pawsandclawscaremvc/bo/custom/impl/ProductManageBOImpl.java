@@ -1,4 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl;
 
-public class ProductManageBOImpl {
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ProductManageBO;
+
+public class ProductManageBOImpl implements ProductManageBO {
 }

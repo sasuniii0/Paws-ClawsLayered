@@ -1,4 +1,7 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom;
 
-public interface SupplierDAO {
+import lk.ijse.gdse.pawsandclawscaremvc.dao.CrudDAO;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Supplier;
+
+public interface SupplierDAO extends CrudDAO<Supplier> {
 }

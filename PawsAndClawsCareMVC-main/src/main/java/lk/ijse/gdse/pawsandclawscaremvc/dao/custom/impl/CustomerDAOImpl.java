@@ -1,5 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.CustomerDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.CustomerDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 
@@ -7,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerDAOImpl {
+public class CustomerDAOImpl implements CustomerDAO {
     public boolean saveCustomer(CustomerDto customerDto) throws SQLException {
         return SQLUtil.execute("INSERT INTO Customer (custId, name, address, email, contactNumber)\n" +
                         "VALUES (?, ?, ?, ?, ?)",

@@ -2,6 +2,7 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ReservationDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ReservationDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
@@ -11,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ReservationDAOImpl {
+public class ReservationDAOImpl implements ReservationDAO {
 
     public String getNextReservationId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select resId from Reservation order by resId desc limit 1");

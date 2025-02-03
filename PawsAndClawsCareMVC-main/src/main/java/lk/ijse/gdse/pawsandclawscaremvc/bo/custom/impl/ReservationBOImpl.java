@@ -1,4 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl;
 
-public class ReservationBOImpl {
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ReservationBO;
+
+public class ReservationBOImpl implements ReservationBO {
 }

@@ -1,12 +1,13 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.OrderDetailsDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.OrderDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OrderDetailsDAOImpl {
+public class OrderDetailsDAOImpl implements OrderDetailsDAO {
     public boolean saveOrderDetailsList(ArrayList<OrderDetailsDto> orderDetailsDtos) throws SQLException {
         for (OrderDetailsDto orderDetailsDto : orderDetailsDtos) {
             // @isOrderDetailsSaved: Saves the individual order detail

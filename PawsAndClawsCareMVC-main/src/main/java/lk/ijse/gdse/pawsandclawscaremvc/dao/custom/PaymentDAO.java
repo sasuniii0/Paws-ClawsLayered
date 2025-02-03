@@ -1,4 +1,7 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom;
 
-public interface PaymentDAO {
+import lk.ijse.gdse.pawsandclawscaremvc.dao.CrudDAO;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Payment;
+
+public interface PaymentDAO  extends CrudDAO<Payment> {
 }

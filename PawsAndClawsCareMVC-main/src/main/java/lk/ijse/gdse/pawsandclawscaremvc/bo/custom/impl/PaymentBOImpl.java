@@ -1,4 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl;
 
-public class PaymentBOImpl {
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.PaymentBO;
+
+public class PaymentBOImpl implements PaymentBO {
 }

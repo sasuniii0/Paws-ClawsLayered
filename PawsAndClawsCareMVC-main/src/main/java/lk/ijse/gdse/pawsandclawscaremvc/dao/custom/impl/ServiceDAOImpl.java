@@ -1,5 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ServiceDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ServiceDAOImpl {
+public class ServiceDAOImpl implements ServiceDAO {
 
     public ArrayList<String> getAllItemIds() throws SQLException {
         ResultSet rst = SQLUtil.execute("select serviceId from Service");

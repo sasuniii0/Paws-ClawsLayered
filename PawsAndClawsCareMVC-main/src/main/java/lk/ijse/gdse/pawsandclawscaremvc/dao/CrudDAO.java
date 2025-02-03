@@ -1,4 +1,4 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao;
 
-public interface CrudDAO {
+public interface CrudDAO<T> extends SuperDAO {
 }

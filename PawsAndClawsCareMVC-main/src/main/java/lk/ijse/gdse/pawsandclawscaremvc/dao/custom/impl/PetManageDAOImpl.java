@@ -1,5 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.PetDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.PetDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 
@@ -7,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class PetManageDAOImpl {
+public class PetManageDAOImpl implements PetDAO {
     public String getNextPetId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select petId from Pet order by petId desc limit 1");
 

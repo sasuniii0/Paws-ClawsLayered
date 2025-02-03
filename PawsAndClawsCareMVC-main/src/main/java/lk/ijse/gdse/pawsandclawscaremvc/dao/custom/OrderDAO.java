@@ -1,4 +1,7 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom;
 
-public interface OrderDAO {
+import lk.ijse.gdse.pawsandclawscaremvc.dao.CrudDAO;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Orders;
+
+public interface OrderDAO  extends CrudDAO<Orders> {
 }

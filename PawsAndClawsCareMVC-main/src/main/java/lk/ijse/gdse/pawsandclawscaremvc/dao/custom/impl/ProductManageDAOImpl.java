@@ -1,5 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ProductDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.OrderDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ProductDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ProductManageDAOImpl {
+public class ProductManageDAOImpl implements ProductDAO {
     public static boolean saveProduct(ProductDto productDto) throws SQLException {
         return SQLUtil.execute("INSERT INTO Product (proId, name, description,  price, qty) VALUES (?,?,?,?,?)",
                 productDto.getProductId(),

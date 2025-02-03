@@ -2,6 +2,7 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.EmployeeDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.EmployeeDto ;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class EmpManageDAOImpl {
+public class EmpManageDAOImpl implements EmployeeDAO {
     public String getNextEmpId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select empId from Employee order by empId desc limit 1");
 

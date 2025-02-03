@@ -1,5 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.OrderDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.OrdersDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
@@ -8,7 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderManageDAOImpl {
+public class OrderManageDAOImpl implements OrderDAO {
     private final OrderDetailsDAOImpl orderDetailsDAOImpl = new OrderDetailsDAOImpl();
     public String getNextOrderId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select orderId from Orders order by orderId desc limit 1");

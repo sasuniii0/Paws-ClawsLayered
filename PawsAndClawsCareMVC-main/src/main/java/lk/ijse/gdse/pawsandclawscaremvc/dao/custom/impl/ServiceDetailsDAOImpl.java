@@ -1,12 +1,13 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ServiceDetailsDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ServiceDetailsDAOImpl {
+public class ServiceDetailsDAOImpl implements ServiceDetailsDAO {
 
     ServiceDAOImpl serviceDAOImpl = new ServiceDAOImpl();
 

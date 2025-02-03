@@ -1,5 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.SupplierDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.SupplierDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 
@@ -7,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class SupManageDAOImpl {
+public class SupManageDAOImpl implements SupplierDAO {
     public String getNextSupId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select supId from Supplier order by supId desc limit 1");
 

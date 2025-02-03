@@ -1,5 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.UserDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
 
 import java.sql.Connection;
@@ -7,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDAOImpl {
+public class UserDAOImpl implements UserDAO {
     public static boolean searchUser(String email, String password) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();

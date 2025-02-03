@@ -2,6 +2,7 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.PaymentDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.PaymentDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class PaymentDAOImpl {
+public class PaymentDAOImpl implements PaymentDAO {
     public ObservableList<String> getAllOrderIds() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT orderId FROM Orders");
 

@@ -1,5 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.InventoryDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.InventoryDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 
@@ -7,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class InvenManageDAOImpl {
+public class InvenManageDAOImpl implements InventoryDAO {
 
     public String getNextInventoryId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select inventoryId from Inventory order by inventoryId desc limit 1");
