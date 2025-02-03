@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ProductManageBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.ProductManageBOImpl;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
@@ -108,7 +110,7 @@ public class ProductManageController implements Initializable {
 
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private ObservableList<ProductTm> productList = FXCollections.observableArrayList();
-    ProductManageDAOImpl prm = new ProductManageDAOImpl();
+    ProductManageBO productManageBO = new ProductManageBOImpl();
 
 
     @FXML
@@ -119,7 +121,7 @@ public class ProductManageController implements Initializable {
         Optional<ButtonType> optionalButtonType = alert.showAndWait();
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
-            boolean isDeleted = productManageDAOImpl.deleteItem(proId);
+            boolean isDeleted = productManageBO.deleteItem(proId);
             if (isDeleted){
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION,"Product Deleted").show();
@@ -169,7 +171,7 @@ public class ProductManageController implements Initializable {
         int qty = Integer.parseInt(TxtQty.getText());
 
         ProductDto productDto = new ProductDto(proId, proName,desc, price,qty);
-        boolean isSaved = productManageDAOImpl.saveProduct(productDto);
+        boolean isSaved = productManageBO.saveProduct(productDto);
         if (isSaved){
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Product Saved").show();
@@ -204,7 +206,7 @@ public class ProductManageController implements Initializable {
 
         ProductDto productDto = new ProductDto(proId, proName,desc, price,qty);
 
-        boolean isUpdated = productManageDAOImpl.updateProduct(productDto);
+        boolean isUpdated = productManageBO.updateProduct(productDto);
         if (isUpdated){
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Product Updated").show();
@@ -264,7 +266,7 @@ public class ProductManageController implements Initializable {
     ProductManageDAOImpl productManageDAOImpl = new ProductManageDAOImpl();
 
     private void loadTableData() throws SQLException {
-        ArrayList<ProductDto> productsDtos = productManageDAOImpl.getAllProducts();
+        ArrayList<ProductDto> productsDtos = productManageBO.getAllProducts();
         ObservableList<ProductTm> productTms = FXCollections.observableArrayList();
 
         for (ProductDto productDto : productsDtos) {
@@ -281,7 +283,7 @@ public class ProductManageController implements Initializable {
     }
 
     private void loadNextProductId() throws SQLException {
-        String nextProductId = productManageDAOImpl.getNextProductId();
+        String nextProductId = productManageBO.getNextProductId();
         LblProId.setText(nextProductId);
     }
 
@@ -318,7 +320,7 @@ public class ProductManageController implements Initializable {
     private void checkLowQuantityProducts() {
         Platform.runLater(() -> {
             try {
-                List<ProductDto> lowStockProducts = productManageDAOImpl.getLowStockProducts();
+                List<ProductDto> lowStockProducts = productManageBO.getLowStockProducts();
                 if (!lowStockProducts.isEmpty()) {
                     displayReminder(lowStockProducts);
                 }

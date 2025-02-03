@@ -4,24 +4,25 @@ import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ProductDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.OrderDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ProductDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Product;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductManageDAOImpl implements ProductDAO {
-    public static boolean saveProduct(ProductDto productDto) throws SQLException {
+    public  boolean save(Product entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO Product (proId, name, description,  price, qty) VALUES (?,?,?,?,?)",
-                productDto.getProductId(),
-                productDto.getProductName(),
-                productDto.getDescription(),
-                productDto.getPrice(),
-                productDto.getQty()
+                entity.getProductId(),
+                entity.getProductName(),
+                entity.getDescription(),
+                entity.getPrice(),
+                entity.getQty()
 
         );
     }
 
-    public static boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException {
+    public  boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException {
         return SQLUtil.execute(
                 "update Product set qty = qty - ? where proId = ?",
                 orderDetailsDto.getQuantity(),   // Quantity to reduce
@@ -29,24 +30,24 @@ public class ProductManageDAOImpl implements ProductDAO {
         );
     }
 
-    public ArrayList<ProductDto> getAllProducts() throws SQLException {
+    public ArrayList<Product> getAll() throws SQLException {
         ResultSet rst = SQLUtil.execute("select proId,name,description,price,qty from Product");
 
-        ArrayList<ProductDto> productDtos = new ArrayList<>();
+        ArrayList<Product> product = new ArrayList<>();
         while (rst.next()){
-            ProductDto productDto = new ProductDto(
+            Product products = new Product(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getDouble(4),
                     rst.getInt(5)
             );
-            productDtos.add(productDto);
+            product.add(products);
         }
-        return productDtos;
+        return product;
     }
 
-    public String getNextProductId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select proId from Product order by proId desc limit 1");
         if (rst.next()){
             String lastId = rst.getNString(1);
@@ -58,17 +59,17 @@ public class ProductManageDAOImpl implements ProductDAO {
         return "PR001";
     }
 
-    public boolean deleteItem(String proId) throws SQLException {
+    public boolean delete(String proId) throws SQLException {
         return SQLUtil.execute("delete from Product where proId = ?",proId);
     }
 
-    public boolean updateProduct(ProductDto productDto) throws SQLException {
+    public boolean update(Product entity) throws SQLException {
         return  SQLUtil.execute("update Product set name =?, description = ?, price = ?, qty = ? where proId = ?",
-                productDto.getProductName(),
-                productDto.getDescription(),
-                productDto.getPrice(),
-                productDto.getQty(),
-                productDto.getProductId()
+                entity.getProductName(),
+                entity.getDescription(),
+                entity.getPrice(),
+                entity.getQty(),
+                entity.getProductId()
         );
     }
 
