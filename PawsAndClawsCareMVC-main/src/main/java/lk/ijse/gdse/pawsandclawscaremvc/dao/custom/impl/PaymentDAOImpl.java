@@ -3,8 +3,8 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.PaymentDAO;
-import lk.ijse.gdse.pawsandclawscaremvc.dto.PaymentDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Payment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +31,7 @@ public class PaymentDAOImpl implements PaymentDAO {
         return serviceIds;
     }
 
-    public String getNextPaymentId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select paymentId from Payment order by paymentId desc limit 1");
 
         if (rst.next()) {
@@ -44,13 +44,13 @@ public class PaymentDAOImpl implements PaymentDAO {
         return "PAY001";
     }
 
-    public ArrayList<PaymentDto> getAllPayments() throws SQLException {
+    public ArrayList<Payment> getAll() throws SQLException {
         ResultSet rst = SQLUtil.execute("SELECT p.paymentId,p.date,p.amount,p.method,p.resId,p.orderId,c.custId,c.email\n" +
                 "    FROM Payment p LEFT JOIN Reservation r ON p.resId = r.resId LEFT JOIN Customer c On r.custId = c.custId");
-        ArrayList<PaymentDto> paymentDtos = new ArrayList<>();
+        ArrayList<Payment> entity = new ArrayList<>();
 
         while (rst.next()) {
-            PaymentDto paymentDto = new PaymentDto(
+            Payment payment = new Payment(
                     rst.getString(1),
                     rst.getDate(2).toLocalDate(),
                     rst.getDouble(3),
@@ -60,20 +60,20 @@ public class PaymentDAOImpl implements PaymentDAO {
                     rst.getString(7),
                     rst.getString(8)
             );
-            paymentDtos.add(paymentDto);
+            entity.add(payment);
         }
-        return paymentDtos;
+        return entity;
     }
 
-    public boolean savePayment(PaymentDto paymentDto) throws SQLException {
+    public boolean save(Payment entity) throws SQLException {
         SQLUtil.execute(
                 "INSERT INTO Payment (paymentId, date,amount,method,resId,orderId) VALUES (?, ?, ?, ?, ?, ?)",
-                paymentDto.getPaymentId(),
-                paymentDto.getDate(),
-                paymentDto.getAmount(),
-                paymentDto.getMethod(),
-                paymentDto.getResId(),
-                paymentDto.getOrderId()
+                entity.getPaymentId(),
+                entity.getDate(),
+                entity.getAmount(),
+                entity.getMethod(),
+                entity.getResId(),
+                entity.getOrderId()
 
         );
         return true;
@@ -98,30 +98,30 @@ public class PaymentDAOImpl implements PaymentDAO {
         }
     }
 
-    public boolean UpdatePayment(PaymentDto paymentDto) throws SQLException {
+    public boolean update(Payment entity) throws SQLException {
         return SQLUtil.execute(
                 "update Payment set date=?, amount=?, method=?, resId=?, orderId=? where paymentId =?",
-                paymentDto.getDate(),
-                paymentDto.getAmount(),
-                paymentDto.getMethod(),
-                paymentDto.getResId(),
-                paymentDto.getOrderId(),
-                paymentDto.getPaymentId()
+                entity.getDate(),
+                entity.getAmount(),
+                entity.getMethod(),
+                entity.getResId(),
+                entity.getOrderId(),
+                entity.getPaymentId()
         );
     }
 
-    public boolean deletePayment(String paymentIdTxt) throws SQLException {
+    public boolean delete(String paymentIdTxt) throws SQLException {
         return SQLUtil.execute("delete from Payment where paymentId = ?",paymentIdTxt);
     }
 
-    public ArrayList<PaymentDto> searchPaymentsByEmail(String searchText) throws SQLException {
+    public ArrayList<Payment> searchPaymentsByEmail(String searchText) throws SQLException {
         ResultSet rst = SQLUtil.execute("select p.paymentId ,p.date,p.amount,p.method,p.resId,p.orderId,c.custId,c.email\n" +
                 "from Customer c Join Orders o on c.custId = o.custId\n" +
                 "join Payment p on o.orderId = p.orderId\n" +
                 "where c.email = ?", searchText);
-        ArrayList<PaymentDto> paymentDtos = new ArrayList<>();
+        ArrayList<Payment> entity = new ArrayList<>();
         while (rst.next()) {
-            PaymentDto paymentDto = new PaymentDto(
+            Payment payment = new Payment(
                     rst.getString(1),
                     rst.getDate(2).toLocalDate(),
                     rst.getDouble(3),
@@ -131,8 +131,8 @@ public class PaymentDAOImpl implements PaymentDAO {
                     rst.getString(7),
                     rst.getString(8)
             );
-            paymentDtos.add(paymentDto);
+            entity.add(payment);
         }
-        return paymentDtos;
+        return entity;
     }
 }

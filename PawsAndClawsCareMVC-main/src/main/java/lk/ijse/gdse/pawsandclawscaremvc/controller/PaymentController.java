@@ -15,6 +15,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Callback;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.PaymentBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.PaymentBOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Payment;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
@@ -121,6 +124,7 @@ public class PaymentController implements Initializable {
     @FXML
     private TextField TxtSearchBox;
 
+    PaymentBO paymentBO = new PaymentBOImpl();
     SendPaymentMailController sendPaymentMailController = new SendPaymentMailController();
 
     @FXML
@@ -139,7 +143,7 @@ public class PaymentController implements Initializable {
         String email= LblEmail.getText();
 
         PaymentDto paymentDto = new PaymentDto(paymentId,date,amount,method,resId,orderId,custId,email);
-        boolean isSaved = paymentDAOImpl.savePayment(paymentDto);
+        boolean isSaved = paymentBO.savePayment(paymentDto);
         if(isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Payment added successfully").show();
@@ -156,7 +160,7 @@ public class PaymentController implements Initializable {
         Optional<ButtonType> optionalButtonType = alert.showAndWait();
 
         if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
-            boolean isDeleted = paymentDAOImpl.deletePayment(paymentIdTxt);
+            boolean isDeleted = paymentBO.deletePayment(paymentIdTxt);
             if (isDeleted) {
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION,"Payment Deleted").show();
@@ -212,20 +216,20 @@ public class PaymentController implements Initializable {
 
         try {
             // Call the method to search for products by catalog
-            ArrayList<PaymentDto> filteredPayments = paymentDAOImpl.searchPaymentsByEmail(searchText);
+            ArrayList<Payment> filteredPayments = paymentBO.searchPaymentsByEmail(searchText);
 
             // Convert the filtered products to ProductTm objects
             ObservableList<PaymentTm> filteredList = FXCollections.observableArrayList();
-            for (PaymentDto paymentDto : filteredPayments) {
+            for (Payment payment : filteredPayments) {
                 PaymentTm paymentTm = new PaymentTm(
-                        paymentDto.getPaymentId(),
-                        paymentDto.getDate(),
-                        paymentDto.getAmount(),
-                        paymentDto.getMethod(),
-                        paymentDto.getResId(),
-                        paymentDto.getOrderId(),
-                        paymentDto.getCustId(),
-                        paymentDto.getEmail()
+                        payment.getPaymentId(),
+                        payment.getDate(),
+                        payment.getAmount(),
+                        payment.getMethod(),
+                        payment.getResId(),
+                        payment.getOrderId(),
+                        payment.getCustId(),
+                        payment.getEmail()
                 );
                 filteredList.add(paymentTm);
             }
@@ -292,7 +296,7 @@ public class PaymentController implements Initializable {
         String email= LblEmail.getText();
 
         PaymentDto paymentDto = new PaymentDto(paymentId,date,amount,method,resId,orderId,custId,email);
-        boolean isSaved = paymentDAOImpl.UpdatePayment(paymentDto);
+        boolean isSaved = paymentBO.updatePayment(paymentDto);
         if(isSaved) {
             refreshPage();
             new Alert(Alert.AlertType.INFORMATION, "Payment Updated successfully").show();
@@ -477,7 +481,7 @@ PaymentDAOImpl paymentDAOImpl = new PaymentDAOImpl();
     }
 
     private void loadTableData() throws SQLException {
-        ArrayList<PaymentDto> paymentDto = paymentDAOImpl.getAllPayments();
+        ArrayList<PaymentDto> paymentDto = paymentBO.getAllPayment();
 
         ObservableList<PaymentTm> paymentTms = FXCollections.observableArrayList();
 
@@ -499,7 +503,7 @@ PaymentDAOImpl paymentDAOImpl = new PaymentDAOImpl();
     }
 
     private void loadNextPaymentId() throws SQLException {
-        String nextEmpId = paymentDAOImpl.getNextPaymentId();
+        String nextEmpId = paymentBO.getNextPaymentId();
         LblPaymentId.setText(nextEmpId);
     }
 
