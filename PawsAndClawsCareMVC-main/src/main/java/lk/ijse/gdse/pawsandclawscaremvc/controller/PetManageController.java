@@ -9,7 +9,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.PetManageBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.PetManageBOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.PetDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.PetDto;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Pet;
 import lk.ijse.gdse.pawsandclawscaremvc.view.dtm.PetTm;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.PetManageDAOImpl;
 import java.net.URL;
@@ -62,19 +66,20 @@ public class PetManageController implements Initializable {
     private TextField TxtSearchPetName;
 
     private final ObservableList<PetTm> petTms = FXCollections.observableArrayList();
+    PetManageBO petManageBO = new PetManageBOImpl();
 
     @FXML
     void BtnSearchOnClickAction(ActionEvent event) throws SQLException {
         String searchText = TxtSearchPetName.getText().trim();
 
-        ArrayList<PetDto> searchResults = petManageDAOImpl.searchPetsByNameOrId(searchText);
+        ArrayList<PetDto> searchResults = petManageBO.searchPetsByNameOrId(searchText);
         ObservableList<PetTm> petTms = FXCollections.observableArrayList();
 
-        for (PetDto petDto : searchResults) {
+        for (PetDto pet : searchResults) {
             PetTm petTm = new PetTm(
-                    petDto.getPetId(),
-                    petDto.getName(),
-                    petDto.getBreed()
+                    pet.getPetId(),
+                    pet.getName(),
+                    pet.getBreed()
             );
             petTms.add(petTm);
         }
@@ -86,7 +91,7 @@ public class PetManageController implements Initializable {
     void DeleteBtnOnClickAction(ActionEvent event) throws SQLException {
         String petId = LblPetId.getText();
 
-        boolean isDeleted = petManageDAOImpl.deletePet(petId);
+        boolean isDeleted = petManageBO.deletePet(petId);
 
         if (isDeleted) {
             refreshPage();
@@ -113,7 +118,7 @@ public class PetManageController implements Initializable {
         String breed = TxtBreed.getText();
 
         PetDto petDto = new PetDto(petId, name, breed);
-        boolean isSaved = petManageDAOImpl.savePet(petDto);
+        boolean isSaved = petManageBO.savePet(petDto);
 
         if (isSaved) {
             refreshPage();
@@ -144,7 +149,7 @@ public class PetManageController implements Initializable {
         String breed = TxtBreed.getText();
 
         PetDto petDto = new PetDto(petId, name, breed);
-        boolean isUpdated = petManageDAOImpl.updatePet(petDto);
+        boolean isUpdated = petManageBO.updatePet(petDto);
 
         if (isUpdated) {
             refreshPage();
@@ -189,7 +194,7 @@ public class PetManageController implements Initializable {
 
     PetManageDAOImpl petManageDAOImpl = new PetManageDAOImpl();
     private void refreshPage() throws SQLException {
-        LblPetId.setText(petManageDAOImpl.getNextPetId());
+        LblPetId.setText(petManageBO.getNextPetId());
 
         loadTableData();
 
@@ -207,7 +212,7 @@ public class PetManageController implements Initializable {
     private void loadTableData() throws SQLException {
         ArrayList<PetDto> petDtos;
 
-        petDtos = petManageDAOImpl.getAllPets();
+        petDtos = petManageBO.getAllPets();
 
         ObservableList<PetTm> petTms = FXCollections.observableArrayList();
 

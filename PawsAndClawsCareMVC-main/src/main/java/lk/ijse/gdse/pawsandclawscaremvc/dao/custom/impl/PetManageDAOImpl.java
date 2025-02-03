@@ -1,15 +1,15 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.PetDAO;
-import lk.ijse.gdse.pawsandclawscaremvc.dto.PetDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Pet;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PetManageDAOImpl implements PetDAO {
-    public String getNextPetId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select petId from Pet order by petId desc limit 1");
 
         if (rst.next()) {
@@ -22,46 +22,46 @@ public class PetManageDAOImpl implements PetDAO {
         return "P001";
     }
 
-    public ArrayList<PetDto> getAllPets() throws SQLException {
+    public ArrayList<Pet> getAll() throws SQLException {
         ResultSet rst = SQLUtil.execute("select * from Pet");
-        ArrayList<PetDto> petDtos = new ArrayList<>();
+        ArrayList<Pet> entity = new ArrayList<>();
 
         while (rst.next()) {
-            PetDto petDto = new PetDto(
+            Pet pets = new Pet(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3)
             );
-            petDtos.add(petDto);
+            entity.add(pets);
         }
-        return petDtos;
+        return entity;
     }
 
-    public boolean updatePet(PetDto petDto) throws SQLException {
+    public boolean update(Pet entity) throws SQLException {
         return SQLUtil.execute("UPDATE Pet SET name = ?, breed = ?  WHERE petId = ?",
-                petDto.getName(),
-                petDto.getBreed(),
-                petDto.getPetId());
+                entity.getName(),
+                entity.getBreed(),
+                entity.getPetId());
     }
 
-    public boolean savePet(PetDto petDto) throws SQLException {
+    public boolean save(Pet entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO Pet VALUES (?, ?, ?)",
-                petDto.getPetId(),
-                petDto.getName(),
-                petDto.getBreed());
+                entity.getPetId(),
+                entity.getName(),
+                entity.getBreed());
     }
 
-    public boolean deletePet(String petId) throws SQLException {
+    public boolean delete(String petId) throws SQLException {
         return SQLUtil.execute("DELETE FROM Pet WHERE petId = ?", petId);
     }
 
-    public ArrayList<PetDto> searchPetsByNameOrId(String searchText) throws SQLException {
-        ArrayList<PetDto> pets = new ArrayList<>();
+    public ArrayList<Pet> searchPetsByNameOrId(String searchText) throws SQLException {
+        ArrayList<Pet> pets = new ArrayList<>();
         ResultSet rs = SQLUtil.execute("SELECT * FROM Pet WHERE petId LIKE ? OR name LIKE ?",
                 "%" + searchText + "%", "%" + searchText + "%");
 
         while (rs.next()) {
-            pets.add(new PetDto(
+            pets.add(new Pet(
                     rs.getString("petId"),
                     rs.getString("name"),
                     rs.getString("breed")
