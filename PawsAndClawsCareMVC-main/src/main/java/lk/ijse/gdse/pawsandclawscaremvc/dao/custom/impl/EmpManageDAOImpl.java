@@ -5,13 +5,14 @@ import javafx.collections.ObservableList;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.EmployeeDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.EmployeeDto ;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Employee;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmpManageDAOImpl implements EmployeeDAO {
-    public String getNextEmpId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select empId from Employee order by empId desc limit 1");
 
         if (rst.next()) {
@@ -24,12 +25,12 @@ public class EmpManageDAOImpl implements EmployeeDAO {
         return "E001";
     }
 
-    public ArrayList<EmployeeDto> getAllEmployees() throws SQLException {
+    public ArrayList<Employee> getAll() throws SQLException {
         ResultSet rst = SQLUtil.execute("select * from Employee");
-        ArrayList<EmployeeDto> employeeDtos = new ArrayList<>();
+        ArrayList<Employee> entity = new ArrayList<>();
 
         while (rst.next()) {
-            EmployeeDto employeeDto = new EmployeeDto(
+            Employee employee = new Employee(
                     rst.getString("empId"),
                     rst.getString("orderId"),
                     rst.getString("employeeType"),
@@ -39,9 +40,9 @@ public class EmpManageDAOImpl implements EmployeeDAO {
                     rst.getString("contactNumber"),
                     rst.getString("endTime")
             );
-            employeeDtos.add(employeeDto);
+            entity.add(employee);
         }
-        return employeeDtos;
+        return entity;
     }
 
     public ObservableList<String> getAllServiceIds() throws SQLException {
@@ -83,46 +84,45 @@ public class EmpManageDAOImpl implements EmployeeDAO {
         return null;
     }
 
-    public boolean saveEmployee(EmployeeDto employeeDto) throws SQLException {;
-        System.out.println(employeeDto);
+    public boolean save(Employee entity) throws SQLException {;
         SQLUtil.execute(
                 "INSERT INTO Employee (empId, roll,contactNumber, serviceId, orderId, employeeType, endTime, startTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                employeeDto.getEmpId(),
-                employeeDto.getRole(),
-                employeeDto.getContactNumber(),
-                employeeDto.getServiceId(),
-                employeeDto.getOrderId(),
-                employeeDto.getEmployeeType(),
-                employeeDto.getEndTime(),
-                employeeDto.getStartTime()
+                entity.getEmpId(),
+                entity.getRole(),
+                entity.getContactNumber(),
+                entity.getServiceId(),
+                entity.getOrderId(),
+                entity.getEmployeeType(),
+                entity.getEndTime(),
+                entity.getStartTime()
         );
         return true;
     }
 
-    public boolean updateEmployee(EmployeeDto employeeDto) throws SQLException {
+    public boolean update(Employee entity) throws SQLException {
         return SQLUtil.execute(
                 "update Employee set employeeType=?, startTime = ?, endTime=?, roll=?, contactNumber=?, serviceId=?, orderId =? where empId =?",
-                employeeDto.getEmployeeType(),
-                employeeDto.getStartTime(),
-                employeeDto.getEndTime(),
-                employeeDto.getRole(),
-                employeeDto.getContactNumber(),
-                employeeDto.getServiceId(),
-                employeeDto.getOrderId(),
-                employeeDto.getEmpId()
+                entity.getEmployeeType(),
+                entity.getStartTime(),
+                entity.getEndTime(),
+                entity.getRole(),
+                entity.getContactNumber(),
+                entity.getServiceId(),
+                entity.getOrderId(),
+                entity.getEmpId()
         );
     }
 
-    public boolean deleteService(String serviceIdText) throws SQLException {
+    public boolean delete(String serviceIdText) throws SQLException {
         return SQLUtil.execute("delete from Service where empId = ?",serviceIdText);
     }
 
-    public ArrayList<EmployeeDto> searchEmployeeByRole(String searchText) throws SQLException {
+    public ArrayList<Employee> searchEmployeeByRole(String searchText) throws SQLException {
         ResultSet rst = SQLUtil.execute("SELECT empId, roll, contactNumber, serviceId, orderId,employeeType,startTime, endTime FROM Employee WHERE roll LIKE ?", "%" + searchText + "%");
 
-        ArrayList<EmployeeDto> employeeDtos = new ArrayList<>();
+        ArrayList<Employee> entity = new ArrayList<>();
         while (rst.next()) {
-            EmployeeDto employeeDto = new EmployeeDto(
+            Employee employee = new Employee(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -132,8 +132,8 @@ public class EmpManageDAOImpl implements EmployeeDAO {
                     rst.getString(7),
                     rst.getString(8)
             );
-            employeeDtos.add(employeeDto);
+            entity.add(employee);
         }
-        return employeeDtos;
+        return entity;
     }
 }
