@@ -18,7 +18,7 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
             }
 
             // @isItemUpdated: Updates the item quantity in the stock for the corresponding order detail
-            boolean isItemUpdated = ProductManageDAOImpl.reduceQty(orderDetailsDto);
+            boolean isItemUpdated = reduceQty(orderDetailsDto);
             if (!isItemUpdated) {
                 // Return false if updating the item quantity fails
                 return false;
@@ -35,6 +35,13 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
                 orderDetailsDto.getProId(),
                 orderDetailsDto.getQuantity(),
                 orderDetailsDto.getPrice()
+        );
+    }
+    public  boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException {
+        return SQLUtil.execute(
+                "update Product set qty = qty - ? where proId = ?",
+                orderDetailsDto.getQuantity(),   // Quantity to reduce
+                orderDetailsDto.getProId()      // Item ID
         );
     }
 }
