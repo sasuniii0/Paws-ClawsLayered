@@ -4,6 +4,7 @@ import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ServiceDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,24 +42,24 @@ public class ServiceDAOImpl implements ServiceDAO {
         return null;
     }
 
-    public ArrayList<ServiceDto> getAllServices() throws SQLException {
+    public ArrayList<Service> getAll() throws SQLException {
         ResultSet rst = SQLUtil.execute("select * from Service");
-        ArrayList<ServiceDto> serviceDtos = new ArrayList<>();
+        ArrayList<Service> services = new ArrayList<>();
         while (rst.next()) {
-            ServiceDto serviceDto = new ServiceDto(
+            Service service = new Service(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getTime(3),
                     rst.getDouble(4),
                     rst.getString(5)
             );
-            serviceDtos.add(serviceDto);
+            services.add(service);
         }
-        return serviceDtos;
+        return services;
     }
 
 
-    public String getNextCustomerId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select serviceId from Service order by serviceId desc limit 1");
         if (rst.next()) {
             String lastId = rst.getString(1);
@@ -70,29 +71,29 @@ public class ServiceDAOImpl implements ServiceDAO {
         return "S001";
     }
 
-    public boolean saveService(ServiceDto serviceDto) throws SQLException {
+    public boolean save(Service entity) throws SQLException {
         return SQLUtil.execute("insert into Service values(?,?,?,?,?)",
-                serviceDto.getServiceId(),
-                serviceDto.getDescription(),
-                serviceDto.getDuration(),
-                serviceDto.getPrice(),
-                serviceDto.getAvailability()
+                entity.getServiceId(),
+                entity.getDescription(),
+                entity.getDuration(),
+                entity.getPrice(),
+                entity.getAvailability()
         );
     }
 
-    public boolean updateService(ServiceDto serviceDto) throws SQLException {
+    public boolean update(Service entity) throws SQLException {
         return SQLUtil.execute(
                 "update Service set availibility=?, duration=?, description=?, price=? where serviceId =?",
-                serviceDto.getAvailability(),    // Corrected parameter order
-                serviceDto.getDuration(),
-                serviceDto.getDescription(),
-                serviceDto.getPrice(),
-                serviceDto.getServiceId()
+                entity.getAvailability(),    // Corrected parameter order
+                entity.getDuration(),
+                entity.getDescription(),
+                entity.getPrice(),
+                entity.getServiceId()
         );
     }
 
 
-    public boolean deleteService(String serviceIdText) throws SQLException {
+    public boolean delete(String serviceIdText) throws SQLException {
         return SQLUtil.execute("delete from Service where serviceId = ?", serviceIdText);
     }
 
@@ -149,7 +150,7 @@ public class ServiceDAOImpl implements ServiceDAO {
         return true;
     }
 
-    private boolean saveServiceDetails(ServiceDetailsDto serviceDetailsDto) {
+     public boolean saveServiceDetails(ServiceDetailsDto serviceDetailsDto) {
         String insertQuery = "INSERT INTO ServiceDetails (serviceId, description, resId) VALUES (?, ?, ?)";
         try {
             return SQLUtil.execute(insertQuery, serviceDetailsDto.getServiceId(), serviceDetailsDto.getDescription(), serviceDetailsDto.getResId()); // Return true if service details are saved
@@ -159,7 +160,7 @@ public class ServiceDAOImpl implements ServiceDAO {
         }
     }
 
-    private boolean updateServiceAvailability(String serviceId) throws SQLException {
+     public boolean updateServiceAvailability(String serviceId) throws SQLException {
         String updateQuery = "UPDATE Service SET availibility = 'Not AVAILABLE' WHERE serviceId = ?";
         try {
             return SQLUtil.execute(updateQuery, serviceId); // If rows are updated, the service is successfully booked
@@ -169,7 +170,7 @@ public class ServiceDAOImpl implements ServiceDAO {
         }
     }
 
-    private boolean checkServiceAvailability(String serviceId, String description) throws SQLException {
+     public boolean checkServiceAvailability(String serviceId, String description) throws SQLException {
         String query = "SELECT availibility FROM Service WHERE serviceId = ?";
         ResultSet resultSet = SQLUtil.execute(query, serviceId);
 

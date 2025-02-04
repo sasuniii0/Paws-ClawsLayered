@@ -54,7 +54,7 @@ public class CustomerManageBOImpl implements CustomerManageBO {
 
     @Override
     public boolean deleteCustomer(String customerId) throws SQLException {
-        return false;
+        return customerDAO.delete(customerId);
     }
 
     @Override
