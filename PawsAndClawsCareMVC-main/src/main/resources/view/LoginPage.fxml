@@ -11,61 +11,52 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="signInAncPane" prefHeight="950.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.LoginPageController">
+<AnchorPane fx:id="signInAncPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.LoginPageController">
    <children>
-      <ImageView fitHeight="950.0" fitWidth="1560.0">
+      <ImageView fitHeight="638.0" fitWidth="988.0">
          <image>
             <Image url="@../images/pic3.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="986.0" layoutY="86.0" prefHeight="84.0" prefWidth="520.0" text="Paws &amp; Claws Care" textFill="#fcfcfc">
+      <Label layoutX="619.0" layoutY="54.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="84.0" prefWidth="314.0" text="Paws &amp; Claws Care" textFill="#fcfcfc">
          <font>
-            <Font name="Dyuthi Regular" size="65.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="SignInPane" layoutX="1011.0" layoutY="183.0" prefHeight="585.0" prefWidth="469.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <AnchorPane fx:id="SignInPane" layoutX="605.0" layoutY="138.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="342.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <Button fx:id="signInBtn" layoutX="164.0" layoutY="384.0" mnemonicParsing="false" onAction="#signInOnClickAction" prefHeight="51.0" prefWidth="156.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Sign in" textFill="WHITE">
+            <Button fx:id="signInBtn" layoutX="111.0" layoutY="250.0" mnemonicParsing="false" onAction="#signInOnClickAction" prefHeight="40.0" prefWidth="130.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Sign in" textFill="WHITE">
                <font>
-                  <Font name="Dyuthi Regular" size="25.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
-            <HBox layoutX="48.0" layoutY="123.0" prefHeight="30.0" prefWidth="387.0" />
-            <HBox layoutX="48.0" layoutY="193.0" prefHeight="30.0" prefWidth="387.0">
+            <HBox layoutX="48.0" layoutY="123.0" prefHeight="30.0" prefWidth="387.0">
                <children>
-                  <TextField fx:id="usrNameTxt" prefHeight="30.0" prefWidth="389.0" promptText="username" style="-fx-background-radius: 25;">
-                     <font>
-                        <Font name="Dyuthi Regular" size="17.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <Label layoutX="172.0" layoutY="68.0" prefHeight="70.0" prefWidth="141.0" text="Sign In">
+                  <TextField fx:id="usrNameTxt" prefHeight="22.0" prefWidth="262.0" promptText="username" style="-fx-background-radius: 25;" />
+               </children></HBox>
+            <HBox layoutX="48.0" layoutY="193.0" prefHeight="30.0" prefWidth="387.0" />
+            <Label layoutX="139.0" layoutY="25.0" prefHeight="52.0" prefWidth="86.0" text="Sign In">
                <font>
-                  <Font name="Dyuthi Regular" size="42.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
             <Label fx:id="ShowLblId" layoutX="71.0" layoutY="241.0" prefHeight="18.0" prefWidth="85.0" />
-            <Button fx:id="BtnForgotPwd" layoutX="305.0" layoutY="327.0" mnemonicParsing="false" onAction="#BtnForgotPwdOnClickAction" prefHeight="26.0" prefWidth="141.0" style="-fx-background-color: white;" text="Forgot Password" textFill="#24b270">
+            <Button fx:id="BtnForgotPwd" layoutX="186.0" layoutY="210.0" mnemonicParsing="false" onAction="#BtnForgotPwdOnClickAction" prefHeight="26.0" prefWidth="141.0" style="-fx-background-color: white;" text="Forgot Password" textFill="#24b270">
                <font>
-                  <Font name="Dyuthi Regular" size="17.0" />
+                  <Font size="11.0" />
                </font>
             </Button>
-            <PasswordField fx:id="pwdTxt" layoutX="49.0" layoutY="272.0" onKeyTyped="#PwdKeyTypeOnAction" prefHeight="30.0" prefWidth="387.0" promptText="password" style="-fx-background-radius: 25;">
+            <Button fx:id="BtnCreateAnAccount" layoutX="45.0" layoutY="327.0" mnemonicParsing="false" onAction="#BtnCreateAnAccountOnClick" prefHeight="40.0" prefWidth="262.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Create An Account" textFill="WHITE">
                <font>
-                  <Font name="Dyuthi Regular" size="17.0" />
-               </font>
-            </PasswordField>
-            <Button fx:id="BtnCreateAnAccount" layoutX="33.0" layoutY="475.0" mnemonicParsing="false" onAction="#BtnCreateAnAccountOnClick" prefHeight="58.0" prefWidth="420.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Create An Account" textFill="WHITE">
-               <font>
-                  <Font name="Dyuthi Regular" size="25.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
-            <Text layoutX="230.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Or">
+            <Text layoutX="167.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Or">
                <font>
-                  <Font name="Dyuthi Regular" size="21.0" />
+                  <Font size="16.0" />
                </font>
             </Text>
+            <PasswordField fx:id="pwdTxt" layoutX="51.0" layoutY="165.0" onKeyTyped="#PwdKeyTypeOnAction" prefHeight="28.0" prefWidth="262.0" promptText="password" style="-fx-background-radius: 25;" />
          </children>
       </AnchorPane>
    </children>

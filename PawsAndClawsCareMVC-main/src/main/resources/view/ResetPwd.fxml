@@ -9,41 +9,34 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="950.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.ResetPwdController">
+<AnchorPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.ResetPwdController">
    <children>
-      <ImageView fitHeight="950.0" fitWidth="1550.0">
+      <ImageView fitHeight="641.0" fitWidth="988.0">
          <image>
             <Image url="@../images/pic3.jpg" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="SignInPane" layoutX="1018.0" layoutY="216.0" prefHeight="585.0" prefWidth="469.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <AnchorPane fx:id="SignInPane" layoutX="605.0" layoutY="138.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="342.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <Button fx:id="BtnChange" layoutX="164.0" layoutY="264.0" mnemonicParsing="false" onAction="#BtnChangePnAction" prefHeight="51.0" prefWidth="156.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Change" textFill="WHITE">
+            <Button fx:id="BtnChange" layoutX="93.0" layoutY="230.0" mnemonicParsing="false" onAction="#BtnChangePnAction" prefHeight="30.0" prefWidth="156.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Change" textFill="WHITE">
                <font>
-                  <Font name="Dyuthi Regular" size="25.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
-            <HBox layoutX="48.0" layoutY="123.0" prefHeight="30.0" prefWidth="387.0" />
-            <HBox layoutX="48.0" layoutY="193.0" prefHeight="30.0" prefWidth="387.0">
-               <children>
-                  <TextField fx:id="TxtNewPwd" prefHeight="30.0" prefWidth="389.0" promptText="Enter new Password" style="-fx-background-radius: 25;">
-                     <font>
-                        <Font name="Dyuthi Regular" size="17.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <Label layoutX="102.0" layoutY="68.0" prefHeight="70.0" prefWidth="312.0" text="Reset Password">
+            <HBox layoutX="30.0" layoutY="123.0" prefHeight="30.0" prefWidth="284.0" />
+            <HBox layoutX="36.0" layoutY="171.0" prefHeight="30.0" prefWidth="241.0" />
+            <Label layoutX="82.0" layoutY="36.0" prefHeight="52.0" prefWidth="178.0" text="Reset Password">
                <font>
-                  <Font name="Dyuthi Regular" size="42.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
             <Label fx:id="ShowLblId" layoutX="71.0" layoutY="241.0" prefHeight="18.0" prefWidth="85.0" />
+            <TextField fx:id="TxtNewPwd" layoutX="40.0" layoutY="156.0" prefHeight="30.0" prefWidth="284.0" promptText="Enter new Password" style="-fx-background-radius: 25;" />
          </children>
       </AnchorPane>
-      <Label layoutX="986.0" layoutY="108.0" prefHeight="84.0" prefWidth="520.0" text="Paws &amp; Claws Care" textFill="#fcfcfc">
+      <Label layoutX="619.0" layoutY="54.0" prefHeight="94.0" prefWidth="322.0" text="Paws &amp; Claws Care" textFill="#fcfcfc">
          <font>
-            <Font name="Dyuthi Regular" size="65.0" />
+            <Font size="36.0" />
          </font>
       </Label>
    </children>

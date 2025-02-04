@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.UserBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.UserBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.db.Database;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.UserDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.UserDAOImpl;
@@ -49,6 +51,8 @@ public class LoginPageController {
     @FXML
     private Label ShowLblId;
 
+    UserBO userBO = new UserBOImpl();
+
     @FXML
     void signInOnClickAction(ActionEvent event) throws IOException {
         String email = usrNameTxt.getText().toLowerCase().trim();
@@ -63,7 +67,7 @@ public class LoginPageController {
             new Alert(Alert.AlertType.WARNING, "Invalid email format!").show();
             return;
         }
-        boolean isAvailable = UserDAOImpl.searchUser(email, password);
+        boolean isAvailable = userBO.searchUser(email, password);
         if (isAvailable) {
             signInAncPane.getChildren().clear();
             Parent load = FXMLLoader.load(getClass().getResource("/view/DashBoardPage.fxml"));

@@ -10,6 +10,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.CustomerManageBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ReservationBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ServiceBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.CustomerManageBOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.ReservationBOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.ServiceBOImpl;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
@@ -55,6 +61,9 @@ public class ReservationController implements Initializable {
 
     @FXML
     private Button BtnUpdate;
+
+    @FXML
+    private Button BtnHistory;
 
     @FXML
     private Label LblPrice;
@@ -120,6 +129,9 @@ public class ReservationController implements Initializable {
     private AnchorPane contentReservation;
 
     private final ObservableList<ReservationTm> data = FXCollections.observableArrayList();
+    ReservationBO reservationBO = new ReservationBOImpl();
+    ServiceBO serviceBO = new ServiceBOImpl();
+    CustomerManageBO customerManageBO = new CustomerManageBOImpl();
 
     @FXML
     void AddNewCustomerOnClickAction(ActionEvent event) {
@@ -161,13 +173,13 @@ public class ReservationController implements Initializable {
             System.out.println("Selected Service: " + services);
             System.out.println("Drop Off Time: " + dropOffTime);
 
-            boolean isNotAvailable = reservationDAOImpl.checkServiceAvailability(date.toString(), services, dropOffTime);
+            boolean isNotAvailable = reservationBO.checkServiceAvailability(date.toString(), services, dropOffTime);
             if (isNotAvailable) {
                 new Alert(Alert.AlertType.ERROR, "Selected service is unavailable", ButtonType.OK).show();
                 return;
             }
 
-            ArrayList<String> availableEmployees = reservationDAOImpl.getAvailableEmployee();
+            ArrayList<String> availableEmployees = reservationBO.getAvailableEmployee();
             System.out.println("Available Employees: " + availableEmployees);  // Debugging
 
             if (!availableEmployees.isEmpty()) {
@@ -196,7 +208,7 @@ public class ReservationController implements Initializable {
             String serviceName = parts[1].trim();
             new Alert(Alert.AlertType.INFORMATION, "Service Selected: " + selectedService, ButtonType.OK).show();
         }
-        String price = reservationDAOImpl.getSelectedServicePrice(selectedService);
+        String price = reservationBO.getSelectedServicePrice(selectedService);
         LblPrice.setText(price);
     }
 
@@ -221,7 +233,7 @@ public class ReservationController implements Initializable {
         try {
             String selectedCustId = CmbCustId.getValue();
             if (selectedCustId != null) {
-                String customerName = customerDAOImpl.getCustomerNameById(selectedCustId);
+                String customerName = customerManageBO.getCustomerNameById(selectedCustId);
                 LblCustName.setText(customerName);
             }
         } catch (SQLException e) {
@@ -263,7 +275,7 @@ public class ReservationController implements Initializable {
             );
 
 
-            boolean isSaved = reservationDAOImpl.saveReservation(reservationDto);
+            boolean isSaved = reservationBO.saveReservation(reservationDto);
 
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, "Reservation Saved", ButtonType.OK).show();
@@ -342,8 +354,8 @@ public class ReservationController implements Initializable {
         String price = LblPrice.getText();
 
 
-        double pricePerHour = serviceDAOImpl.getPricePerHour(selectedService);
-        String durationString = serviceDAOImpl.getDuration(selectedService); // Assume the format is "HH:mm:ss"
+        double pricePerHour = serviceBO.getPricePerHour(selectedService);
+        String durationString = serviceBO.getDuration(selectedService); // Assume the format is "HH:mm:ss"
         String[] durationParts = durationString.split(":");
         int hours = Integer.parseInt(durationParts[0]);
         int minutes = Integer.parseInt(durationParts[1]);
@@ -438,7 +450,7 @@ public class ReservationController implements Initializable {
     private void loadAvailableServices() {
         try {
             // Fetch the list of serviceId-description pairs from the model
-            ArrayList<String> services = serviceDAOImpl.getAllServiceIdDesc();
+            ArrayList<String> services = serviceBO.getAllServiceIdDesc();
 
             // Create an observable list from the services list
             ObservableList<String> serviceList = FXCollections.observableArrayList(services);
@@ -454,9 +466,18 @@ public class ReservationController implements Initializable {
 
 
     private void loadCustomerIds() throws SQLException {
-        ArrayList<String> customerIds = customerDAOImpl.getAllCustomerIds();
+        ArrayList<String> customerIds = customerManageBO.getAllCustomerIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(customerIds);
         CmbCustId.setItems(observableList);
+    }
+
+    public void BtnUpdateOnAction(ActionEvent actionEvent) {
+    }
+
+    public void BtnDeleteOnAction(ActionEvent actionEvent) {
+    }
+
+    public void BtnHistoryOnAction(ActionEvent actionEvent) {
     }
 }

@@ -14,76 +14,76 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="956.0" prefWidth="1173.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.PaymentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="716.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.PaymentController">
    <children>
-      <VBox layoutX="7.0" layoutY="114.0" prefHeight="893.0" prefWidth="1173.0" spacing="10.0">
+      <VBox layoutX="16.0" layoutY="73.0" prefHeight="554.0" prefWidth="688.0" spacing="10.0">
          <children>
-            <HBox prefHeight="42.0" prefWidth="1173.0">
+            <HBox prefHeight="39.0" prefWidth="688.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="252.0" text="Payment Id" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
                   <Label fx:id="LblPaymentId" prefHeight="18.0" prefWidth="464.0" text="1" textFill="#fffdfd">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
                   <Label prefHeight="18.0" prefWidth="185.0" text="Payment Date" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
                   <Label fx:id="LblPaymentDate" prefHeight="18.0" prefWidth="260.0" text="YYYY-MM-DD" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
                </children>
             </HBox>
-            <HBox prefHeight="49.0" prefWidth="1173.0">
+            <HBox prefHeight="38.0" prefWidth="688.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="252.0" text="Payment Method" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
                   <RadioButton fx:id="RadioCash" mnemonicParsing="false" onAction="#RadioCashOnAction" prefHeight="18.0" prefWidth="207.0" text="Cash Payment" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                      <toggleGroup>
                         <ToggleGroup fx:id="TglPaymentMethod" />
                      </toggleGroup></RadioButton>
                   <RadioButton fx:id="RadioCard" mnemonicParsing="false" onAction="#RadioCardOnAction" prefHeight="18.0" prefWidth="207.0" text="Card Payment" textFill="WHITE" toggleGroup="$TglPaymentMethod">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></RadioButton>
                </children>
             </HBox>
-            <HBox prefHeight="50.0" prefWidth="1173.0">
+            <HBox prefHeight="37.0" prefWidth="688.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="245.0" text="Amount" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
                   <TextField fx:id="TxtAmount" prefHeight="26.0" prefWidth="429.0" promptText="00.00" style="-fx-background-radius: 25;">
                      <font>
-                        <Font name="Dyuthi Regular" size="18.0" />
+                        <Font size="14.0" />
                      </font>
                   </TextField>
                </children>
             </HBox>
-            <HBox prefHeight="32.0" prefWidth="1173.0">
+            <HBox prefHeight="14.0" prefWidth="688.0">
                <children>
-                  <Separator prefHeight="23.0" prefWidth="1173.0" />
+                  <Separator prefHeight="4.0" prefWidth="688.0" />
                </children></HBox>
-            <HBox prefHeight="30.0" prefWidth="1173.0">
+            <HBox prefHeight="42.0" prefWidth="688.0">
                <children>
                   <Label prefHeight="48.0" prefWidth="427.0" text="Payment for Reservation or Order" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="28.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <RadioButton fx:id="RadioReservation" mnemonicParsing="false" onAction="#RadioReservationOnAction" prefHeight="18.0" prefWidth="295.0" text="Reservation" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                      <toggleGroup>
                         <ToggleGroup fx:id="TglPaymentType" />
@@ -91,36 +91,36 @@
                   </RadioButton>
                   <RadioButton fx:id="RadioOrder" mnemonicParsing="false" onAction="#RadioOrderOnAction" prefHeight="18.0" prefWidth="282.0" text="Order" textFill="WHITE" toggleGroup="$TglPaymentType">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                   </RadioButton>
                </children>
             </HBox>
-            <HBox prefHeight="50.0" prefWidth="1173.0" spacing="20.0">
+            <HBox prefHeight="24.0" prefWidth="688.0" spacing="20.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="230.0" text="Reservation" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="CmbReservationId" onAction="#CmbReservationIdOnAction" prefHeight="26.0" prefWidth="264.0" style="-fx-background-radius: 25; -fx-background-color: white;" />
                   <Label fx:id="Lbl" prefHeight="18.0" prefWidth="473.0" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                </children></HBox>
-            <HBox prefHeight="51.0" prefWidth="1173.0" spacing="20.0">
+            <HBox prefHeight="29.0" prefWidth="688.0" spacing="20.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="230.0" text="Order" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="CmbOrderId" onAction="#CmbOrderIdOnAction" prefHeight="26.0" prefWidth="264.0" style="-fx-background-radius: 25; -fx-background-color: white;" />
                   <Label prefHeight="18.0" prefWidth="473.0" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -129,99 +129,99 @@
                <children>
                   <Label prefHeight="18.0" prefWidth="315.0">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="LblCustId" prefHeight="18.0" prefWidth="315.0">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="LblEmail" prefHeight="18.0" prefWidth="315.0">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <Label layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="315.0">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
             <Separator prefWidth="200.0" />
-            <HBox prefHeight="57.0" prefWidth="1173.0" spacing="40.0">
+            <HBox prefHeight="32.0" prefWidth="688.0" spacing="40.0">
                <children>
                   <Button fx:id="BtnReset" mnemonicParsing="false" onAction="#BtnResetOnAction" prefHeight="26.0" prefWidth="262.0" style="-fx-background-radius: 35; -fx-background-color: #3B3B98;" text="Reset" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                   <Button fx:id="BtnUpdate" mnemonicParsing="false" onAction="#BtnUpdateOnAction" prefHeight="26.0" prefWidth="262.0" style="-fx-background-radius: 35; -fx-background-color: #3B3B98;" text="Update Payment" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                   <Button fx:id="BtnDelete" mnemonicParsing="false" onAction="#BtnDeleteOnAction" prefHeight="26.0" prefWidth="262.0" style="-fx-background-radius: 35; -fx-background-color: #3B3B98;" text="Delete Payment" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                   <Button fx:id="BtnAdd" mnemonicParsing="false" onAction="#BtnAddOnAction" prefHeight="26.0" prefWidth="262.0" style="-fx-background-radius: 35; -fx-background-color: #3B3B98;" text="Add Payment" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
             <HBox prefHeight="44.0" prefWidth="1173.0" spacing="10.0">
                <children>
-                  <TextField fx:id="TxtSearchBox" prefHeight="20.0" prefWidth="476.0" promptText="Enter the Payment Id" style="-fx-background-radius: 30;">
+                  <TextField fx:id="TxtSearchBox" prefHeight="30.0" prefWidth="510.0" promptText="Enter the Payment Id" style="-fx-background-radius: 30;">
                      <font>
-                        <Font name="Dyuthi Regular" size="19.0" />
+                        <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="BtnSearch" mnemonicParsing="false" onAction="#BtnSearchOnAction" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 30; -fx-background-color: #3B3B98;" text="Search" textFill="WHITE">
+                  <Button fx:id="BtnSearch" mnemonicParsing="false" onAction="#BtnSearchOnAction" prefHeight="30.0" prefWidth="206.0" style="-fx-background-radius: 30; -fx-background-color: #3B3B98;" text="Search" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="18.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="TblPayment" onMouseClicked="#TblPaymentOnClick" prefHeight="166.0" prefWidth="1173.0">
+            <TableView fx:id="TblPayment" onMouseClicked="#TblPaymentOnClick" prefHeight="126.0" prefWidth="688.0">
               <columns>
-                <TableColumn fx:id="ColPaymentId" prefWidth="94.0" text="Payment Id" />
-                <TableColumn fx:id="ColPayementDate" prefWidth="158.0" text="Payment Date" />
-                  <TableColumn fx:id="ColPayementMethod" prefWidth="185.0" text="Payment Method" />
-                  <TableColumn fx:id="ColAmount" prefWidth="158.0" text="Amount" />
-                  <TableColumn fx:id="ColResId" prefWidth="163.0" text="Reservation Id" />
-                  <TableColumn fx:id="ColOrderId" prefWidth="136.0" text="Order Id" />
-                  <TableColumn fx:id="ColCustId" prefWidth="142.0" text="Customer Id" />
-                  <TableColumn fx:id="ColEmail" prefWidth="136.0" text="Email" />
+                <TableColumn fx:id="ColPaymentId" prefWidth="74.3999924659729" text="Payment Id" />
+                <TableColumn fx:id="ColPayementDate" prefWidth="86.4000015258789" text="Payment Date" />
+                  <TableColumn fx:id="ColPayementMethod" prefWidth="108.0" text="Payment Method" />
+                  <TableColumn fx:id="ColAmount" prefWidth="70.4000244140625" text="Amount" />
+                  <TableColumn fx:id="ColResId" prefWidth="108.0" text="Reservation Id" />
+                  <TableColumn fx:id="ColOrderId" maxWidth="129.59994506835938" prefWidth="64.79989624023438" text="Order Id" />
+                  <TableColumn fx:id="ColCustId" maxWidth="160.0001220703125" prefWidth="103.20001220703125" text="Customer Id" />
+                  <TableColumn fx:id="ColEmail" maxWidth="83.19997558593752" prefWidth="83.19997558593752" text="Email" />
               </columns>
             </TableView>
-            <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="64.0" prefWidth="1173.0" spacing="20.0">
+            <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="688.0" spacing="20.0">
                <children>
-                  <Button fx:id="BtnPrintRep" mnemonicParsing="false" onAction="#BtnPrintRepOnAction" prefHeight="26.0" prefWidth="322.0" style="-fx-background-radius: 30; -fx-background-color: #3B3B98;" text="Print Receipt" textFill="WHITE">
+                  <Button fx:id="BtnPrintRep" mnemonicParsing="false" onAction="#BtnPrintRepOnAction" prefHeight="30.0" prefWidth="342.0" style="-fx-background-radius: 30; -fx-background-color: #3B3B98;" text="Print Receipt" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                   <Button fx:id="BtnSendMail" mnemonicParsing="false" onAction="#BtnSendMailOnAction" prefHeight="26.0" prefWidth="322.0" style="-fx-background-radius: 30; -fx-background-color: #3B3B98;" text="Send Mail" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
          </children>
       </VBox>
-      <Label layoutX="360.0" layoutY="26.0" prefHeight="80.0" prefWidth="453.0" text="Payment Management" textFill="WHITE">
+      <Label layoutX="206.0" prefHeight="80.0" prefWidth="283.0" text="Payment Management" textFill="WHITE">
          <font>
-            <Font name="Dyuthi Regular" size="48.0" />
+            <Font size="26.0" />
          </font>
       </Label>
-      <Separator layoutX="4.0" layoutY="61.0" prefHeight="7.0" prefWidth="352.0" />
-      <Separator layoutX="820.0" layoutY="59.0" prefHeight="7.0" prefWidth="352.0" />
+      <Separator layoutX="7.0" layoutY="40.0" prefHeight="3.0" prefWidth="185.0" />
+      <Separator layoutX="479.0" layoutY="39.0" prefHeight="3.0" prefWidth="221.0" />
    </children>
 </AnchorPane>

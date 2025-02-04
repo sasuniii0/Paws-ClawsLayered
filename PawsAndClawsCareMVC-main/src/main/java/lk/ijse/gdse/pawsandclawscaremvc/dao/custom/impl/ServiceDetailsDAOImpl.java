@@ -3,6 +3,7 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ServiceDetailsDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.ServiceDetails;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,6 +39,31 @@ public class ServiceDetailsDAOImpl implements ServiceDetailsDAO {
                 serviceDetailsDto.getDescription()
 
         );
+    }
+
+    @Override
+    public boolean save(ServiceDetails dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public String getNextId() throws SQLException {
+        return "";
+    }
+
+    @Override
+    public ArrayList<ServiceDetails> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean delete(String customerId) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean update(ServiceDetails dto) throws SQLException {
+        return false;
     }
 }
 

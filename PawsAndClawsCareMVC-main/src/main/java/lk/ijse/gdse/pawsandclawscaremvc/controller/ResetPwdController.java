@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.UserBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.UserBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.UserDAOImpl;
 import java.io.IOException;
 
@@ -31,6 +33,8 @@ public class ResetPwdController {
 
     private String selectedEmail = "";
 
+    UserBO userBO = new UserBOImpl();
+
     public void setUserData(String email) {
         this.selectedEmail = email;
         System.out.println("Selected email: " + selectedEmail);
@@ -39,7 +43,7 @@ public class ResetPwdController {
     @FXML
     void BtnChangePnAction(ActionEvent event) throws IOException {
         String password = TxtNewPwd.getText();
-        boolean isUpdate = UserDAOImpl.updateUser(selectedEmail, password);
+        boolean isUpdate = userBO.updateUser(selectedEmail, password);
         if (isUpdate) {
             new Alert(Alert.AlertType.INFORMATION, "Password updated successfully").show();
             Parent load = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));

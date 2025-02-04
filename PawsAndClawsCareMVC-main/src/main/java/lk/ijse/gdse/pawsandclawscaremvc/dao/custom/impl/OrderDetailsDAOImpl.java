@@ -3,45 +3,62 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.OrderDetailsDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.OrderDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.OrderDetails;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderDetailsDAOImpl implements OrderDetailsDAO {
+    @Override
     public boolean saveOrderDetailsList(ArrayList<OrderDetailsDto> orderDetailsDtos) throws SQLException {
         for (OrderDetailsDto orderDetailsDto : orderDetailsDtos) {
-            // @isOrderDetailsSaved: Saves the individual order detail
             boolean isOrderDetailsSaved = saveOrderDetail(orderDetailsDto);
             if (!isOrderDetailsSaved) {
-                // Return false if saving any order detail fails
                 return false;
             }
 
-            // @isItemUpdated: Updates the item quantity in the stock for the corresponding order detail
-            boolean isItemUpdated = reduceQty(orderDetailsDto);
+            boolean isItemUpdated = ProductManageDAOImpl.reduceQty(orderDetailsDto);
             if (!isItemUpdated) {
-                // Return false if updating the item quantity fails
                 return false;
             }
         }
-        // Return true if all order details are saved and item quantities updated successfully
         return true;
     }
 
-    private boolean saveOrderDetail(OrderDetailsDto orderDetailsDto) throws SQLException {
+
+    @Override
+    public boolean saveOrderDetail(OrderDetailsDto orderDetailsDto) throws SQLException {
         return SQLUtil.execute(
-                "insert into OrderDetails values (?,?,?,?)",
+                "INSERT INTO OrderDetails VALUES (?, ?, ?, ?)",
                 orderDetailsDto.getOrderId(),
                 orderDetailsDto.getProId(),
                 orderDetailsDto.getQuantity(),
                 orderDetailsDto.getPrice()
         );
     }
-    public  boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException {
-        return SQLUtil.execute(
-                "update Product set qty = qty - ? where proId = ?",
-                orderDetailsDto.getQuantity(),   // Quantity to reduce
-                orderDetailsDto.getProId()      // Item ID
-        );
+
+    @Override
+    public boolean save(OrderDetails dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public String getNextId() throws SQLException {
+        return "";
+    }
+
+    @Override
+    public ArrayList<OrderDetails> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean delete(String customerId) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean update(OrderDetails dto) throws SQLException {
+        return false;
     }
 }

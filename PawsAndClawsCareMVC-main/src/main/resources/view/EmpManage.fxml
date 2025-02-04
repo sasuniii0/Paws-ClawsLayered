@@ -14,134 +14,135 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="display" prefHeight="956.0" prefWidth="1173.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.EmpManageController">
+<AnchorPane fx:id="display" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="716.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.EmpManageController">
    <children>
-      <VBox layoutX="12.0" layoutY="114.0" prefHeight="819.0" prefWidth="1150.0" spacing="20.0">
+      <VBox layoutX="18.0" layoutY="94.0" prefHeight="542.0" prefWidth="684.0" spacing="20.0">
          <children>
             <HBox prefHeight="44.0" prefWidth="1071.0" spacing="20.0">
                <children>
-                  <Label prefHeight="38.0" prefWidth="151.0" text="Employee Id" textFill="WHITE">
+                  <Label prefHeight="26.0" prefWidth="116.0" text="Employee Id" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="LblEmpId" prefHeight="18.0" prefWidth="284.0" text="1" textFill="WHITE">
+                  <Label fx:id="LblEmpId" prefHeight="20.0" prefWidth="96.0" text="1" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
-                  <Label prefHeight="38.0" prefWidth="199.0" text="EmpLoyee Type" textFill="WHITE">
+                  <Label prefHeight="26.0" prefWidth="118.0" text="EmpLoyee Type" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
                   <RadioButton fx:id="RadioService" mnemonicParsing="false" text="Service Employee" textFill="WHITE">
                      <toggleGroup>
                         <ToggleGroup fx:id="TogEmployee" />
                      </toggleGroup>
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></RadioButton>
                   <RadioButton fx:id="RadioOrders" mnemonicParsing="false" text="Orders Employee" textFill="WHITE" toggleGroup="$TogEmployee">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></RadioButton>
                </children>
             </HBox>
             <HBox prefHeight="44.0" prefWidth="1071.0" spacing="40.0">
                <children>
-                  <Label prefHeight="38.0" prefWidth="136.0" text="Service Id" textFill="WHITE">
+                  <Label prefHeight="30.0" prefWidth="197.0" text="Service Id" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
-                  <ComboBox fx:id="CmbServiceId" onAction="#CmbServiceId" prefHeight="34.0" prefWidth="263.0" style="-fx-background-radius: 25;" />
-                  <Label prefHeight="18.0" prefWidth="117.0" text="Description" textFill="WHITE">
+                  <ComboBox fx:id="CmbServiceId" onAction="#CmbServiceId" prefHeight="24.0" prefWidth="174.0" style="-fx-background-radius: 25;" />
+                  <Label prefHeight="20.0" prefWidth="178.0" text="Description" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
                   <Label fx:id="LblDesc" prefHeight="18.0" prefWidth="250.0" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
-                  <Button fx:id="BtnAddNewService" mnemonicParsing="false" onAction="#BtnAddNewServiceOnClickAction" prefHeight="52.0" prefWidth="218.0" style="-fx-background-color: #3B3B98; -fx-background-radius: 25;" text="Add New Service" textFill="WHITE">
+                  <Button fx:id="BtnAddNewService" mnemonicParsing="false" onAction="#BtnAddNewServiceOnClickAction" prefHeight="30.0" prefWidth="249.0" style="-fx-background-color: #3B3B98; -fx-background-radius: 25;" text="Add New Service" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
-                     </font></Button>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
             <HBox prefHeight="44.0" prefWidth="1071.0" spacing="40.0">
                <children>
-                  <Label prefHeight="38.0" prefWidth="135.0" text="Order Id" textFill="WHITE">
+                  <Label prefHeight="30.0" prefWidth="197.0" text="Order Id" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
-                  <ComboBox fx:id="CmbOrdersId" onAction="#CmbOrderId" prefHeight="34.0" prefWidth="264.0" style="-fx-background-radius: 25;" />
-                  <Label prefHeight="18.0" prefWidth="125.0" text="Date" textFill="WHITE">
+                  <ComboBox fx:id="CmbOrdersId" onAction="#CmbOrderId" prefHeight="14.0" prefWidth="174.0" style="-fx-background-radius: 25;" />
+                  <Label prefHeight="20.0" prefWidth="175.0" text="Date" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
                   <Label fx:id="LblDate" prefHeight="38.0" prefWidth="244.0" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
-                  <Button fx:id="BtnAddNewOrder" mnemonicParsing="false" onAction="#BtnAddNewOrderOnClickAction" prefHeight="52.0" prefWidth="220.0" style="-fx-background-color: #3B3B98; -fx-background-radius: 25;" text="Add New Order" textFill="WHITE">
+                  <Button fx:id="BtnAddNewOrder" mnemonicParsing="false" onAction="#BtnAddNewOrderOnClickAction" prefHeight="30.0" prefWidth="254.0" style="-fx-background-color: #3B3B98; -fx-background-radius: 25;" text="Add New Order" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Button>
                </children>
             </HBox>
             <HBox prefHeight="44.0" prefWidth="1071.0" spacing="20.0">
                <children>
-                  <Label prefHeight="38.0" prefWidth="153.0" text="Role" textFill="WHITE">
+                  <Label prefHeight="30.0" prefWidth="122.0" text="Role" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
-                  <TextField fx:id="TxtRoll" prefHeight="41.0" prefWidth="190.0" promptText="example" style="-fx-background-radius: 25;">
+                  <TextField fx:id="TxtRoll" prefHeight="21.0" prefWidth="170.0" promptText="example" style="-fx-background-radius: 25;">
                      <font>
-                        <Font name="Dyuthi Regular" size="18.0" />
+                        <Font size="14.0" />
                      </font></TextField>
                   <Label prefHeight="38.0" prefWidth="157.0" text="ContactNumber" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
-                  <TextField fx:id="TxtContactNumber" prefHeight="41.0" prefWidth="220.0" promptText="example" style="-fx-background-radius: 25;">
+                  <TextField fx:id="TxtContactNumber" prefHeight="23.0" prefWidth="205.0" promptText="example" style="-fx-background-radius: 25;">
                      <font>
-                        <Font name="Dyuthi Regular" size="18.0" />
+                        <Font size="14.0" />
                      </font></TextField>
                </children>
             </HBox>
             <HBox prefHeight="43.0" prefWidth="1150.0" spacing="20.0">
                <children>
-                  <Label prefHeight="38.0" prefWidth="151.0" text="Schedule" textFill="WHITE">
+                  <Label prefHeight="30.0" prefWidth="121.0" text="Schedule" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font size="14.0" />
                      </font></Label>
-                  <TextField fx:id="TxtStartTime" prefHeight="41.0" prefWidth="282.0" promptText="start" style="-fx-background-radius: 25;">
+                  <TextField fx:id="TxtStartTime" prefHeight="22.0" prefWidth="254.0" promptText="start" style="-fx-background-radius: 25;">
                      <font>
-                        <Font name="Dyuthi Regular" size="18.0" />
+                        <Font size="14.0" />
                      </font></TextField>
-                  <TextField fx:id="TxtEndTime" prefHeight="41.0" prefWidth="309.0" promptText="End" style="-fx-background-radius: 25;">
+                  <TextField fx:id="TxtEndTime" prefHeight="22.0" prefWidth="291.0" promptText="End" style="-fx-background-radius: 25;">
                      <font>
-                        <Font name="Dyuthi Regular" size="18.0" />
+                        <Font size="14.0" />
                      </font>
                   </TextField>
                </children>
             </HBox>
             <Separator prefWidth="200.0" />
-            <HBox prefHeight="57.0" prefWidth="1071.0" spacing="32.0">
+            <HBox prefHeight="33.0" prefWidth="698.0" spacing="32.0">
                <children>
                   <Button fx:id="BtnReset" mnemonicParsing="false" onAction="#BtnResetOnClickAction" prefHeight="57.0" prefWidth="314.0" style="-fx-background-color: #3B3B98; -fx-background-radius: 25;" text="Reset" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font></Button>
                   <Button fx:id="BtnDelete" mnemonicParsing="false" onAction="#BtnDeleteOnClickAction" prefHeight="57.0" prefWidth="345.0" style="-fx-background-color: #3B3B98; -fx-background-radius: 25;" text="Delete" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font></Button>
                   <Button fx:id="BtnUpdate" mnemonicParsing="false" onAction="#BtnUpdateOnClickAction" prefHeight="57.0" prefWidth="346.0" style="-fx-background-color: #3B3B98; -fx-background-radius: 25;" text="Update" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font></Button>
                   <Button fx:id="BtnSave" mnemonicParsing="false" onAction="#BtnSaveOnClickAction" prefHeight="57.0" prefWidth="326.0" style="-fx-background-color: #3B3B98; -fx-background-radius: 25;" text="Save" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="24.0" />
+                        <Font size="14.0" />
                      </font></Button>
                </children>
             </HBox>
@@ -149,37 +150,37 @@
                <children>
                   <TextField fx:id="TxtSearchEmpRole" prefHeight="26.0" prefWidth="586.0" promptText="Enter Employee Role" style="-fx-background-radius: 25;">
                      <font>
-                        <Font name="Dyuthi Regular" size="18.0" />
+                        <Font size="14.0" />
                      </font>
                   </TextField>
                   <Button fx:id="BtnSearch" mnemonicParsing="false" onAction="#BtnSearchOnClickAction" prefHeight="26.0" prefWidth="132.0" style="-fx-background-color: #3B3B98; -fx-background-radius: 25;" text="Search" textFill="WHITE">
                      <font>
-                        <Font name="Dyuthi Regular" size="20.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="TblEmployee" onMouseClicked="#TblEmployeeOnClickAction" prefHeight="251.0" prefWidth="1109.0">
+            <TableView fx:id="TblEmployee" onMouseClicked="#TblEmployeeOnClickAction" prefHeight="155.0" prefWidth="698.0">
               <columns>
-                <TableColumn fx:id="ColEmpId" prefWidth="109.0" text="Employee Id" />
-                <TableColumn fx:id="ColOrderId" minWidth="0.0" prefWidth="113.0" text="OrderId" />
-                  <TableColumn fx:id="ColEmployeeType" prefWidth="134.0" text="Employee Type" />
-                  <TableColumn fx:id="ColEmployeeRole" prefWidth="251.0" text="Employee Role" />
-                  <TableColumn fx:id="ColServiceId" prefWidth="128.0" text="Service Id" />
-                  <TableColumn fx:id="ColStartTime" prefWidth="99.0" text="Start Time" />
-                  <TableColumn fx:id="ColContactNumber" minWidth="0.0" prefWidth="198.0" text="Contact Number" />
-                  <TableColumn fx:id="ColEndTime" prefWidth="117.0" text="End Time" />
+                <TableColumn fx:id="ColEmpId" prefWidth="77.60000419616699" text="Employee Id" />
+                <TableColumn fx:id="ColOrderId" minWidth="0.0" prefWidth="72.8000259399414" text="OrderId" />
+                  <TableColumn fx:id="ColEmployeeType" prefWidth="101.60003662109375" text="Employee Type" />
+                  <TableColumn fx:id="ColEmployeeRole" minWidth="0.0" prefWidth="91.199951171875" text="Employee Role" />
+                  <TableColumn fx:id="ColServiceId" prefWidth="72.0" text="Service Id" />
+                  <TableColumn fx:id="ColStartTime" maxWidth="111.99996948242188" prefWidth="84.80001831054688" text="Start Time" />
+                  <TableColumn fx:id="ColContactNumber" maxWidth="129.59988403320312" minWidth="0.0" prefWidth="112.0" text="Contact Number" />
+                  <TableColumn fx:id="ColEndTime" prefWidth="83.199951171875" text="End Time" />
               </columns>
             </TableView>
             <HBox prefHeight="41.0" prefWidth="1071.0" spacing="40.0" />
          </children>
       </VBox>
-      <Label layoutX="375.0" layoutY="14.0" prefHeight="77.0" prefWidth="460.0" text="Employee Management" textFill="WHITE">
+      <Label layoutX="206.0" prefHeight="78.0" prefWidth="282.0" text="Employee Management" textFill="WHITE">
          <font>
-            <Font name="Dyuthi Regular" size="46.0" />
+            <Font size="26.0" />
          </font>
       </Label>
-      <Separator layoutX="20.0" layoutY="54.0" prefHeight="0.0" prefWidth="343.0" />
-      <Separator layoutX="835.0" layoutY="51.0" prefHeight="3.0" prefWidth="326.0" />
+      <Separator layoutX="18.0" layoutY="37.0" prefHeight="3.0" prefWidth="162.0" />
+      <Separator layoutX="488.0" layoutY="38.0" prefHeight="3.0" prefWidth="199.0" />
    </children>
 </AnchorPane>

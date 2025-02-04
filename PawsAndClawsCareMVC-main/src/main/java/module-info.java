@@ -10,8 +10,7 @@ module lk.ijse.gdse.pawsandclawscaremvc {
     requires mysql.connector.j;
     requires jbcrypt;
 
-    opens lk.ijse.gdse.pawsandclawscaremvc.dto.tm to javafx.base;
+    opens lk.ijse.gdse.pawsandclawscaremvc.view.dtm to javafx.base;
     opens lk.ijse.gdse.pawsandclawscaremvc.controller to javafx.fxml;
     exports lk.ijse.gdse.pawsandclawscaremvc;
-    opens lk.ijse.gdse.pawsandclawscaremvc.view.dtm to javafx.base;
 }

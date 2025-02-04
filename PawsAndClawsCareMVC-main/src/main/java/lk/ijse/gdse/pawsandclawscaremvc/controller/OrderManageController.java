@@ -8,6 +8,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.CustomerManageBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.OrderManageBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ProductManageBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.CustomerManageBOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.OrderManageBOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.ProductManageBOImpl;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
@@ -92,9 +98,18 @@ public class OrderManageController implements Initializable {
     @FXML
     private TextField TxtQty;
 
-    private final OrderManageDAOImpl orderManageDAOImpl = new OrderManageDAOImpl();
-    private final CustomerDAOImpl customerDAOImpl = new CustomerDAOImpl();
-    private final ProductManageDAOImpl productManageDAOImpl = new ProductManageDAOImpl();
+    @FXML
+    private Button BtnDelete;
+
+    @FXML
+    private Button BtnUpdate;
+
+    @FXML
+    private Button BtnHistory;
+
+   CustomerManageBO customerManageBO = new CustomerManageBOImpl();
+   ProductManageBO productManageBO = new ProductManageBOImpl();
+   OrderManageBO orderManageBO = new OrderManageBOImpl();
 
     private final ObservableList<CartTm> cartTms = FXCollections.observableArrayList();
 
@@ -163,7 +178,7 @@ public class OrderManageController implements Initializable {
     @FXML
     void CmbCustomerOnClickAction(ActionEvent event) throws SQLException {
         String selectedCustId = CmbCustomer.getSelectionModel().getSelectedItem();
-        CustomerDto customerDto = customerDAOImpl.findById(selectedCustId);
+        CustomerDto customerDto = customerManageBO.findById(selectedCustId);
 
         if (customerDto != null) {
             LblCustomerName.setText(customerDto.getCustomerName());
@@ -173,7 +188,7 @@ public class OrderManageController implements Initializable {
     @FXML
     void CmbProductOnClickAction(ActionEvent event) throws SQLException {
         String selectedProId = CmbProduct.getSelectionModel().getSelectedItem();
-        ProductDto productDto = productManageDAOImpl.findById(selectedProId);
+        ProductDto productDto = productManageBO.findById(selectedProId);
 
         if (productDto != null) {
             LblProductName.setText(productDto.getProductName());
@@ -245,7 +260,7 @@ public class OrderManageController implements Initializable {
                 orderDetailsDtos
         );
 
-        boolean isSaved = orderManageDAOImpl.saveOrder(ordersDto);
+        boolean isSaved = orderManageBO.saveOrder(ordersDto);
 
         if (isSaved) {
             new Alert(Alert.AlertType.INFORMATION, "Order saved..!").show();
@@ -279,7 +294,7 @@ public class OrderManageController implements Initializable {
     }
 
     private void refreshPage() throws SQLException {
-        LblOrderId.setText(orderManageDAOImpl.getNextOrderId());
+        LblOrderId.setText(orderManageBO.getNextOrderId());
         LblOrderDate.setText(LocalDate.now().toString());
         loadCustomerIds();
         loadProductIds();
@@ -298,14 +313,14 @@ public class OrderManageController implements Initializable {
     }
 
     private void loadProductIds() throws SQLException {
-        ArrayList<String> itemIds = productManageDAOImpl.getAllProductId();
+        ArrayList<String> itemIds = productManageBO.getAllProductId();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(itemIds);
         CmbProduct.setItems(observableList);
     }
 
     private void loadCustomerIds() throws SQLException {
-        ArrayList<String> customerIds = customerDAOImpl.getAllCustomerIds();
+        ArrayList<String> customerIds = customerManageBO.getAllCustomerIds();
         ObservableList<String> observableList = FXCollections.observableArrayList();
         observableList.addAll(customerIds);
         CmbCustomer.setItems(observableList);
@@ -321,5 +336,14 @@ public class OrderManageController implements Initializable {
 
         TblOrders.setItems(cartTms);
 
+    }
+
+    public void BtnHistoryOnAction(ActionEvent actionEvent) {
+    }
+
+    public void BtnDeleteOnAction(ActionEvent actionEvent) {
+    }
+
+    public void BtnUpdateOnAction(ActionEvent actionEvent) {
     }
 }

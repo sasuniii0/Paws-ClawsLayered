@@ -6,6 +6,8 @@ import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ReservationDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ReservationDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Reservation;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.ServiceDetails;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -68,7 +70,33 @@ public class ReservationDAOImpl implements ReservationDAO {
 
     ServiceDetailsDAOImpl serviceDetailsDAOImpl = new ServiceDetailsDAOImpl();
 
-    public boolean saveReservation(ReservationDto reservationDto) throws SQLException {
+    @Override
+    public boolean save(Reservation dto) throws SQLException {
+        String sql = "INSERT INTO Reservation (resId, dropOffTime, custId, date) VALUES (?, ?, ?, ?)";
+        return SQLUtil.execute(dto.getResId(),dto.getDropOffTime() ,dto.getCustId(),dto.getDate());
+    }
+
+    @Override
+    public String getNextId() throws SQLException {
+        return "";
+    }
+
+    @Override
+    public ArrayList<Reservation> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean delete(String customerId) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean update(Reservation dto) throws SQLException {
+        return false;
+    }
+
+    /*public boolean saveReservation(ReservationDto reservationDto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         try{
             connection.setAutoCommit(false);
@@ -97,5 +125,5 @@ public class ReservationDAOImpl implements ReservationDAO {
         }finally{
             connection.setAutoCommit(true);
         }
-    }
+    }*/
 }

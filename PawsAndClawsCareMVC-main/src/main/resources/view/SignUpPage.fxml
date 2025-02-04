@@ -11,66 +11,45 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="950.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.signUpController">
+<AnchorPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.pawsandclawscaremvc.controller.signUpController">
    <children>
-      <ImageView fitHeight="974.0" fitWidth="1559.0">
+      <ImageView fitHeight="641.0" fitWidth="988.0">
          <image>
             <Image url="@../images/pic3.jpg" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="SignInPane" layoutX="1015.0" layoutY="188.0" prefHeight="585.0" prefWidth="469.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+      <AnchorPane fx:id="SignInPane" layoutX="605.0" layoutY="138.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="342.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <Button fx:id="BtnSignUp" layoutX="166.0" layoutY="387.0" mnemonicParsing="false" onAction="#signUpOnClickAction" prefHeight="51.0" prefWidth="156.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Sign up" textFill="WHITE">
+            <Button fx:id="BtnSignUp" layoutX="93.0" layoutY="250.0" mnemonicParsing="false" onAction="#signUpOnClickAction" prefHeight="26.0" prefWidth="156.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Sign up" textFill="WHITE">
                <font>
-                  <Font name="Dyuthi Regular" size="25.0" />
+                  <Font size="14.0" />
                </font>
             </Button>
-            <HBox layoutX="48.0" layoutY="123.0" prefHeight="30.0" prefWidth="387.0" />
-            <HBox layoutX="48.0" layoutY="193.0" prefHeight="30.0" prefWidth="387.0" spacing="20.0">
+            <HBox layoutX="17.0" layoutY="123.0" prefHeight="30.0" prefWidth="314.0" spacing="10.0">
                <children>
-                  <TextField fx:id="TxtFirstName" prefHeight="41.0" prefWidth="184.0" promptText="First Name" style="-fx-background-radius: 25;">
-                     <font>
-                        <Font name="Dyuthi Regular" size="17.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="TxtLastName" prefHeight="41.0" prefWidth="184.0" promptText="Last Name" style="-fx-background-radius: 25;">
-                     <font>
-                        <Font name="Dyuthi Regular" size="17.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <Label layoutX="172.0" layoutY="68.0" prefHeight="70.0" prefWidth="141.0" text="Sign Up">
+                  <TextField fx:id="TxtFirstName" prefHeight="26.0" prefWidth="142.0" promptText="First Name" style="-fx-background-radius: 25;" />
+                  <TextField fx:id="TxtLastName" prefHeight="26.0" prefWidth="162.0" promptText="Last Name" style="-fx-background-radius: 25;" />
+               </children></HBox>
+            <HBox layoutX="48.0" layoutY="193.0" prefHeight="30.0" prefWidth="387.0" spacing="20.0" />
+            <Label layoutX="128.0" layoutY="47.0" prefHeight="42.0" prefWidth="86.0" text="Sign Up">
                <font>
-                  <Font name="Dyuthi Regular" size="42.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
             <Label fx:id="ShowLblId" layoutX="71.0" layoutY="241.0" prefHeight="18.0" prefWidth="85.0" />
-            <PasswordField fx:id="TxtPwd" layoutX="50.0" layoutY="305.0" onKeyTyped="#PwdKeyTypeOnAction" prefHeight="30.0" prefWidth="387.0" promptText="password" style="-fx-background-radius: 25;">
+            <PasswordField fx:id="TxtPwd" layoutX="20.0" layoutY="208.0" onKeyTyped="#PwdKeyTypeOnAction" prefHeight="18.0" prefWidth="314.0" promptText="password" style="-fx-background-radius: 25;" />
+            <Button fx:id="BtnAlreadyHaveAnAccount" layoutX="17.0" layoutY="321.0" mnemonicParsing="false" onAction="#BtnAlreadyHaveAnAccountOnAction" prefHeight="30.0" prefWidth="314.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Already Have An Account" textFill="WHITE">
                <font>
-                  <Font name="Dyuthi Regular" size="17.0" />
-               </font>
-            </PasswordField>
-            <Button fx:id="BtnAlreadyHaveAnAccount" layoutX="35.0" layoutY="486.0" mnemonicParsing="false" onAction="#BtnAlreadyHaveAnAccountOnAction" prefHeight="58.0" prefWidth="418.0" style="-fx-background-radius: 25; -fx-background-color: #1F1F1F;" text="Already Have An Account" textFill="WHITE">
-               <font>
-                  <Font name="Dyuthi Regular" size="25.0" />
+                  <Font size="14.0" />
                </font>
             </Button>
-            <Text layoutX="230.0" layoutY="473.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR">
-               <font>
-                  <Font name="Dyuthi Regular" size="23.0" />
-               </font>
-            </Text>
-            <TextField fx:id="TxtEmail" layoutX="51.0" layoutY="250.0" prefHeight="41.0" prefWidth="387.0" promptText="Email" style="-fx-background-radius: 25;">
-               <font>
-                  <Font name="Dyuthi Regular" size="16.0" />
-               </font>
-            </TextField>
+            <Text layoutX="169.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR" />
+            <TextField fx:id="TxtEmail" layoutX="20.0" layoutY="167.0" prefHeight="26.0" prefWidth="314.0" promptText="Email" style="-fx-background-radius: 25;" />
          </children>
       </AnchorPane>
-      <Label layoutX="990.0" layoutY="86.0" prefHeight="84.0" prefWidth="520.0" text="Paws &amp; Claws Care" textFill="#fcfcfc">
+      <Label layoutX="619.0" layoutY="54.0" prefHeight="84.0" prefWidth="314.0" text="Paws &amp; Claws Care" textFill="#fcfcfc">
          <font>
-            <Font name="Dyuthi Regular" size="65.0" />
+            <Font size="36.0" />
          </font>
       </Label>
    </children>
