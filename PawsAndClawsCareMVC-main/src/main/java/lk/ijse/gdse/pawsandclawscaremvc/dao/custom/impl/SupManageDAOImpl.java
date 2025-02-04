@@ -3,13 +3,14 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.SupplierDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.SupplierDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Supplier;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SupManageDAOImpl implements SupplierDAO {
-    public String getNextSupId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select supId from Supplier order by supId desc limit 1");
 
         if (rst.next()) {
@@ -22,49 +23,49 @@ public class SupManageDAOImpl implements SupplierDAO {
         return "SUP001";
     }
 
-    public ArrayList<SupplierDto> getAllSuppliers() throws SQLException {
+    public ArrayList<Supplier> getAll() throws SQLException {
         ResultSet rst = SQLUtil.execute("select * from Supplier");
-        ArrayList<SupplierDto> supplierDto = new ArrayList<>();
+        ArrayList<Supplier> entity = new ArrayList<>();
 
         while (rst.next()) {
-            SupplierDto supplierDtos = new SupplierDto(
+            Supplier supplier = new Supplier(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3)
             );
-            supplierDto.add(supplierDtos);
+            entity.add(supplier);
         }
-        return supplierDto;
+        return entity;
     }
 
-    public boolean saveSupplier(SupplierDto supplierDto) throws SQLException {
+    public boolean save(Supplier entity) throws SQLException {
         return SQLUtil.execute("INSERT INTO Supplier VALUES (?, ?, ?)",
-                supplierDto.getSupId(),
-                supplierDto.getName(),
-                supplierDto.getContactNumber());
+                entity.getSupId(),
+                entity.getName(),
+                entity.getContactNumber());
     }
 
 
-    public boolean updateSupplier(SupplierDto supplierDto) throws SQLException {
+    public boolean update(Supplier entity) throws SQLException {
         return SQLUtil.execute("UPDATE Supplier SET name = ?, contactNumber = ?  WHERE supId = ?",
-                supplierDto.getName(),
-                supplierDto.getContactNumber(),
-                supplierDto.getSupId());
+                entity.getName(),
+                entity.getContactNumber(),
+                entity.getSupId());
     }
 
 
-    public boolean deleteSupplier(String supId) throws SQLException {
+    public boolean delete(String supId) throws SQLException {
         return SQLUtil.execute("DELETE FROM Supplier WHERE supId = ?", supId);
     }
 
 
-    public ArrayList<SupplierDto> searchSuppliersByNameOrId(String searchText) throws SQLException {
-        ArrayList<SupplierDto> suppliers = new ArrayList<>();
+    public ArrayList<Supplier> searchSuppliersByNameOrId(String searchText) throws SQLException {
+        ArrayList<Supplier> suppliers = new ArrayList<>();
         ResultSet rs = SQLUtil.execute("SELECT * FROM Supplier WHERE supId LIKE ? OR name LIKE ?",
                 "%" + searchText + "%", "%" + searchText + "%");
 
         while (rs.next()) {
-            suppliers.add(new SupplierDto(
+            suppliers.add(new Supplier(
                     rs.getString("supId"),
                     rs.getString("name"),
                     rs.getString("contactNumber")
