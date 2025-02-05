@@ -10,6 +10,5 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface UserDAO  extends CrudDAO<User> {
-      boolean searchUser(String email, String password);
-      boolean updateUser(String selectedEmail, String password);
+
 }

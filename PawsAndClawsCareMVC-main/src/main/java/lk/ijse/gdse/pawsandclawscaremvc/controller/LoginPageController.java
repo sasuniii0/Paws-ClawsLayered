@@ -51,8 +51,6 @@ public class LoginPageController {
     @FXML
     private Label ShowLblId;
 
-    UserBO userBO = new UserBOImpl();
-
     @FXML
     void signInOnClickAction(ActionEvent event) throws IOException {
         String email = usrNameTxt.getText().toLowerCase().trim();
@@ -67,7 +65,7 @@ public class LoginPageController {
             new Alert(Alert.AlertType.WARNING, "Invalid email format!").show();
             return;
         }
-        boolean isAvailable = userBO.searchUser(email, password);
+        boolean isAvailable = UserDAOImpl.search(email, password);
         if (isAvailable) {
             signInAncPane.getChildren().clear();
             Parent load = FXMLLoader.load(getClass().getResource("/view/DashBoardPage.fxml"));
@@ -91,6 +89,7 @@ public class LoginPageController {
 
     @FXML
     void PwdKeyTypeOnAction(KeyEvent event) {
+
     }
 
     public void BtnForgotPwdOnClickAction(ActionEvent actionEvent) throws IOException {

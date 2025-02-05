@@ -16,29 +16,4 @@ public class UserBOImpl implements UserBO {
     public boolean updateUser(String selectedEmail, String password) {
         return false;
     }
-
-    @Override
-    public boolean save(UserDto dto) throws SQLException {
-        return false;
-    }
-
-    @Override
-    public String getNextId() throws SQLException {
-        return "";
-    }
-
-    @Override
-    public ArrayList<UserDto> getAll() throws SQLException {
-        return null;
-    }
-
-    @Override
-    public boolean delete(String customerId) throws SQLException {
-        return false;
-    }
-
-    @Override
-    public boolean update(UserDto dto) throws SQLException {
-        return false;
-    }
 }
