@@ -33,21 +33,26 @@ public class InventoryManageBOImpl implements InvenManageBO {
 
     @Override
     public String getNextInventoryId() throws SQLException {
-        return "";
+        return inventoryDAO.getNextId();
     }
 
     @Override
     public ArrayList<InventoryDto> getAllInventory() throws SQLException {
-        return null;
+        ArrayList<Inventory> inventory = inventoryDAO.getAll();
+        ArrayList<InventoryDto> inventoryDtos = new ArrayList<>();
+        for (Inventory inventory1 : inventory) {
+            inventoryDtos.add(new InventoryDto(inventory1.getInventoryId(), inventory1.getStockUpdate(), inventory1.getInventoryCategory(), inventory1.getAvailabilityStatus()));
+        }
+        return inventoryDtos;
     }
 
     @Override
     public boolean deleteItem(String customerId) throws SQLException {
-        return false;
+        return inventoryDAO.delete(customerId);
     }
 
     @Override
     public boolean updateInventory(InventoryDto dto) throws SQLException {
-        return false;
+        return inventoryDAO.update(new Inventory(dto.getInventoryId(), dto.getStockUpdate(), dto.getInventoryCategory(), dto.getAvailabilityStatus()));
     }
 }

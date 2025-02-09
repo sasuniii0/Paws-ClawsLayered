@@ -33,7 +33,7 @@ public class PaymentBOImpl implements PaymentBO {
     }
 
     @Override
-    public ArrayList<Payment> searchPaymentsByEmail(String searchText) throws SQLException {
+    public ArrayList<PaymentDto> searchPaymentsByEmail(String searchText) throws SQLException {
         return null;
     }
 
@@ -44,7 +44,7 @@ public class PaymentBOImpl implements PaymentBO {
 
     @Override
     public String getNextPaymentId() throws SQLException {
-        return "";
+        return paymentDAO.getNextId();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class PaymentBOImpl implements PaymentBO {
         for (Payment payment : payments){
             paymentDtos.add(new PaymentDto(payment.getPaymentId(),payment.getDate(),payment.getAmount(),payment.getMethod(),payment.getResId(),payment.getOrderId(),payment.getCustId(),payment.getEmail()));
         }
-        return null;
+        return paymentDtos;
     }
 
     @Override

@@ -8,12 +8,14 @@ import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.CustomerDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.OrderDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.OrderDetailsDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ProductDAO;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.ProductManageDAOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.OrderDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.OrdersDto;
 import lk.ijse.gdse.pawsandclawscaremvc.entity.OrderDetails;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -25,23 +27,45 @@ public class OrderManageBOImpl implements OrderManageBO {
     OrderDetailsDAO orderDetailsDAO = (OrderDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER_DETAILS);
 
     @Override
+    public boolean saveOrderDetailsList(ArrayList<OrderDetailsDto> orderDetailsDtos) throws SQLException {
+        for (OrderDetailsDto orderDetailsDto : orderDetailsDtos) {
+            boolean isOrderDetailsSaved = saveOrderDetail(orderDetailsDto);
+            if (!isOrderDetailsSaved) {
+                return false;
+            }
+
+            boolean isItemUpdated = ProductManageDAOImpl.reduceQty(orderDetailsDto);
+            if (!isItemUpdated) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    @Override
+    public boolean saveOrderDetail(OrderDetailsDto orderDetailsDto) throws SQLException {
+        return SQLUtil.execute(
+                "INSERT INTO OrderDetails VALUES (?, ?, ?, ?)",
+                orderDetailsDto.getOrderId(),
+                orderDetailsDto.getProId(),
+                orderDetailsDto.getQuantity(),
+                orderDetailsDto.getPrice()
+        );
+    }
+
+    @Override
     public String getNextOrderId() throws SQLException {
-        return "";
+        return orderDAO.getNextId();
     }
 
     @Override
     public String getOrderDateById(String selectedOrderId) throws SQLException {
-        return "";
-    }
-
-    @Override
-    public boolean saveOrderDetailsList(ArrayList<OrderDetailsDto> orderDetailsDtos) throws SQLException {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrderDetail(OrderDetailsDto orderDetailsDto) throws SQLException {
-        return false;
+        ResultSet rst = SQLUtil.execute("SELECT date FROM Orders WHERE orderId = ?", selectedOrderId);
+        if (rst.next()) {
+            return rst.getString(1);
+        }
+        return null;
     }
 
     public boolean saveOrder(OrdersDto ordersDto) throws SQLException {
@@ -56,7 +80,7 @@ public class OrderManageBOImpl implements OrderManageBO {
                     ordersDto.getOrderDate()
             );
             if (isOrderSaved) {
-                boolean isOrderDetailListSaved = orderDetailsDAO.saveOrderDetailsList(ordersDto.getOrderDetailsDtos());
+                boolean isOrderDetailListSaved = saveOrderDetailsList(ordersDto.getOrderDetailsDtos());
                 if (isOrderDetailListSaved) {
                     connection.commit(); // 2
                     return true;
@@ -71,20 +95,5 @@ public class OrderManageBOImpl implements OrderManageBO {
         } finally {
             connection.setAutoCommit(true); // 4
         }
-    }
-
-    @Override
-    public ArrayList<OrderDetails> getAllOrder() throws SQLException {
-        return null;
-    }
-
-    @Override
-    public boolean deleteOrder(String customerId) throws SQLException {
-        return false;
-    }
-
-    @Override
-    public boolean updateOrder(OrderDetails dto) throws SQLException {
-        return false;
     }
 }

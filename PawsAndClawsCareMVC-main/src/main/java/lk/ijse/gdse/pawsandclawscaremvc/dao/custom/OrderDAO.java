@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface OrderDAO  extends CrudDAO<Orders> {
-    String getNextOrderId() throws SQLException;
-    String getOrderDateById(String selectedOrderId) throws SQLException;
+   /* String getNextOrderId() throws SQLException;
+    String getOrderDateById(String selectedOrderId) throws SQLException;*/
 
 }

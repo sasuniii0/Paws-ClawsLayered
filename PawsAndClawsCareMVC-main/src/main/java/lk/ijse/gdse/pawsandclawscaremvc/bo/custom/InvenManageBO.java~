@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface InvenManageBO extends SuperBO {
-     ArrayList<InventoryDto> searchProductsByCatalog(String searchText) throws SQLException;
-     ArrayList<String> getAllInventoryId() throws SQLException;
-     InventoryDto findById(String selectedInvenId) throws SQLException;
+    public ArrayList<InventoryDto> searchProductsByCatalog(String searchText) throws SQLException;
+    public ArrayList<String> getAllInventoryId() throws SQLException;
+    public InventoryDto findById(String selectedInvenId) throws SQLException;
     boolean saveInventory(InventoryDto dto) throws SQLException;
     String getNextInventoryId() throws SQLException;
     ArrayList<InventoryDto> getAllInventory() throws SQLException;

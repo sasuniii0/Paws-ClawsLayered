@@ -216,11 +216,11 @@ public class PaymentController implements Initializable {
 
         try {
             // Call the method to search for products by catalog
-            ArrayList<Payment> filteredPayments = paymentBO.searchPaymentsByEmail(searchText);
+            ArrayList<PaymentDto> filteredPayments = paymentBO.searchPaymentsByEmail(searchText);
 
             // Convert the filtered products to ProductTm objects
             ObservableList<PaymentTm> filteredList = FXCollections.observableArrayList();
-            for (Payment payment : filteredPayments) {
+            for (PaymentDto payment : filteredPayments) {
                 PaymentTm paymentTm = new PaymentTm(
                         payment.getPaymentId(),
                         payment.getDate(),
@@ -310,7 +310,7 @@ public class PaymentController implements Initializable {
         CmbOrderId.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 try {
-                    paymentDAOImpl.displayCustomerDetailsByOrderId(newValue);// Fetch and display details based on orderId
+                    paymentBO.displayCustomerDetailsByOrderId(newValue);// Fetch and display details based on orderId
                     LblCustId.setText(newValue);
                     LblEmail.setText(newValue);
                 } catch (SQLException e) {
@@ -325,7 +325,7 @@ public class PaymentController implements Initializable {
         CmbReservationId.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 try {
-                    paymentDAOImpl.displayCustomerDetailsByResId(newValue); // Fetch and display details based on resId
+                    paymentBO.displayCustomerDetailsByResId(newValue); // Fetch and display details based on resId
                     LblCustId.setText(newValue);
                     LblEmail.setText(newValue);
                 } catch (SQLException e) {
@@ -425,7 +425,7 @@ public class PaymentController implements Initializable {
 
     private void loadReservationData() {
         try {
-            ObservableList<String> serviceIds = paymentDAOImpl.getAllReservationIds();
+            ObservableList<String> serviceIds = paymentBO.getAllReservationIds();
             CmbReservationId.setItems(serviceIds);
             CmbReservationId.valueProperty().addListener((obs, oldValue, newValue) -> {
             });
@@ -433,10 +433,9 @@ public class PaymentController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Failed to load reservation data: " + e.getMessage()).show();
         }
     }
-PaymentDAOImpl paymentDAOImpl = new PaymentDAOImpl();
     private void loadOrderData() {
         try {
-            ObservableList<String> orderIds = paymentDAOImpl.getAllOrderIds();
+            ObservableList<String> orderIds = paymentBO.getAllOrderIds();
             CmbOrderId.setItems(orderIds);
             CmbOrderId.valueProperty().addListener((obs, oldValue, newValue) -> {
             });

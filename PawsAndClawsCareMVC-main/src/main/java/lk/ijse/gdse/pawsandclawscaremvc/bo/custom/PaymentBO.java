@@ -13,7 +13,7 @@ public interface PaymentBO extends SuperBO {
     ObservableList<String> getAllReservationIds() throws SQLException;
     void displayCustomerDetailsByResId(String newValue) throws SQLException;
     void displayCustomerDetailsByOrderId(String newValue) throws SQLException;
-    ArrayList<Payment> searchPaymentsByEmail(String searchText) throws SQLException;
+    ArrayList<PaymentDto> searchPaymentsByEmail(String searchText) throws SQLException;
     boolean savePayment(PaymentDto dto) throws SQLException;
     String getNextPaymentId() throws SQLException;
     ArrayList<PaymentDto> getAllPayment() throws SQLException;

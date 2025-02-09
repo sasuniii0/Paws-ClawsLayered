@@ -12,9 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.EmpManageBO;
-import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.OrderManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.EmpManageBOImpl;
-import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.OrderManageBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.EmployeeDto;
 import lk.ijse.gdse.pawsandclawscaremvc.view.dtm.EmployeeTm;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.EmpManageDAOImpl;
@@ -126,7 +124,6 @@ public class EmpManageController implements Initializable {
     private AnchorPane display;
 
     EmpManageBO empManageBO = new EmpManageBOImpl();
-    OrderManageBO orderManageBO = new OrderManageBOImpl();
 
     @FXML
     void BtnAddNewOrderOnClickAction(ActionEvent event) {
@@ -268,7 +265,7 @@ OrderManageDAOImpl orderManageDAOImpl = new OrderManageDAOImpl();
         if (selectedOrderId != null) {
             try {
                 // Fetch order date from the database
-                String orderDate =orderManageBO.getOrderDateById(selectedOrderId);
+                String orderDate = orderManageDAOImpl.getOrderDateById(selectedOrderId);
 
                 // Update the label
                 LblDate.setText(orderDate != null ? orderDate : "Order date not available");

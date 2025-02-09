@@ -10,36 +10,8 @@ import java.util.ArrayList;
 
 public class OrderDetailsDAOImpl implements OrderDetailsDAO {
     @Override
-    public boolean saveOrderDetailsList(ArrayList<OrderDetailsDto> orderDetailsDtos) throws SQLException {
-        for (OrderDetailsDto orderDetailsDto : orderDetailsDtos) {
-            boolean isOrderDetailsSaved = saveOrderDetail(orderDetailsDto);
-            if (!isOrderDetailsSaved) {
-                return false;
-            }
-
-            boolean isItemUpdated = ProductManageDAOImpl.reduceQty(orderDetailsDto);
-            if (!isItemUpdated) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    @Override
-    public boolean saveOrderDetail(OrderDetailsDto orderDetailsDto) throws SQLException {
-        return SQLUtil.execute(
-                "INSERT INTO OrderDetails VALUES (?, ?, ?, ?)",
-                orderDetailsDto.getOrderId(),
-                orderDetailsDto.getProId(),
-                orderDetailsDto.getQuantity(),
-                orderDetailsDto.getPrice()
-        );
-    }
-
-    @Override
     public boolean save(OrderDetails dto) throws SQLException {
-        return false;
+        return SQLUtil.execute("INSERT INTO OrderDetails VALUES (?, ?, ?, ?)", dto.getOrderId(), dto.getProId(), dto.getQuantity(), dto.getPrice());
     }
 
     @Override

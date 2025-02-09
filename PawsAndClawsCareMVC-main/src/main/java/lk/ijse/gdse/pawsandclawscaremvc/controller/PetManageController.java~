@@ -191,6 +191,8 @@ public class PetManageController implements Initializable {
             }
         });
     }
+
+    PetManageDAOImpl petManageDAOImpl = new PetManageDAOImpl();
     private void refreshPage() throws SQLException {
         LblPetId.setText(petManageBO.getNextPetId());
 

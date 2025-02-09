@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -80,7 +81,7 @@ public class DashBoardPageController implements Initializable {
     private void navigateTo(String fxmlPath) throws IOException {
         try{
             ancPaneLoad.getChildren().clear();
-            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource(fxmlPath));
+            AnchorPane anchorPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
             ancPaneLoad.getChildren().add(anchorPane);
         }catch(IOException e){
             e.printStackTrace();

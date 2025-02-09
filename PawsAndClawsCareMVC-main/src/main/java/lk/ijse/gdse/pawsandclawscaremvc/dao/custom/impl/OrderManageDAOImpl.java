@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class OrderManageDAOImpl implements OrderDAO {
     private final OrderDetailsDAOImpl orderDetailsDAOImpl = new OrderDetailsDAOImpl();
     @Override
-    public String getNextOrderId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("SELECT orderId FROM Orders ORDER BY orderId DESC LIMIT 1");
 
         if (rst.next()) {
@@ -57,22 +57,8 @@ public class OrderManageDAOImpl implements OrderDAO {
 //    }
 
     @Override
-    public String getOrderDateById(String selectedOrderId) throws SQLException {
-        ResultSet rst = SQLUtil.execute("SELECT date FROM Orders WHERE orderId = ?", selectedOrderId);
-        if (rst.next()) {
-            return rst.getString(1);
-        }
-        return null;
-    }
-
-    @Override
     public boolean save(Orders dto) throws SQLException {
-        return false;
-    }
-
-    @Override
-    public String getNextId() throws SQLException {
-        return "";
+        return SQLUtil.execute("INSERT INTO Orders VALUES (?, ?, ?)", dto.getOrderId(), dto.getCustomerId(), dto.getOrderDate());
     }
 
     @Override

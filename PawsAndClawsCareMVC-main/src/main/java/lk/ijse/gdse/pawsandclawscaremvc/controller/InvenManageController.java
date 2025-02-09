@@ -81,11 +81,11 @@ public class InvenManageController implements Initializable {
 
         try {
             // Call the method to search for products by catalog
-            ArrayList<Inventory> filteredProducts = invenManageDAOImpl.searchProductsByCatalog(searchText);
+            ArrayList<InventoryDto> filteredProducts = invenManageBO.searchProductsByCatalog(searchText);
 
             // Convert the filtered products to ProductTm objects
             ObservableList<InventoryTm> filteredList = FXCollections.observableArrayList();
-            for (Inventory inventory : filteredProducts) {
+            for (InventoryDto inventory : filteredProducts) {
                 InventoryTm inventoryTm = new InventoryTm(
                         inventory.getInventoryId(),
                         inventory.getStockUpdate(),
@@ -248,9 +248,6 @@ public class InvenManageController implements Initializable {
         }
         TblInventory.setItems(inventoryTms);
     }
-
-    InvenManageDAOImpl invenManageDAOImpl = new InvenManageDAOImpl();
-
     private void loadNextInventoryId() throws SQLException {
         String nextInventoryId = invenManageBO.getNextInventoryId();
         LblInvenId.setText(nextInventoryId);
