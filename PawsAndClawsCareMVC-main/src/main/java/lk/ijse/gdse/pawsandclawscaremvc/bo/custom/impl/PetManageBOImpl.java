@@ -14,7 +14,7 @@ public class PetManageBOImpl implements PetManageBO {
 
     @Override
     public ArrayList<PetDto> searchPetsByNameOrId(String searchText) throws SQLException {
-        return petDAO.searchPetNameOrId();
+        return petDAO.searchPetsByNameOrId(searchText);
     }
 
     @Override

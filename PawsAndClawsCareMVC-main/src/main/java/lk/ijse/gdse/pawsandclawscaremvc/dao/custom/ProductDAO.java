@@ -11,5 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ProductDAO  extends CrudDAO<Product> {
-
+    boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException;
+    ArrayList<String> getAllProductId() throws SQLException;
+    ProductDto findById(String selectedProId) throws SQLException ;
+    ArrayList<ProductDto> searchProductsByCatalog(String searchText) throws SQLException ;
+    ArrayList<ProductDto> getLowStockProducts() throws SQLException;
 }

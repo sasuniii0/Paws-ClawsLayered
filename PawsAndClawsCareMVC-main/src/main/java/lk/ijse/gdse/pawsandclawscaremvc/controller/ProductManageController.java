@@ -263,8 +263,6 @@ public class ProductManageController implements Initializable {
         TxtQty.setText("");
     }
 
-    ProductManageDAOImpl productManageDAOImpl = new ProductManageDAOImpl();
-
     private void loadTableData() throws SQLException {
         ArrayList<ProductDto> productsDtos = productManageBO.getAllProducts();
         ObservableList<ProductTm> productTms = FXCollections.observableArrayList();
@@ -293,7 +291,7 @@ public class ProductManageController implements Initializable {
 
             try {
                 // Call the method to search for products by catalog
-                ArrayList<ProductDto> filteredProducts = productManageDAOImpl.searchProductsByCatalog(searchText);
+                ArrayList<ProductDto> filteredProducts = productManageBO.searchProductsByCatalog(searchText);
 
                 // Convert the filtered products to ProductTm objects
                 ObservableList<ProductTm> filteredList = FXCollections.observableArrayList();

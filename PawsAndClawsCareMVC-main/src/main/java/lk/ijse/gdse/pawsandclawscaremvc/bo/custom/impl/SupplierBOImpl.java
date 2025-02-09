@@ -14,7 +14,7 @@ public class SupplierBOImpl implements SupplierBO {
     SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.SUPPLIER);
     @Override
     public ArrayList<SupplierDto> searchSuppliersByNameOrId(String searchText) throws SQLException {
-        return null;
+        return supplierDAO.searchSuppliersByNameOrId(searchText);
     }
 
     @Override

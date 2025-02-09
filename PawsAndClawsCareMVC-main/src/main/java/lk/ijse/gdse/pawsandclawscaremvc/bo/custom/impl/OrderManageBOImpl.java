@@ -34,7 +34,7 @@ public class OrderManageBOImpl implements OrderManageBO {
                 return false;
             }
 
-            boolean isItemUpdated = ProductManageDAOImpl.reduceQty(orderDetailsDto);
+            boolean isItemUpdated = productDAO.reduceQty(orderDetailsDto);
             if (!isItemUpdated) {
                 return false;
             }
@@ -52,6 +52,11 @@ public class OrderManageBOImpl implements OrderManageBO {
                 orderDetailsDto.getQuantity(),
                 orderDetailsDto.getPrice()
         );
+    }
+
+    @Override
+    public boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException {
+        return false;
     }
 
     @Override

@@ -83,7 +83,7 @@ public class ServiceDAOImpl implements ServiceDAO {
 
     public boolean update(Service entity) throws SQLException {
         return SQLUtil.execute(
-                "update Service set availibility=?, duration=?, description=?, price=? where serviceId =?",
+                "update Service set availability=?, duration=?, description=?, price=? where serviceId =?",
                 entity.getAvailability(),    // Corrected parameter order
                 entity.getDuration(),
                 entity.getDescription(),
@@ -99,7 +99,7 @@ public class ServiceDAOImpl implements ServiceDAO {
 
     public ArrayList<String> getAllServiceIds() throws SQLException {
         ArrayList<String> serviceIds = new ArrayList<>();
-        ResultSet rst = SQLUtil.execute("SELECT serviceId FROM Service WHERE availibility = 'Available'");
+        ResultSet rst = SQLUtil.execute("SELECT serviceId FROM Service WHERE availability = 'Available'");
 
         while (rst.next()) {
             serviceIds.add(rst.getString("serviceId"));

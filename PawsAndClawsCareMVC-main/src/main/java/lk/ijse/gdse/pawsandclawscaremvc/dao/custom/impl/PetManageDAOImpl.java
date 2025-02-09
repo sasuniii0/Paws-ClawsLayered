@@ -2,6 +2,7 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.PetDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
+import lk.ijse.gdse.pawsandclawscaremvc.dto.PetDto;
 import lk.ijse.gdse.pawsandclawscaremvc.entity.Pet;
 
 import java.sql.ResultSet;
@@ -55,13 +56,13 @@ public class PetManageDAOImpl implements PetDAO {
         return SQLUtil.execute("DELETE FROM Pet WHERE petId = ?", petId);
     }
 
-    public ArrayList<Pet> searchPetsByNameOrId(String searchText) throws SQLException {
-        ArrayList<Pet> pets = new ArrayList<>();
+    public ArrayList<PetDto> searchPetsByNameOrId(String searchText) throws SQLException {
+        ArrayList<PetDto> pets = new ArrayList<>();
         ResultSet rs = SQLUtil.execute("SELECT * FROM Pet WHERE petId LIKE ? OR name LIKE ?",
                 "%" + searchText + "%", "%" + searchText + "%");
 
         while (rs.next()) {
-            pets.add(new Pet(
+            pets.add(new PetDto(
                     rs.getString("petId"),
                     rs.getString("name"),
                     rs.getString("breed")

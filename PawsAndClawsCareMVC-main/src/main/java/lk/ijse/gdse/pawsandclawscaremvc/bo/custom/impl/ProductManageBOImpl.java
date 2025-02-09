@@ -14,27 +14,27 @@ public class ProductManageBOImpl implements ProductManageBO {
     ProductDAO productDAO = (ProductDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PRODUCT);
     @Override
     public boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException {
-        return false;
+        return productDAO.reduceQty(orderDetailsDto);
     }
 
     @Override
     public ArrayList<String> getAllProductId() throws SQLException {
-        return null;
+        return productDAO.getAllProductId();
     }
 
     @Override
     public ProductDto findById(String selectedProId) throws SQLException {
-        return null;
+        return productDAO.findById(selectedProId);
     }
 
     @Override
     public ArrayList<ProductDto> searchProductsByCatalog(String searchText) throws SQLException {
-        return null;
+        return productDAO.searchProductsByCatalog(searchText);
     }
 
     @Override
     public ArrayList<ProductDto> getLowStockProducts() throws SQLException {
-        return null;
+        return productDAO.getLowStockProducts();
     }
 
     @Override
@@ -51,8 +51,8 @@ public class ProductManageBOImpl implements ProductManageBO {
     public ArrayList<ProductDto> getAllProducts() throws SQLException {
         ArrayList<Product> products = productDAO.getAll();
         ArrayList<ProductDto> productDtos = new ArrayList<>();
-        for (Product product: products){
-            products.add(new Product(product.getProductId(), product.getProductName(), product.getDescription(), product.getPrice(), product.getQty()));
+        for (Product product : products){
+            productDtos.add(new ProductDto(product.getProductId(),product.getProductName(),product.getDescription(),product.getPrice(),product.getQty()));
         }
         return productDtos;
     }

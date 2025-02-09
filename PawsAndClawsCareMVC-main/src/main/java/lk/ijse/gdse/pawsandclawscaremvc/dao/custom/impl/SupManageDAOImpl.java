@@ -59,13 +59,13 @@ public class SupManageDAOImpl implements SupplierDAO {
     }
 
 
-    public ArrayList<Supplier> searchSuppliersByNameOrId(String searchText) throws SQLException {
-        ArrayList<Supplier> suppliers = new ArrayList<>();
+    public ArrayList<SupplierDto> searchSuppliersByNameOrId(String searchText) throws SQLException {
+        ArrayList<SupplierDto> suppliers = new ArrayList<>();
         ResultSet rs = SQLUtil.execute("SELECT * FROM Supplier WHERE supId LIKE ? OR name LIKE ?",
                 "%" + searchText + "%", "%" + searchText + "%");
 
         while (rs.next()) {
-            suppliers.add(new Supplier(
+            suppliers.add(new SupplierDto(
                     rs.getString("supId"),
                     rs.getString("name"),
                     rs.getString("contactNumber")

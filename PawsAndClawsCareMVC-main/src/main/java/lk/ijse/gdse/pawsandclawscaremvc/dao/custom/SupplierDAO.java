@@ -10,4 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface SupplierDAO extends CrudDAO<Supplier> {
+    ArrayList<SupplierDto> searchSuppliersByNameOrId(String searchText) throws SQLException;
+
 }

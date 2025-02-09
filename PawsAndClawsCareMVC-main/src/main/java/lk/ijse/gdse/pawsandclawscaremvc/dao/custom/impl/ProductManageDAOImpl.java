@@ -22,7 +22,7 @@ public class ProductManageDAOImpl implements ProductDAO {
         );
     }
 
-    public static boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException {
+    public boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException {
         return SQLUtil.execute(
                 "update Product set qty = qty - ? where proId = ?",
                 orderDetailsDto.getQuantity(),   // Quantity to reduce

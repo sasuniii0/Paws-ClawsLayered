@@ -213,7 +213,6 @@ public class SupManageController implements Initializable {
         TblSupplier.setItems(supplierTms1);
     }
 
-    InvenManageDAOImpl invenManageDAOImpl = new InvenManageDAOImpl();
 
     @FXML
     void BtnSearchOnClickAction(ActionEvent event) throws SQLException {

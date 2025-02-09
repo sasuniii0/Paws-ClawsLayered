@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface OrderManageBO extends SuperBO {
+    boolean reduceQty(OrderDetailsDto orderDetailsDto) throws SQLException;
     String getNextOrderId() throws SQLException;
     String getOrderDateById(String selectedOrderId) throws SQLException;
     boolean saveOrderDetailsList(ArrayList<OrderDetailsDto> orderDetailsDtos) throws SQLException;
