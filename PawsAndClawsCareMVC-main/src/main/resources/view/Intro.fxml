@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,8 +19,36 @@
                   <Font size="45.0" />
                </font>
             </Label>
-            <ImageView fx:id="ImgViewSlideShow" fitHeight="514.0" fitWidth="700.0" opacity="0.81" pickOnBounds="true" preserveRatio="true" />
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="558.0" />
+            <VBox prefHeight="244.0" prefWidth="716.0">
+               <children>
+                  <LineChart fx:id="GraphStats" opacity="0.61" prefHeight="230.0" prefWidth="694.0" style="-fx-background-color: #82b1ff;" title="sales revenue">
+                    <xAxis>
+                      <CategoryAxis label="sales " side="BOTTOM" tickLabelFill="WHITE" fx:id="x" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="y" label="month" side="LEFT" tickLabelFill="WHITE" />
+                    </yAxis>
+                  </LineChart>
+               </children>
+            </VBox>
+            <VBox prefHeight="290.0" prefWidth="716.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="ImgViewSlideShow" fitHeight="304.0" fitWidth="453.0" opacity="0.81" pickOnBounds="true" preserveRatio="true" />
+                        <VBox fx:id="lowStockContainer" prefHeight="304.0" prefWidth="355.0">
+                           <children>
+                              <Label fx:id="LblLowStock" alignment="CENTER" prefHeight="18.0" prefWidth="268.0" text="Low stock" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>
