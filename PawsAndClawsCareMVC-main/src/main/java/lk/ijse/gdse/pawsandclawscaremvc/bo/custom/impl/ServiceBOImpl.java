@@ -53,18 +53,23 @@ public class ServiceBOImpl implements ServiceBO {
     }
 
     @Override
-    public boolean checkServiceAvailability(String serviceId, String description) throws SQLException {
+    public boolean checkServiceAvailability(String services, String date, String dropOffTime) throws SQLException {
         return false;
     }
 
     @Override
+    public boolean checkServiceAvailability(String serviceId, String description) throws SQLException {
+        return serviceDAO.checkServiceAvailability(serviceId,description);
+    }
+
+    @Override
     public String getServiceDescriptionById(String selectedServiceId) throws SQLException {
-        return "";
+        return serviceDAO.getServiceDescriptionById(selectedServiceId);
     }
 
     @Override
     public ArrayList<String> getAllServiceIdDesc() throws SQLException {
-        return null;
+        return serviceDAO.getAllServiceIdDesc();
     }
 
     @Override

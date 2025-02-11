@@ -1,6 +1,9 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import javafx.collections.ObservableList;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.DAOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.OrderDAO;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.OrderDetailsDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.db.DBConnection;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.OrdersDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
@@ -12,7 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderManageDAOImpl implements OrderDAO {
-    private final OrderDetailsDAOImpl orderDetailsDAOImpl = new OrderDetailsDAOImpl();
     @Override
     public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("SELECT orderId FROM Orders ORDER BY orderId DESC LIMIT 1");
@@ -74,5 +76,15 @@ public class OrderManageDAOImpl implements OrderDAO {
     @Override
     public boolean update(Orders dto) throws SQLException {
         return false;
+    }
+
+    @Override
+    public ObservableList<String> getAllOrderIds() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Object getOrderDate(String newValue) throws SQLException {
+        return null;
     }
 }

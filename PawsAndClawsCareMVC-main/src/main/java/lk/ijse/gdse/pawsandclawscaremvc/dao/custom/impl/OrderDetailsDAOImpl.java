@@ -1,10 +1,12 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.OrderDetailsDAO;
-import lk.ijse.gdse.pawsandclawscaremvc.dto.OrderDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 import lk.ijse.gdse.pawsandclawscaremvc.entity.OrderDetails;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -32,5 +34,26 @@ public class OrderDetailsDAOImpl implements OrderDetailsDAO {
     @Override
     public boolean update(OrderDetails dto) throws SQLException {
         return false;
+    }
+
+    @Override
+    public ObservableList<String> getAllOrderIds() throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT orderId FROM Orders");
+
+        ObservableList<String> orderIds = FXCollections.observableArrayList();
+        while (resultSet.next()) {
+            orderIds.add(resultSet.getString(1));
+        }
+        return orderIds;
+    }
+
+    @Override
+    public Object getOrderDate(String newValue) throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT date FROM Orders WHERE orderId = ?", newValue);
+
+        if (resultSet.next()) {
+            return resultSet.getDate(1);
+        }
+        return "";
     }
 }

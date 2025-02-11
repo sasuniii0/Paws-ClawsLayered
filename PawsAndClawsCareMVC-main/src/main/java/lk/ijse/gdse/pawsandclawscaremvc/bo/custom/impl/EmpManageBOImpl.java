@@ -4,6 +4,8 @@ import javafx.collections.ObservableList;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.EmpManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.DAOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.EmployeeDAO;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.OrderDetailsDAO;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ServiceDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.EmployeeDto;
 import lk.ijse.gdse.pawsandclawscaremvc.entity.Employee;
 
@@ -12,30 +14,31 @@ import java.util.ArrayList;
 
 public class EmpManageBOImpl implements EmpManageBO {
     EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.EMPLOYEE);
-
+    ServiceDAO serviceDAO = (ServiceDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.SERVICE);
+    OrderDetailsDAO orderDetailsDAO = (OrderDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER_DETAILS);
     @Override
-    public ObservableList<String> getAllServiceIds() throws SQLException {
-        return null;
+    public ArrayList<String> getAllServiceIds() throws SQLException {
+        return serviceDAO.getAllServiceIds();
     }
 
     @Override
-    public String getServiceDescription(String newValue) throws SQLException {
-        return "";
+    public String getServiceDescriptionById(String newValue) throws SQLException {
+        return serviceDAO.getServiceDescriptionById(newValue);
     }
 
     @Override
     public ObservableList<String> getAllOrderIds() throws SQLException {
-        return null;
+        return orderDetailsDAO.getAllOrderIds();
     }
 
     @Override
     public Object getOrderDate(String newValue) throws SQLException {
-        return null;
+        return orderDetailsDAO.getOrderDate(newValue);
     }
 
     @Override
-    public ArrayList<EmployeeDto> searchEmployeeByRole(String searchText) throws SQLException {
-        return null;
+    public ArrayList<Employee> searchEmployeeByRole(String searchText) throws SQLException {
+        return employeeDAO.searchEmployeeByRole(searchText);
     }
 
     @Override

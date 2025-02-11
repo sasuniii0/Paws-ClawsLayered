@@ -151,7 +151,7 @@ public class ServiceDAOImpl implements ServiceDAO {
     }
 
      public boolean saveServiceDetails(ServiceDetailsDto serviceDetailsDto) {
-        String insertQuery = "INSERT INTO ServiceDetails (serviceId, description, resId) VALUES (?, ?, ?)";
+        String insertQuery = "INSERT INTO ServiceDetail (serviceId, description, resId) VALUES (?, ?, ?)";
         try {
             return SQLUtil.execute(insertQuery, serviceDetailsDto.getServiceId(), serviceDetailsDto.getDescription(), serviceDetailsDto.getResId()); // Return true if service details are saved
         } catch (SQLException e) {
@@ -161,7 +161,7 @@ public class ServiceDAOImpl implements ServiceDAO {
     }
 
      public boolean updateServiceAvailability(String serviceId) throws SQLException {
-        String updateQuery = "UPDATE Service SET availibility = 'Not AVAILABLE' WHERE serviceId = ?";
+        String updateQuery = "UPDATE Service SET availability = 'Not AVAILABLE' WHERE serviceId = ?";
         try {
             return SQLUtil.execute(updateQuery, serviceId); // If rows are updated, the service is successfully booked
         } catch (SQLException e) {
@@ -171,7 +171,7 @@ public class ServiceDAOImpl implements ServiceDAO {
     }
 
      public boolean checkServiceAvailability(String serviceId, String description) throws SQLException {
-        String query = "SELECT availibility FROM Service WHERE serviceId = ?";
+        String query = "SELECT availability FROM Service WHERE serviceId = ?";
         ResultSet resultSet = SQLUtil.execute(query, serviceId);
 
         if (resultSet.next()) {
@@ -187,7 +187,7 @@ public class ServiceDAOImpl implements ServiceDAO {
         while (rst.next()) {
             return rst.getString(1);
         }
-        return null;
+        return rst.getString(1);
     }
 
     public ArrayList<String> getAllServiceIdDesc() throws SQLException {

@@ -11,8 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ReservationDAO  extends CrudDAO<Reservation> {
-    public ObservableList<String> getAllCustomerId() throws SQLException ;
-    public boolean checkServiceAvailability(String services, String date, String dropOffTime) throws SQLException;
-    public ArrayList<String> getAvailableEmployee() throws SQLException;
-    public String getSelectedServicePrice(String selectedService) throws SQLException;
+     boolean checkServiceAvailability(String services, String date, String dropOffTime) throws SQLException;
+     ArrayList<String> getAvailableEmployee() throws SQLException;
+     String getSelectedServicePrice(String selectedService) throws SQLException;
 }

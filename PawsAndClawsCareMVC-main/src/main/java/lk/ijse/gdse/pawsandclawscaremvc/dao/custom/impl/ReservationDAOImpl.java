@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class ReservationDAOImpl implements ReservationDAO {
 
-    public String getNextReservationId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rst = SQLUtil.execute("select resId from Reservation order by resId desc limit 1");
 
         if (rst.next()) {
@@ -29,7 +29,7 @@ public class ReservationDAOImpl implements ReservationDAO {
         return "R001";
     }
 
-    public ObservableList<String> getAllCustomerId() throws SQLException {
+   /* public ObservableList<String> getAllCustomerId() throws SQLException {
         ResultSet rs = SQLUtil.execute("SELECT custId FROM Customer");
 
         ObservableList<String> customerIdList = FXCollections.observableArrayList();
@@ -37,11 +37,11 @@ public class ReservationDAOImpl implements ReservationDAO {
             customerIdList.add(rs.getString("custId"));
         }
         return customerIdList;
-    }
+    }*/
 
     public boolean checkServiceAvailability(String services, String date, String dropOffTime) throws SQLException {
-        ResultSet rst = SQLUtil.execute("SELECT * FROM Reservation r join ServiceDetails s on r.resId = s.resId\n" +
-                "WHERE s.serviceId = ? AND r.date = ? AND r.dropOffTime = ?;",date,services,dropOffTime);
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Reservation r join ServiceDetail s on r.resId = s.resId\n" +
+                "WHERE s.serviced = ? AND r.date = ? AND r.dropOffTime = ?;",date,services,dropOffTime);
 
        return rst.next();
     }
@@ -49,7 +49,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     public ArrayList<String> getAvailableEmployee() throws SQLException {
         ArrayList<String> availableEmployees = new ArrayList<>();
         ResultSet rst = SQLUtil.execute(
-                "select empId,roll from Employee"
+                "select empId,role from Employee"
         );
         while (rst.next()) {
             String empId = rst.getString(1);
@@ -76,24 +76,29 @@ public class ReservationDAOImpl implements ReservationDAO {
         return SQLUtil.execute(dto.getResId(),dto.getDropOffTime() ,dto.getCustId(),dto.getDate());
     }
 
-    @Override
+   /* @Override
     public String getNextId() throws SQLException {
         return "";
-    }
+    }*/
 
     @Override
     public ArrayList<Reservation> getAll() throws SQLException {
-        return null;
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Reservation");
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        while (rst.next()) {
+            reservations.add(new Reservation(rst.getString(1), rst.getTime(2), rst.getString(3), rst.getDate(4)));
+        }
+        return reservations;
     }
 
     @Override
     public boolean delete(String customerId) throws SQLException {
-        return false;
+        return SQLUtil.execute("DELETE FROM Reservation WHERE resId = ?", customerId);
     }
 
     @Override
     public boolean update(Reservation dto) throws SQLException {
-        return false;
+        return SQLUtil.execute("UPDATE Reservation SET dropOffTime = ?, custId = ?, date = ? WHERE resId = ?", dto.getDropOffTime(), dto.getCustId(), dto.getDate(), dto.getResId());
     }
 
     /*public boolean saveReservation(ReservationDto reservationDto) throws SQLException {

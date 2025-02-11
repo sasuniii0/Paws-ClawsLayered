@@ -14,7 +14,7 @@ public class CustomerManageBOImpl implements CustomerManageBO {
 
     @Override
     public ArrayList<String> getAllCustomerIds() throws SQLException {
-        return null;
+        return customerDAO.getAllCustomerIds();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CustomerManageBOImpl implements CustomerManageBO {
 
     @Override
     public String getCustomerNameById(String selectedCustId) throws SQLException {
-        return "";
+        return customerDAO.getCustomerNameById(selectedCustId);
     }
 
     @Override

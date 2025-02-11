@@ -33,9 +33,9 @@ public class EmpManageDAOImpl implements EmployeeDAO {
             Employee employee = new Employee(
                     rst.getString("empId"),
                     rst.getString("orderId"),
-                    rst.getString("employeeType"),
-                    rst.getString("roll"),
-                    rst.getString("serviceId"),
+                    rst.getString("empType"),
+                    rst.getString("role"),
+                    rst.getString("serviced"),
                     rst.getString("startTime"),
                     rst.getString("contactNumber"),
                     rst.getString("endTime")
@@ -46,7 +46,7 @@ public class EmpManageDAOImpl implements EmployeeDAO {
     }
 
     public ObservableList<String> getAllServiceIds() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT serviceId FROM Service");
+        ResultSet resultSet = SQLUtil.execute("SELECT serviced FROM Service");
 
         ObservableList<String> serviceIds = FXCollections.observableArrayList();
         while (resultSet.next()) {
@@ -57,7 +57,7 @@ public class EmpManageDAOImpl implements EmployeeDAO {
     }
 
     public String getServiceDescription(String newValue) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT description FROM Service WHERE serviceId = ?", newValue);
+        ResultSet resultSet = SQLUtil.execute("SELECT description FROM Service WHERE serviced = ?", newValue);
 
         if (resultSet.next()) {
             return resultSet.getString(1);
@@ -81,12 +81,12 @@ public class EmpManageDAOImpl implements EmployeeDAO {
         if (resultSet.next()) {
             return resultSet.getDate(1);
         }
-        return null;
+        return "";
     }
 
     public boolean save(Employee entity) throws SQLException {;
         SQLUtil.execute(
-                "INSERT INTO Employee (empId, roll,contactNumber, serviceId, orderId, employeeType, endTime, startTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO Employee (empId, role,contactNumber, serviced, orderId, empType, endTime, startTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 entity.getEmpId(),
                 entity.getRole(),
                 entity.getContactNumber(),
@@ -101,7 +101,7 @@ public class EmpManageDAOImpl implements EmployeeDAO {
 
     public boolean update(Employee entity) throws SQLException {
         return SQLUtil.execute(
-                "update Employee set employeeType=?, startTime = ?, endTime=?, roll=?, contactNumber=?, serviceId=?, orderId =? where empId =?",
+                "update Employee set empType=?, startTime = ?, endTime=?, role=?, contactNumber=?, serviced=?, orderId =? where empId =?",
                 entity.getEmployeeType(),
                 entity.getStartTime(),
                 entity.getEndTime(),
@@ -114,11 +114,11 @@ public class EmpManageDAOImpl implements EmployeeDAO {
     }
 
     public boolean delete(String serviceIdText) throws SQLException {
-        return SQLUtil.execute("delete from Service where empId = ?",serviceIdText);
+        return SQLUtil.execute("delete from Employee where empId = ?",serviceIdText);
     }
 
     public ArrayList<Employee> searchEmployeeByRole(String searchText) throws SQLException {
-        ResultSet rst = SQLUtil.execute("SELECT empId, roll, contactNumber, serviceId, orderId,employeeType,startTime, endTime FROM Employee WHERE roll LIKE ?", "%" + searchText + "%");
+        ResultSet rst = SQLUtil.execute("SELECT empId, role, contactNumber, serviced, orderId,empType,startTime, endTime FROM Employee WHERE role LIKE ?", "%" + searchText + "%");
 
         ArrayList<Employee> entity = new ArrayList<>();
         while (rst.next()) {

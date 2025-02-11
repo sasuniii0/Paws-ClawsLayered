@@ -13,9 +13,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.EmpManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.OrderManageBO;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ServiceBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.EmpManageBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.OrderManageBOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.ServiceBOImpl;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ServiceDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.EmployeeDto;
+import lk.ijse.gdse.pawsandclawscaremvc.entity.Employee;
 import lk.ijse.gdse.pawsandclawscaremvc.view.dtm.EmployeeTm;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.EmpManageDAOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.OrderManageDAOImpl;
@@ -127,6 +131,7 @@ public class EmpManageController implements Initializable {
 
     EmpManageBO empManageBO = new EmpManageBOImpl();
     OrderManageBO orderManageBO = new OrderManageBOImpl();
+    ServiceBO serviceBO = new ServiceBOImpl();
 
     @FXML
     void BtnAddNewOrderOnClickAction(ActionEvent event) {
@@ -205,20 +210,20 @@ public class EmpManageController implements Initializable {
 
         try {
             // Call the method to search for products by catalog
-            ArrayList<EmployeeDto> filteredEmployee = empManageBO.searchEmployeeByRole(searchText);
+            ArrayList<Employee> filteredEmployee = empManageBO.searchEmployeeByRole(searchText);
 
             // Convert the filtered products to ProductTm objects
             ObservableList<EmployeeTm> filteredList = FXCollections.observableArrayList();
-            for (EmployeeDto employeeDto : filteredEmployee) {
+            for (Employee entity : filteredEmployee) {
                 EmployeeTm employeeTm = new EmployeeTm(
-                        employeeDto.getEmpId(),
-                        employeeDto.getStartTime(),
-                        employeeDto.getEndTime(),
-                        employeeDto.getRole(),
-                        employeeDto.getContactNumber(),
-                        employeeDto.getServiceId(),
-                        employeeDto.getOrderId(),
-                        employeeDto.getEmployeeType()
+                        entity.getEmpId(),
+                        entity.getStartTime(),
+                        entity.getEndTime(),
+                        entity.getRole(),
+                        entity.getContactNumber(),
+                        entity.getServiceId(),
+                        entity.getOrderId(),
+                        entity.getEmployeeType()
                 );
                 filteredList.add(employeeTm);
             }
@@ -260,7 +265,6 @@ public class EmpManageController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Failed to update employee").show();
         }
     }
-OrderManageDAOImpl orderManageDAOImpl = new OrderManageDAOImpl();
     @FXML
     void CmbOrderId(ActionEvent event) {
         String selectedOrderId = CmbOrdersId.getValue();
@@ -278,7 +282,6 @@ OrderManageDAOImpl orderManageDAOImpl = new OrderManageDAOImpl();
             }
         }
     }
-ServiceDAOImpl serviceDAOImpl = new ServiceDAOImpl();
     @FXML
     void CmbServiceId(ActionEvent event) {
         String selectedServiceId = CmbServiceId.getValue();
@@ -286,7 +289,7 @@ ServiceDAOImpl serviceDAOImpl = new ServiceDAOImpl();
         if (selectedServiceId != null) {
             try {
                 // Fetch service description from the database
-                String serviceDescription = serviceDAOImpl.getServiceDescriptionById(selectedServiceId);
+                String serviceDescription = serviceBO.getServiceDescriptionById(selectedServiceId);
                 // Update the label
                 LblDesc.setText(serviceDescription != null ? serviceDescription : "Description not available");
             } catch (SQLException e) {
@@ -418,12 +421,14 @@ ServiceDAOImpl serviceDAOImpl = new ServiceDAOImpl();
 
     private void loadOrderData() {
         try {
+            //ArrayList<String> orderIds = empManageBO.getAllOrderIds();
             ObservableList<String> orderIds = empManageBO.getAllOrderIds();
             CmbOrdersId.setItems(orderIds);
             CmbOrdersId.valueProperty().addListener((obs, oldValue, newValue) -> {
                 try {
                     LblDate.setText(empManageBO.getOrderDate(newValue).toString());
                 } catch (SQLException e) {
+                    e.printStackTrace();
                    // LblDate.setText("");
                 }
             });
@@ -434,12 +439,13 @@ ServiceDAOImpl serviceDAOImpl = new ServiceDAOImpl();
 
     private void loadServiceData() {
         try {
-            ObservableList<String> serviceIds = empManageBO.getAllServiceIds();
-            CmbServiceId.setItems(serviceIds);
+            ArrayList<String> serviceIds = empManageBO.getAllServiceIds();
+            CmbServiceId.setItems(FXCollections.observableArrayList(serviceIds));
             CmbServiceId.valueProperty().addListener((obs, oldValue, newValue) -> {
                 try {
-                    LblDesc.setText(empManageBO.getServiceDescription(newValue));
+                    LblDesc.setText(serviceBO.getServiceDescriptionById(newValue));
                 } catch (SQLException e) {
+                    e.printStackTrace();
                     throw new RuntimeException(e);
                 }
             });

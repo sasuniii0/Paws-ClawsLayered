@@ -46,7 +46,7 @@ public class OrderManageBOImpl implements OrderManageBO {
     @Override
     public boolean saveOrderDetail(OrderDetailsDto orderDetailsDto) throws SQLException {
         return SQLUtil.execute(
-                "INSERT INTO OrderDetails VALUES (?, ?, ?, ?)",
+                "INSERT INTO OrderDetail VALUES (?, ?, ?, ?)",
                 orderDetailsDto.getOrderId(),
                 orderDetailsDto.getProId(),
                 orderDetailsDto.getQuantity(),

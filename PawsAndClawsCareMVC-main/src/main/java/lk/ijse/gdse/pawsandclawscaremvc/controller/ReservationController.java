@@ -430,7 +430,7 @@ public class ReservationController implements Initializable {
     }
 
     private void refreshPage() throws SQLException {
-        LblResId.setText(reservationDAOImpl.getNextReservationId());
+        LblResId.setText(reservationBO.getNextReservationId());
         LblDate.setText(LocalDate.now().toString());
         loadCustomerIds();
         loadAvailableServices();

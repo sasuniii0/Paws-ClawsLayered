@@ -16,6 +16,8 @@ public interface ServiceBO extends SuperBO {
     boolean bookService(ServiceDetailsDto serviceDetailsDto) throws SQLException ;
     boolean saveServiceDetails(ServiceDetailsDto serviceDetailsDto) ;
     boolean updateServiceAvailability(String serviceId) throws SQLException ;
+    public boolean checkServiceAvailability(String services, String date, String dropOffTime) throws SQLException;
+
     boolean checkServiceAvailability(String serviceId, String description) throws SQLException ;
     String getServiceDescriptionById(String selectedServiceId) throws SQLException ;
     ArrayList<String> getAllServiceIdDesc() throws SQLException ;
