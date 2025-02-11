@@ -47,7 +47,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="LblCustomerName" prefHeight="20.0" prefWidth="296.0" textFill="WHITE">
+                  <Label fx:id="LblCustomerName" prefHeight="20.0" prefWidth="294.0" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font></Label>

@@ -41,7 +41,7 @@ public class InvenManageDAOImpl implements InventoryDAO {
     }
 
     public boolean save(Inventory entity) throws SQLException {
-        return SQLUtil.execute("INSERT INTO Inventory (inventoryId, stockUpdate, inventoryCategory,availabilityStatus) VALUES (?,?,?,?)",
+        return SQLUtil.execute("INSERT INTO Inventory (inventoryId, stockUpdate, inventoryCategory,availability VALUES (?,?,?,?)",
                 entity.getInventoryId(),
                 entity.getStockUpdate(),
                 entity.getInventoryCategory(),

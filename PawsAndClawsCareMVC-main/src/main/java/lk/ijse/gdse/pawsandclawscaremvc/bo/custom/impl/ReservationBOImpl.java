@@ -15,6 +15,7 @@ import lk.ijse.gdse.pawsandclawscaremvc.entity.Reservation;
 import lk.ijse.gdse.pawsandclawscaremvc.entity.ServiceDetails;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -23,9 +24,17 @@ public class ReservationBOImpl implements ReservationBO {
     ServiceDetailsDAO serviceDetailsDAO = (ServiceDetailsDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.SERVICE_DETAILS);
     ServiceDAO serviceDAO = (ServiceDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.SERVICE);
     CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+
     public boolean saveReservation(ReservationDto reservationDto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         try{
+
+            // Validate primary key constraint
+            ResultSet rs = SQLUtil.execute("SELECT 1 FROM Reservation WHERE resId = ?", reservationDto.getResId());
+            if (rs.next()) { // If rs.next() returns true, the ID exists
+                throw new SQLException("Reservation ID already exists!");
+            }
+
             connection.setAutoCommit(false);
             boolean isReservationSaved = SQLUtil.execute("insert into Reservation (resId,dropOffTime,custId,date) values (?,?,?,?)",
                     reservationDto.getResId(),
@@ -70,8 +79,8 @@ public class ReservationBOImpl implements ReservationBO {
     }
 
     @Override
-    public double getSelectedServicePrice(String selectedService) throws SQLException {
-        return reservationDAO.getSelectedServicePrice(selectedService);
+    public String getSelectedServicePrice(String selectedService) throws SQLException {
+        return serviceDAO.getSelectedServicePrice(selectedService);
     }
 
     @Override

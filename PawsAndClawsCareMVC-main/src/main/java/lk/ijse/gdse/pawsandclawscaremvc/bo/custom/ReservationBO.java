@@ -12,7 +12,7 @@ public interface ReservationBO extends SuperBO {
      ObservableList<String> getAllCustomerId() throws SQLException;
      boolean checkServiceAvailability(String services, String date, String dropOffTime) throws SQLException;
      ArrayList<String> getAvailableEmployee() throws SQLException;
-     double getSelectedServicePrice(String selectedService) throws SQLException;
+     String getSelectedServicePrice(String selectedService) throws SQLException;
     boolean saveReservation(ReservationDto dto) throws SQLException;
     String getNextReservationId() throws SQLException;
     ArrayList<ServiceDetailsDto> getAllReservation() throws SQLException;

@@ -5,5 +5,5 @@ import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.entity.ServiceDetails;
 
 public interface ServiceDetailsDAO  extends CrudDAO<ServiceDetails> {
-    public boolean saveServiceDetails(ServiceDetailsDto serviceDetailsDto) ;
+     boolean saveServiceDetails(ServiceDetailsDto serviceDetailsDto) ;
     }

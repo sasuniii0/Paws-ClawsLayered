@@ -98,9 +98,9 @@ public class EmpManageDAOImpl implements EmployeeDAO {
         return "";
     }*/
 
-    public boolean save(Employee entity) throws SQLException {;
+    public boolean save(Employee entity) throws SQLException {
         SQLUtil.execute(
-                "INSERT INTO Employee (empId, role,contactNumber, serviced, orderId, empType, endTime, startTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO Employee (empId, role, contactNumber, serviced, orderId, empType, endTime, startTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 entity.getEmpId(),
                 entity.getRole(),
                 entity.getContactNumber(),

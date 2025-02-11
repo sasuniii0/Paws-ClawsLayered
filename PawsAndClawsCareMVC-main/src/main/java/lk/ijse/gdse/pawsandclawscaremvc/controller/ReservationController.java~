@@ -272,7 +272,7 @@ public class ReservationController implements Initializable {
                     custId,
                     selectedDate,
                     employee,
-                    price,
+                    LblPrice.getText(),
                     serviceDetailsDtos
             );
 

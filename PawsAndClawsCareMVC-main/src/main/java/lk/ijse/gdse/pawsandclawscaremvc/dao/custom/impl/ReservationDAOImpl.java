@@ -73,11 +73,6 @@ public class ReservationDAOImpl implements ReservationDAO {
         return availableEmployees;
     }
 
-    @Override
-    public double getSelectedServicePrice(String selectedService) throws SQLException {
-        return 0;
-    }
-
     /*public ArrayList<String> getAvailableEmployee() throws SQLException {
         ArrayList<String> availableEmployees = new ArrayList<>();
         ResultSet rst = SQLUtil.execute(

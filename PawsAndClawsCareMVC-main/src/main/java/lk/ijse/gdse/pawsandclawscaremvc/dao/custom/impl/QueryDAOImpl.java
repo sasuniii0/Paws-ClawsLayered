@@ -2,6 +2,7 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.QueryDAO;
+import lk.ijse.gdse.pawsandclawscaremvc.dto.PaymentDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDto;
 import lk.ijse.gdse.pawsandclawscaremvc.entity.Payment;
 
@@ -53,14 +54,14 @@ public class QueryDAOImpl implements QueryDAO {
 
         return rst.next();
     }
-    public ArrayList<Payment> searchPaymentsByEmail(String searchText) throws SQLException {
+    public ArrayList<PaymentDto> searchPaymentsByEmail(String searchText) throws SQLException {
         ResultSet rst = SQLUtil.execute("select p.paymentId ,p.date,p.amount,p.method,p.resId,p.orderId,c.custId,c.email\n" +
                 "from Customer c Join Orders o on c.custId = o.custId\n" +
                 "join Payment p on o.orderId = p.orderId\n" +
                 "where c.email = ?", searchText);
-        ArrayList<Payment> entity = new ArrayList<>();
+        ArrayList<PaymentDto> entity = new ArrayList<>();
         while (rst.next()) {
-            Payment payment = new Payment(
+            PaymentDto payment = new PaymentDto(
                     rst.getString(1),
                     rst.getDate(2).toLocalDate(),
                     rst.getDouble(3),

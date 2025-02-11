@@ -14,4 +14,5 @@ public class Customer {
     private String address;
     private String email;
     private String contactNumber;
+    //private String petId;
 }

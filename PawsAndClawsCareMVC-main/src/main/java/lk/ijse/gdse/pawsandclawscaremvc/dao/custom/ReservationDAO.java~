@@ -9,4 +9,5 @@ import java.util.ArrayList;
 public interface ReservationDAO  extends CrudDAO<Reservation> {
      boolean checkServiceAvailability(String services, String date, String dropOffTime) throws SQLException;
      ArrayList<String> getAvailableEmployee() throws SQLException;
+     double getSelectedServicePrice(String selectedService) throws SQLException;
 }

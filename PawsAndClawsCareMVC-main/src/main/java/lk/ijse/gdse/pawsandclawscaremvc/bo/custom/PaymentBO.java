@@ -3,7 +3,6 @@ package lk.ijse.gdse.pawsandclawscaremvc.bo.custom;
 import javafx.collections.ObservableList;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.SuperBO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.PaymentDto;
-import lk.ijse.gdse.pawsandclawscaremvc.entity.Payment;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

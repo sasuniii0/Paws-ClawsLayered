@@ -37,7 +37,7 @@ public class PaymentBOImpl implements PaymentBO {
     }
 
     @Override
-    public ArrayList<PaymentDto> searchPaymentsByEmail(String searchText) throws SQLException {
+    public ArrayList<Payment> searchPaymentsByEmail(String searchText) throws SQLException {
         return queryDAO.searchPaymentsByEmail(searchText);
     }
 

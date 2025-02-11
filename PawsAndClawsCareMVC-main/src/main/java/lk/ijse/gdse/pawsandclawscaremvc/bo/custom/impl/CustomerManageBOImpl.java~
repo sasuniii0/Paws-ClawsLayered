@@ -19,7 +19,7 @@ public class CustomerManageBOImpl implements CustomerManageBO {
 
     @Override
     public CustomerDto findById(String selectedCustId) throws SQLException {
-        return customerDAO.findById(selectedCustId);
+        return null;
     }
 
     @Override

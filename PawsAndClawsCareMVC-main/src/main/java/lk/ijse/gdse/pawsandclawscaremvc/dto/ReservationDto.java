@@ -15,7 +15,6 @@ public class ReservationDto {
     private String dropOffTime;
     private String custId;
     private String date;
-    private String empId;
 
 
 private ArrayList<ServiceDetailsDto> serviceDetailsDtos;

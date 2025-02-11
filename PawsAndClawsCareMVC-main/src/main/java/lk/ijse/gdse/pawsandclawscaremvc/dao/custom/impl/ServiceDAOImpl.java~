@@ -61,7 +61,7 @@ public class ServiceDAOImpl implements ServiceDAO {
         if (rst.next()) {
             return rst.getString(1);
         }
-        return "";
+        return null;
     }
 
     public ArrayList<Service> getAll() throws SQLException {

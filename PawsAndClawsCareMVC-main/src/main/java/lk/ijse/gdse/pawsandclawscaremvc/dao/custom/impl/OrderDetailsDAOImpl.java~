@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class OrderDetailsDAOImpl implements OrderDetailsDAO {
 
     OrderDAO orderDAO = (OrderDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER);
-
     @Override
     public boolean save(OrderDetails dto) throws SQLException {
         return SQLUtil.execute("INSERT INTO OrderDetails VALUES (?, ?, ?, ?)", dto.getOrderId(), dto.getProId(), dto.getQuantity(), dto.getPrice());
