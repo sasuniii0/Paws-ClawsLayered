@@ -12,6 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface EmployeeDAO extends CrudDAO<Employee> {
-    public ArrayList<Employee> searchEmployeeByRole(String searchText) throws SQLException ;
-
+     ArrayList<Employee> searchEmployeeByRole(String searchText) throws SQLException ;
+     String getNextId() throws SQLException ;
+     ArrayList<Employee> getAll() throws SQLException;
+     ArrayList<String> getAvailableEmployee() throws SQLException;
+     boolean save(Employee entity) throws SQLException ;
+     boolean update(Employee entity) throws SQLException;
+     boolean delete(String serviceIdText) throws SQLException ;
     }

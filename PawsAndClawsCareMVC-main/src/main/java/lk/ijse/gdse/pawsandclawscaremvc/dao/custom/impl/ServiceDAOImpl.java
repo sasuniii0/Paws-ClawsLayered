@@ -1,6 +1,9 @@
 package lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl;
 
+import lk.ijse.gdse.pawsandclawscaremvc.dao.DAOFactory;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.QueryDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ServiceDAO;
+import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.ServiceDetailsDAO;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDetailsDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDto;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
@@ -11,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ServiceDAOImpl implements ServiceDAO {
-
     public ArrayList<String> getAllItemIds() throws SQLException {
         ResultSet rst = SQLUtil.execute("select serviceId from Service");
         ArrayList<String> serviceId = new ArrayList<>();
@@ -22,7 +24,12 @@ public class ServiceDAOImpl implements ServiceDAO {
         return serviceId;
     }
 
+    @Override
     public ServiceDto findServiceByEmployeeId(String empId) throws SQLException {
+        return null;
+    }
+
+    /*public ServiceDto findServiceByEmployeeId(String empId) throws SQLException {
         // Using CrudUtil.execute to execute the query and handle parameters
         ResultSet rst = SQLUtil.execute(
                 "SELECT s.serviceId FROM Services s " +
@@ -38,6 +45,24 @@ public class ServiceDAOImpl implements ServiceDAO {
                     null,
                     null
             );
+        }
+        return null;
+    }*/
+
+
+
+    public String getServiceDescription(String newValue) throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT description FROM Service WHERE serviced = ?", newValue);
+
+        if (resultSet.next()) {
+            return resultSet.getString(1);
+        }
+        return "";
+    }
+    public String getSelectedServicePrice(String selectedService) throws SQLException {
+        ResultSet rst = SQLUtil.execute("select price from Service where serviceId = ?",selectedService);
+        if (rst.next()) {
+            return rst.getString(1);
         }
         return null;
     }
@@ -150,7 +175,12 @@ public class ServiceDAOImpl implements ServiceDAO {
         return true;
     }
 
-     public boolean saveServiceDetails(ServiceDetailsDto serviceDetailsDto) {
+    @Override
+    public boolean saveServiceDetails(ServiceDetailsDto serviceDetailsDto) {
+        return false;
+    }
+
+     /*public boolean saveServiceDetails(ServiceDetailsDto serviceDetailsDto) {
         String insertQuery = "INSERT INTO ServiceDetail (serviceId, description, resId) VALUES (?, ?, ?)";
         try {
             return SQLUtil.execute(insertQuery, serviceDetailsDto.getServiceId(), serviceDetailsDto.getDescription(), serviceDetailsDto.getResId()); // Return true if service details are saved
@@ -158,7 +188,7 @@ public class ServiceDAOImpl implements ServiceDAO {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 
      public boolean updateServiceAvailability(String serviceId) throws SQLException {
         String updateQuery = "UPDATE Service SET availability = 'Not AVAILABLE' WHERE serviceId = ?";

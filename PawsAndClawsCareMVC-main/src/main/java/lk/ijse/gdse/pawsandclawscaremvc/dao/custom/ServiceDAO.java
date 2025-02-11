@@ -22,4 +22,5 @@ public interface ServiceDAO  extends CrudDAO<Service> {
     boolean checkServiceAvailability(String serviceId, String description) throws SQLException ;
     String getServiceDescriptionById(String selectedServiceId) throws SQLException ;
     ArrayList<String> getAllServiceIdDesc() throws SQLException ;
+
 }

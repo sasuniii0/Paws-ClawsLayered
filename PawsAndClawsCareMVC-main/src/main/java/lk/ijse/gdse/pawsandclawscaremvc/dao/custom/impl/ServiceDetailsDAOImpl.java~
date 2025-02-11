@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ServiceDetailsDAOImpl implements ServiceDetailsDAO {
-    ServiceDAO serviceDAO = (ServiceDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.SERVICE);
+ServiceDAO serviceDAO = (S)
+    ServiceDAOImpl serviceDAOImpl = new ServiceDAOImpl();
+
     public boolean saveReservationDetailsList(ArrayList<ServiceDetailsDto> serviceDetailsDtos) throws SQLException {
 
         for (ServiceDetailsDto serviceDetailsDto : serviceDetailsDtos) {
@@ -21,7 +23,7 @@ public class ServiceDetailsDAOImpl implements ServiceDetailsDAO {
             if (!isReservationSaved) {
                 return false;
             }
-            boolean isServiceUpdated = serviceDAO.bookService(serviceDetailsDto);
+            boolean isServiceUpdated = serviceDAOImpl.bookService(serviceDetailsDto);
             System.out.println("isServiceUpdated " + isServiceUpdated);
 
             if (!isServiceUpdated) {

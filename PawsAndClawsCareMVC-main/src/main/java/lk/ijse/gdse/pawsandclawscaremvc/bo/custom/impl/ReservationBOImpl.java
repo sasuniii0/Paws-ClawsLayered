@@ -1,9 +1,7 @@
 package lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl;
 
 import javafx.collections.ObservableList;
-import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.CustomerManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ReservationBO;
-import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ServiceBO;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.DAOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.SQLUtil;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.CustomerDAO;
@@ -72,7 +70,7 @@ public class ReservationBOImpl implements ReservationBO {
     }
 
     @Override
-    public String getSelectedServicePrice(String selectedService) throws SQLException {
+    public double getSelectedServicePrice(String selectedService) throws SQLException {
         return reservationDAO.getSelectedServicePrice(selectedService);
     }
 

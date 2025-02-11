@@ -65,7 +65,7 @@ public ObservableList<String> getAllOrderIds() throws SQLException {
     }
     @Override
     public Object getOrderDate(String newValue) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT date FROM Orders WHERE orderId = ?", newValue);
+        ResultSet resultSet = SQLUtil.execute("SELECT orderDate FROM Orders WHERE orderId = ?", newValue);
 
         if (resultSet.next()) {
             return resultSet.getDate(1);

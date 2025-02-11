@@ -29,7 +29,7 @@
             </HBox>
             <HBox prefHeight="46.0" prefWidth="1059.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="249.0" text="Availability" textFill="WHITE">
+                  <Label prefHeight="18.0" prefWidth="249.0" text="Description" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
@@ -41,7 +41,7 @@
             </HBox>
             <HBox prefHeight="46.0" prefWidth="1059.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="249.0" text="Description" textFill="WHITE">
+                  <Label prefHeight="18.0" prefWidth="249.0" text="Availability" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font></Label>

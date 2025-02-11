@@ -208,7 +208,7 @@ public class ReservationController implements Initializable {
             String serviceName = parts[1].trim();
             new Alert(Alert.AlertType.INFORMATION, "Service Selected: " + selectedService, ButtonType.OK).show();
         }
-        String price = reservationBO.getSelectedServicePrice(selectedService);
+        String price = String.valueOf(reservationBO.getSelectedServicePrice(selectedService));
         LblPrice.setText(price);
     }
 
@@ -254,6 +254,7 @@ public class ReservationController implements Initializable {
             String custId = CmbCustId.getValue();
             String dropOffTime = TxtDropOffTime.getText();
             String employee = CmbAvailableEmp.getValue();
+            String price = LblPrice.getText();
 
             ArrayList<ServiceDetailsDto> serviceDetailsDtos = new ArrayList<>();
 

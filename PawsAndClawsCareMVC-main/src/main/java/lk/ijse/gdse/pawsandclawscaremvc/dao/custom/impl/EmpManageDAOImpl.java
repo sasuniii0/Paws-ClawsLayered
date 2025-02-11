@@ -45,7 +45,21 @@ public class EmpManageDAOImpl implements EmployeeDAO {
         return entity;
     }
 
-    public ObservableList<String> getAllServiceIds() throws SQLException {
+    public ArrayList<String> getAvailableEmployee() throws SQLException {
+        ArrayList<String> availableEmployees = new ArrayList<>();
+        ResultSet rst = SQLUtil.execute(
+                "select empId,role from Employee"
+        );
+        while (rst.next()) {
+            String empId = rst.getString(1);
+            String roll = rst.getString(2);
+            availableEmployees.add(empId + " " + roll);
+        }
+        return availableEmployees;
+
+    }
+
+    /*public ObservableList<String> getAllServiceIds() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT serviced FROM Service");
 
         ObservableList<String> serviceIds = FXCollections.observableArrayList();
@@ -54,18 +68,18 @@ public class EmpManageDAOImpl implements EmployeeDAO {
         }
         return serviceIds;
         
-    }
+    }*/
 
-    public String getServiceDescription(String newValue) throws SQLException {
+    /*public String getServiceDescription(String newValue) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT description FROM Service WHERE serviced = ?", newValue);
 
         if (resultSet.next()) {
             return resultSet.getString(1);
         }
         return "";
-    }
+    }*/
 
-    public ObservableList<String> getAllOrderIds() throws SQLException {
+    /*public ObservableList<String> getAllOrderIds() throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT orderId FROM Orders");
 
         ObservableList<String> orderIds = FXCollections.observableArrayList();
@@ -73,16 +87,16 @@ public class EmpManageDAOImpl implements EmployeeDAO {
             orderIds.add(resultSet.getString(1));
         }
         return orderIds;
-    }
+    }*/
 
-    public Object getOrderDate(String newValue) throws SQLException {
+    /*public Object getOrderDate(String newValue) throws SQLException {
         ResultSet resultSet = SQLUtil.execute("SELECT orderDate FROM Orders WHERE orderId = ?", newValue);
 
         if (resultSet.next()) {
             return resultSet.getDate(1);
         }
         return "";
-    }
+    }*/
 
     public boolean save(Employee entity) throws SQLException {;
         SQLUtil.execute(

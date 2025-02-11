@@ -1,4 +1,6 @@
 package lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl;
 
-public class QueryBOImpl {
+import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.QueryBO;
+
+public class QueryBOImpl implements QueryBO {
 }
