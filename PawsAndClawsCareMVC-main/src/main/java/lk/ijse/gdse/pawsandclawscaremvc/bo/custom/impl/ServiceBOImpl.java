@@ -29,12 +29,12 @@ public class ServiceBOImpl implements ServiceBO {
 
     @Override
     public double getPricePerHour(String selectedService) throws SQLException {
-        return 0;
+        return serviceDAO.getPricePerHour(selectedService);
     }
 
     @Override
     public String getDuration(String selectedService) throws SQLException {
-        return "";
+        return serviceDAO.getDuration(selectedService);
     }
 
     @Override

@@ -164,14 +164,14 @@
             <TableView fx:id="TblReservation" onMouseClicked="#TblReservationOnClick" prefHeight="169.0" prefWidth="1128.0">
                <columns>
                   <TableColumn fx:id="ColResId" prefWidth="61.59997367858887" text="ResId" />
-                  <TableColumn fx:id="ColCustId" prefWidth="75.20001983642578" text="CustId" />
-                  <TableColumn fx:id="ColServiceId" prefWidth="104.79998779296875" text="ServiceId" />
-                  <TableColumn fx:id="ColDesc" prefWidth="120.00006103515625" text="Description" />
-                  <TableColumn fx:id="ColDropOffTime" prefWidth="112.79998779296875" text="Drop Off Time" />
-                  <TableColumn fx:id="ColDate" prefWidth="99.19998168945312" text="Date" />
-                  <TableColumn fx:id="ColAction" maxWidth="100.0" minWidth="0.0" prefWidth="248.0" text="Action" />
-                  <TableColumn fx:id="ColPrice" prefWidth="163.0" text="Service Per hour Price" />
-                  <TableColumn fx:id="ColTotal" prefWidth="144.0" text="Total Price" />
+                  <TableColumn fx:id="ColCustId" prefWidth="59.20001983642578" text="CustId" />
+                  <TableColumn fx:id="ColServiceId" prefWidth="64.0" text="ServiceId" />
+                  <TableColumn fx:id="ColDesc" prefWidth="88.800048828125" text="Description" />
+                  <TableColumn fx:id="ColDropOffTime" prefWidth="92.79998779296875" text="Drop Off Time" />
+                  <TableColumn fx:id="ColDate" prefWidth="52.0" text="Date" />
+                  <TableColumn fx:id="ColPrice" maxWidth="160.7999267578125" prefWidth="131.19998168945312" text="Service Per hour Price" />
+                  <TableColumn fx:id="ColTotal" maxWidth="208.79989624023438" prefWidth="76.00006103515625" text="Total Price" />
+                  <TableColumn fx:id="ColAction" maxWidth="200.79995727539062" minWidth="0.0" prefWidth="62.400146484375" text="Action" />
                </columns>
             </TableView>
             <HBox prefHeight="43.0" prefWidth="1056.0" spacing="10.0">

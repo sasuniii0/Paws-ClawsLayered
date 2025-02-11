@@ -20,4 +20,6 @@ public class ReservationDto {
 
 private ArrayList<ServiceDetailsDto> serviceDetailsDtos;
 
+    public ReservationDto(String resId, String dropOffTime, String custId, String selectedDate, String employee, String text, ArrayList<ServiceDetailsDto> serviceDetailsDtos) {
+    }
 }

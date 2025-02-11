@@ -271,6 +271,7 @@ public class ReservationController implements Initializable {
                     custId,
                     selectedDate,
                     employee,
+                    LblPrice.getText(),
                     serviceDetailsDtos
             );
 
@@ -399,11 +400,6 @@ public class ReservationController implements Initializable {
     void TblReservationOnClick(MouseEvent event) {
 
     }
-
-
-    private final ReservationDAOImpl reservationDAOImpl = new ReservationDAOImpl();
-    private final CustomerDAOImpl customerDAOImpl = new CustomerDAOImpl();
-    private final ServiceDAOImpl serviceDAOImpl = new ServiceDAOImpl();
 
     private final ObservableList<ReservationTm> reservationTms = FXCollections.observableArrayList();
 
