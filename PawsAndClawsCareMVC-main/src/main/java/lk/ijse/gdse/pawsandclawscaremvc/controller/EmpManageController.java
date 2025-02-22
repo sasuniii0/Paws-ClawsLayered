@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.EmpManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.OrderManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ServiceBO;
@@ -129,9 +130,9 @@ public class EmpManageController implements Initializable {
     @FXML
     private AnchorPane display;
 
-    EmpManageBO empManageBO = new EmpManageBOImpl();
-    OrderManageBO orderManageBO = new OrderManageBOImpl();
-    ServiceBO serviceBO = new ServiceBOImpl();
+    EmpManageBO empManageBO = (EmpManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.EMPLOYEE);
+    OrderManageBO orderManageBO = (OrderManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ORDERS);
+    ServiceBO serviceBO = (ServiceBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SERVICE);
 
     @FXML
     void BtnAddNewOrderOnClickAction(ActionEvent event) {

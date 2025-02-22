@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.CustomerManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ReservationBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ServiceBO;
@@ -129,9 +130,9 @@ public class ReservationController implements Initializable {
     private AnchorPane contentReservation;
 
     private final ObservableList<ReservationTm> data = FXCollections.observableArrayList();
-    ReservationBO reservationBO = new ReservationBOImpl();
-    ServiceBO serviceBO = new ServiceBOImpl();
-    CustomerManageBO customerManageBO = new CustomerManageBOImpl();
+    ReservationBO reservationBO = (ReservationBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION);
+    ServiceBO serviceBO = (ServiceBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SERVICE);
+    CustomerManageBO customerManageBO = (CustomerManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CUSTOMER);
 
     @FXML
     void AddNewCustomerOnClickAction(ActionEvent event) {
@@ -283,10 +284,10 @@ public class ReservationController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION, "Reservation Saved", ButtonType.OK).show();
                 refreshPage();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Reservation Not Saved", ButtonType.OK).show();
+                new Alert(Alert.AlertType.ERROR, "Reservation  Saved", ButtonType.OK).show();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 

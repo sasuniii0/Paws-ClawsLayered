@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.InvenManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.InventoryManageBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.InventoryDAO;
@@ -73,7 +74,7 @@ public class InvenManageController implements Initializable {
     @FXML
     private DatePicker TxtStockUpdateDate;
 
-    InvenManageBO invenManageBO = new InventoryManageBOImpl();
+    InvenManageBO invenManageBO = (InvenManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.INVENTORY);
 
     @FXML
     void BtnSearchOnClickAction(ActionEvent event) {

@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.SupplierBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.SupplierBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.SupplierDto;
@@ -65,7 +66,7 @@ public class SupManageController implements Initializable {
     private TextField TxtSearchSupplier;
 
     private final ObservableList<SupplierTm> supplierTms = FXCollections.observableArrayList();
-    SupplierBO supplierBO = new SupplierBOImpl();
+    SupplierBO supplierBO = (SupplierBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SUPPLIER);
 
     @FXML
     void BtnUpdateOnClickAction(ActionEvent event) throws SQLException {

@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ProductManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.ProductManageBOImpl;
 import net.sf.jasperreports.engine.*;
@@ -110,7 +111,7 @@ public class ProductManageController implements Initializable {
 
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private ObservableList<ProductTm> productList = FXCollections.observableArrayList();
-    ProductManageBO productManageBO = new ProductManageBOImpl();
+    ProductManageBO productManageBO = (ProductManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PRODUCT);
 
 
     @FXML

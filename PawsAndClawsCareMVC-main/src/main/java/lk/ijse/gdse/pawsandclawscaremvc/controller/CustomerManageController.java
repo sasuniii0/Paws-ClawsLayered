@@ -15,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Callback;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.CustomerManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.CustomerManageBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.CustomerDAO;
@@ -103,7 +104,7 @@ public class CustomerManageController implements Initializable {
     @FXML
     private TextField TxtEmail;
 
-    CustomerManageBO customerBO = new CustomerManageBOImpl();
+    CustomerManageBO customerBO = (CustomerManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CUSTOMER);
 
     @FXML
     void DeleteOnClickAction(ActionEvent event) throws SQLException {

@@ -15,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Callback;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.PaymentBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.PaymentBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.entity.Payment;
@@ -124,7 +125,7 @@ public class PaymentController implements Initializable {
     @FXML
     private TextField TxtSearchBox;
 
-    PaymentBO paymentBO = new PaymentBOImpl();
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PAYMENT);
     SendPaymentMailController sendPaymentMailController = new SendPaymentMailController();
 
     @FXML

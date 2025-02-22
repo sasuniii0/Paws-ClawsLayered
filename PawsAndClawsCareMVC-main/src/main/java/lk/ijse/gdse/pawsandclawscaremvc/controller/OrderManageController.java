@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.CustomerManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.OrderManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ProductManageBO;
@@ -107,9 +108,13 @@ public class OrderManageController implements Initializable {
     @FXML
     private Button BtnHistory;
 
-   CustomerManageBO customerManageBO = new CustomerManageBOImpl();
-   ProductManageBO productManageBO = new ProductManageBOImpl();
-   OrderManageBO orderManageBO = new OrderManageBOImpl();
+   //CustomerManageBO customerManageBO = new CustomerManageBOImpl();
+   //ProductManageBO productManageBO = new ProductManageBOImpl();
+   //OrderManageBO orderManageBO = new OrderManageBOImpl();
+
+   CustomerManageBO customerManageBO = (CustomerManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CUSTOMER);
+   ProductManageBO productManageBO = (ProductManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PRODUCT);
+   OrderManageBO orderManageBO = (OrderManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ORDERS);
 
     private final ObservableList<CartTm> cartTms = FXCollections.observableArrayList();
 

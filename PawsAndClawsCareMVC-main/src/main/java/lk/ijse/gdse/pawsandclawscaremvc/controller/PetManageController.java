@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.PetManageBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.PetManageBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.PetDAO;
@@ -66,7 +67,7 @@ public class PetManageController implements Initializable {
     private TextField TxtSearchPetName;
 
     private final ObservableList<PetTm> petTms = FXCollections.observableArrayList();
-    PetManageBO petManageBO = new PetManageBOImpl();
+    PetManageBO petManageBO = (PetManageBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PET);
 
     @FXML
     void BtnSearchOnClickAction(ActionEvent event) throws SQLException {

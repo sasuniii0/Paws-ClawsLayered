@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
-import lk.ijse.gdse.pawsandclawscaremvc.bo.BOFactory;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.ServiceBO;
 import lk.ijse.gdse.pawsandclawscaremvc.bo.custom.impl.ServiceBOImpl;
 import lk.ijse.gdse.pawsandclawscaremvc.dto.ServiceDto;
@@ -72,9 +71,9 @@ public class ServicesController implements Initializable {
     @FXML
     private TextField TxtPrice;
 
-    //ServiceDto serviceDto = new ServiceDto();
-    //ServiceTm serviceTm = new ServiceTm();
-    ServiceBO serviceBO = (ServiceBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SERVICE);
+    ServiceDto serviceDto = new ServiceDto();
+    ServiceTm serviceTm = new ServiceTm();
+    ServiceBO serviceBO = new ServiceBOImpl();
 
     @FXML
     void DeleteBtnOnClickAction(ActionEvent event) throws SQLException {

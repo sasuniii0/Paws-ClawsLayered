@@ -2,7 +2,7 @@ package lk.ijse.gdse.pawsandclawscaremvc.dao;
 
 import lk.ijse.gdse.pawsandclawscaremvc.dao.custom.impl.*;
 
-public class DAOFactory {
+public class     DAOFactory {
     private static DAOFactory daoFactory;
     private DAOFactory(){
 

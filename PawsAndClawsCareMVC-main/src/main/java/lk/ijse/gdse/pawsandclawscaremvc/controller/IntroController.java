@@ -133,12 +133,6 @@ public class IntroController {
         }).start();
     }
 
-    /*private void displayLowStockMessage(String message) {
-        lowStockContainer.getChildren().clear(); // Clear previous alerts
-        Label alertLabel = new Label(message);
-        alertLabel.setStyle("-fx-text-fill: red; -fx-font-size: 12px; -fx-padding: 5;");
-        lowStockContainer.getChildren().add(alertLabel);
-    }*/
     private void displayLowStockMessage(String message) {
         lowStockContainer.getChildren().clear();
 
